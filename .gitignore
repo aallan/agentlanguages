@@ -17,6 +17,11 @@ pnpm-debug.log*
 .env.local
 .env.production
 
+# Python virtualenv for scripts/refresh_stars.py (see scripts/refresh_stars.py
+# header for setup). Homebrew Python on macOS refuses pip installs at the
+# system level (PEP 668), so the script's pyyaml dep lives in a local venv.
+.venv/
+
 # macOS-specific files
 .DS_Store
 

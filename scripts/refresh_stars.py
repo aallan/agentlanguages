@@ -6,8 +6,21 @@ API for each, and writes src/data/stars.json. If the API call fails for a
 given repo, the previous value (if any) is preserved so the site doesn't
 regress to "—" on a transient network blip.
 
-Run locally:  python3 scripts/refresh_stars.py
-In CI:        GITHUB_TOKEN=... python3 scripts/refresh_stars.py
+Local setup (Homebrew Python refuses pip installs at the system level under
+PEP 668, so we use a project-local venv):
+
+    python3 -m venv .venv
+    .venv/bin/pip install pyyaml
+    GITHUB_TOKEN=$(gh auth token) .venv/bin/python scripts/refresh_stars.py
+
+CI setup (refresh-stars.yml installs pyyaml directly on the runner):
+
+    pip install pyyaml
+    GITHUB_TOKEN=$GITHUB_TOKEN python3 scripts/refresh_stars.py
+
+GITHUB_TOKEN is optional — without it the script falls back to unauthenticated
+requests with a 60/hour rate limit, which is fine for the catalogue's size but
+will hit the limit if run repeatedly.
 """
 from __future__ import annotations
 
