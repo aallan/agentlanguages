@@ -270,6 +270,7 @@ section.camp .camp-prose p {
   color: var(--ink-700);
   line-height: 1.65;
 }
+section.camp .camp-prose p + p { margin-top: 1rem; }
 section.camp .camp-prose .thesis {
   font-family: var(--serif);
   font-size: clamp(1.25rem, 2.4vw, 1.6rem);
