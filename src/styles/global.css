@@ -586,13 +586,18 @@ section.about h2 {
 }
 section.about .lead { color: var(--ink-700); font-size: 1.075rem; }
 section.about .columns {
+  /* Three-column methodology block ("What counts" / "How to contribute" /
+     "For machines"). Auto-fit with a 260px minimum gives: 1 col below ~540px,
+     2 cols 540–820px, 3 cols 820px+ — without an explicit breakpoint per
+     count. The gap widens at the same 760px breakpoint the rest of the page
+     uses for going from mobile to wider spacing. */
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 2.5rem;
   margin-top: 2.5rem;
 }
 @media (min-width: 760px) {
-  section.about .columns { grid-template-columns: 1fr 1fr; gap: 3.5rem; }
+  section.about .columns { gap: 3.5rem; }
 }
 section.about h3 {
   font-family: var(--sans);

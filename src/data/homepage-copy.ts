@@ -70,6 +70,13 @@ export const methodology = {
       "The maintainer reviews each submission for fit, accuracy, and tone (the catalogue is descriptive, not promotional). Marginal cases get discussed in the PR thread. Edits to existing entries are welcome — especially corrections from the language's authors.",
     ],
   },
+  forMachines: {
+    heading: 'For machines',
+    paragraphs: [
+      'The catalogue is itself a machine-readable specification. Every detail page has a markdown companion at the same path with a `.md` extension, discoverable through `<link rel="alternate">` and the [llmstxt.org](https://llmstxt.org) conventions.',
+      'Use [/llms.txt](/llms.txt) for the short index, [/llms-full.txt](/llms-full.txt) for every entry in one file, or [/sitemap.xml](/sitemap.xml) for the full URL set. Agents and crawlers are explicitly welcome.',
+    ],
+  },
 } as const;
 
 // Camp-name styling helpers — only applied to the camps-intro paragraph,
@@ -101,17 +108,36 @@ export function withCampBold(text: string): string {
 // Minimal inline-markdown → HTML transform.
 //
 // Handles only the inline syntax the homepage prose uses:
-//   `code`        → <code>code</code>
+//   `code`        → <code>code</code>      (contents are HTML-escaped)
 //   [text](url)   → <a href="url">text</a>
 //   *italic*      → <em>italic</em>
 //
 // This is not a general-purpose markdown renderer — Astro's MDX integration
-// does that for content collections. This is a ~10-line helper so the
-// homepage prose can live in one place and render correctly on both
-// surfaces without pulling in a markdown library for three inline forms.
+// does that for content collections. This is a small helper so the homepage
+// prose can live in one place and render correctly on both surfaces without
+// pulling in a markdown library for three inline forms.
+//
+// Two correctness moves worth flagging:
+//   1. Contents of `code` spans are HTML-escaped — so `<link rel="alt">`
+//      inside backticks renders as literal text, not as an actual <link> tag.
+//   2. Code spans are extracted first to sentinel placeholders before the
+//      *italic* and [link](url) transforms run, so a `*` or `[` inside
+//      backticks doesn't get re-interpreted as markdown emphasis.
 export function inlineMarkdownToHtml(text: string): string {
-  return text
-    .replace(/`([^`]+)`/g, '<code>$1</code>')
+  const escapeHtml = (s: string) =>
+    s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+  const codeSpans: string[] = [];
+  let result = text.replace(/`([^`]+)`/g, (_, code) => {
+    const idx = codeSpans.length;
+    codeSpans.push(`<code>${escapeHtml(code)}</code>`);
+    // Null-byte sentinel — safe because normal prose never contains  .
+    return ` CODE${idx} `;
+  });
+
+  result = result
     .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
     .replace(/\*([^*]+)\*/g, '<em>$1</em>');
+
+  return result.replace(/ CODE(\d+) /g, (_, i) => codeSpans[parseInt(i, 10)]);
 }

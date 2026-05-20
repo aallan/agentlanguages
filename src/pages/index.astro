@@ -133,14 +133,12 @@ const trackedCount = languages.length;
       <p class="lead" set:html={inlineMarkdownToHtml(methodology.lead)}></p>
 
       <div class="columns">
-        <div>
-          <h3>{methodology.whatCounts.heading}</h3>
-          {methodology.whatCounts.paragraphs.map((p) => (<p set:html={inlineMarkdownToHtml(p)}></p>))}
-        </div>
-        <div>
-          <h3>{methodology.howToContribute.heading}</h3>
-          {methodology.howToContribute.paragraphs.map((p) => (<p set:html={inlineMarkdownToHtml(p)}></p>))}
-        </div>
+        {[methodology.whatCounts, methodology.howToContribute, methodology.forMachines].map((section) => (
+          <div>
+            <h3>{section.heading}</h3>
+            {section.paragraphs.map((p) => (<p set:html={inlineMarkdownToHtml(p)}></p>))}
+          </div>
+        ))}
       </div>
     </div>
   </section>

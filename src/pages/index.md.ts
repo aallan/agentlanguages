@@ -115,7 +115,7 @@ export const GET: APIRoute = async ({ site }) => {
   lines.push('');
   lines.push(methodology.lead);
   lines.push('');
-  for (const section of [methodology.whatCounts, methodology.howToContribute]) {
+  for (const section of [methodology.whatCounts, methodology.howToContribute, methodology.forMachines]) {
     lines.push(`### ${section.heading}`);
     lines.push('');
     for (const paragraph of section.paragraphs) {
@@ -124,16 +124,10 @@ export const GET: APIRoute = async ({ site }) => {
     }
   }
 
-  // Resources for agents.
-  lines.push('## Agent-accessible resources');
-  lines.push('');
-  lines.push(`- [llms.txt](${base}/llms.txt) — index following the [llmstxt.org](https://llmstxt.org) spec`);
-  lines.push(`- [llms-full.txt](${base}/llms-full.txt) — every entry concatenated in one file`);
-  lines.push(`- [sitemap.xml](${base}/sitemap.xml) — XML sitemap (HTML and markdown surfaces)`);
-  lines.push(`- [robots.txt](${base}/robots.txt) — crawler policy (all agents welcome)`);
-  lines.push('');
-  lines.push('Each entry above links to its individual markdown companion (`/languages/<slug>.md`).');
-  lines.push('');
+  // The "For machines" subsection inside Methodology covers /llms.txt,
+  // /llms-full.txt, /sitemap.xml, and the markdown alternates. We used to
+  // duplicate them in a standalone "Agent-accessible resources" section
+  // here; the methodology subsection makes that redundant.
 
   lines.push('---');
   lines.push('');
