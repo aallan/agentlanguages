@@ -91,7 +91,12 @@ const siteHost = (() => {
 
   <section class="detail-header">
     <div class="col col-full">
-      <div class="eyebrow"><span class="accent">{campLabelMap[data.camp]}</span></div>
+      <div class="eyebrow">
+        <span class="accent">{campLabelMap[data.camp]}</span>
+        {data.spans_camps && data.spans_camps.length > 0 && data.spans_camps.map((c) => (
+          <span class={`accent-${campShort[c]}`}> · also {c}</span>
+        ))}
+      </div>
       <h1>{data.name}.</h1>
       <p class="one-liner">{data.one_liner}</p>
 

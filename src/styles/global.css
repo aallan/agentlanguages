@@ -432,11 +432,19 @@ section.catalogue .sub {
   text-transform: uppercase;
   margin-bottom: 0.75rem;
 }
-.card.syn .camp-label { color: var(--camp-syntactic); }
-.card.ver .camp-label { color: var(--camp-verification); }
-.card.orc .camp-label { color: var(--camp-orchestration); }
-.card.adj .camp-label { color: var(--camp-adjacent); }
-.card.unc .camp-label { color: var(--camp-unclassified); }
+.card.syn .camp-label > span:first-child { color: var(--camp-syntactic); }
+.card.ver .camp-label > span:first-child { color: var(--camp-verification); }
+.card.orc .camp-label > span:first-child { color: var(--camp-orchestration); }
+.card.adj .camp-label > span:first-child { color: var(--camp-adjacent); }
+.card.unc .camp-label > span:first-child { color: var(--camp-unclassified); }
+
+/* Secondary camp on cards that span (e.g. Vera primarily verification,
+   also orchestration). Coloured in the secondary camp's hue so the
+   visual language is consistent with the camp encoding. */
+.card .camp-label .spans { opacity: 0.85; }
+.card .camp-label .spans-syn { color: var(--camp-syntactic); }
+.card .camp-label .spans-ver { color: var(--camp-verification); }
+.card .camp-label .spans-orc { color: var(--camp-orchestration); }
 
 .card h3 {
   font-family: var(--serif);

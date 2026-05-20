@@ -25,6 +25,12 @@ const campLabel: Record<typeof data.camp, string> = {
   unclassified: 'Unclassified',
 };
 
+const spansLabel: Record<string, string> = {
+  syntactic: 'Syntactic',
+  verification: 'Verification',
+  orchestration: 'Orchestration',
+};
+
 const maturityLabel: Record<typeof data.maturity, string> = {
   thought_experiment: 'thought experiment',
   research_paper: 'research paper',
@@ -48,7 +54,12 @@ const sortStars = stars === null ? -1 : stars;
   data-camp={data.camp}
   data-name={data.name}
 >
-  <div class="camp-label">{campLabel[data.camp]}</div>
+  <div class="camp-label">
+    <span>{campLabel[data.camp]}</span>
+    {data.spans_camps && data.spans_camps.length > 0 && data.spans_camps.map((c) => (
+      <span class={`spans spans-${campShort[c]}`}> + {spansLabel[c] ?? c}</span>
+    ))}
+  </div>
   <h3>{data.name}</h3>
   <p class="one-liner">{data.one_liner}</p>
   <p class="author">{data.author}</p>
