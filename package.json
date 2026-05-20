@@ -24,5 +24,8 @@
     "@astrojs/mdx": "^5.0.6",
     "@astrojs/sitemap": "^3.7.2",
     "astro": "^6.3.6"
+  },
+  "devDependencies": {
+    "png-to-ico": "^3.0.1"
   }
 }
