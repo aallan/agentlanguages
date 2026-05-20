@@ -237,6 +237,13 @@ section.band p + p { margin-top: 1rem; }
   font-size: 1.075rem;
 }
 
+/* Inline camp names — coloured in their camp's hue so the encoding the
+   reader will see in the sections below is established at first mention. */
+.camp-name { font-weight: 500; }
+.camp-name.syn { color: var(--camp-syntactic); }
+.camp-name.ver { color: var(--camp-verification); }
+.camp-name.orc { color: var(--camp-orchestration); }
+
 section.camp {
   padding: 6rem 0;
   border-bottom: 1px solid var(--rule);
