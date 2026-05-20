@@ -57,7 +57,7 @@ export const GET: APIRoute = async ({ site }) => {
   // The taxonomy.
   lines.push('## The taxonomy');
   lines.push('');
-  lines.push('Three camps disagree about what the problem is. The **Syntactic** camp says the problem is representational — strip ambiguity at the token level. The **Verification** camp says it\'s semantic — make contracts mechanically checkable. The **Orchestration** camp says it isn\'t a language problem at all — constrain how agents coordinate. The catalogue below treats them as evidence that this disagreement is real.');
+  lines.push('Three camps disagree on how to frame the problem. The **Syntactic** camp says it\'s representational — strip ambiguity at the token level. The **Verification** camp says it\'s semantic — make contracts mechanically checkable. The **Orchestration** camp says it isn\'t a language problem at all — constrain how agents coordinate. The catalogue below treats them as evidence that this disagreement is real.');
   lines.push('');
 
   // Syntactic camp.

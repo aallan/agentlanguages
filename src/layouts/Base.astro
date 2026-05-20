@@ -54,14 +54,19 @@ if (pathname === '/' || pathname === '') {
          generated from favicon.svg via scripts/build_favicons.mjs. -->
     <link rel="icon" href="/favicon.ico?v=2" />
     <link rel="sitemap" href="/sitemap.xml" />
-    {/* Agent-accessibility: every HTML page has a markdown companion served on the
-        same origin. Crawlers and agent SDKs can prefer the .md surface via the
-        `<link rel="alternate">` discovery convention; see also /llms.txt and
-        /llms-full.txt for the catalogue index and concatenated full text. */}
+    {/* Agent-accessibility. Every HTML page has a markdown companion served on
+        the same origin; the catalogue also exposes /llms.txt (short index) and
+        /llms-full.txt (concatenated full text). The `rel="llms-txt"` and
+        `rel="llms-full-txt"` custom relations come from the llmstxt.org
+        community — not in the IANA registry, but emerging as the convention
+        agent SDKs look for when `<link rel="alternate">` is ambiguous. */}
     {markdownAlt && (
       <link rel="alternate" type="text/markdown" href={markdownAlt} title="Markdown version of this page" />
     )}
-    <link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt — catalogue index for AI agents" />
+    <link rel="alternate" type="text/markdown" href="/llms.txt" title="llms.txt — catalogue index for AI agents" />
+    <link rel="alternate" type="text/markdown" href="/llms-full.txt" title="llms-full.txt — full catalogue text" />
+    <link rel="llms-txt" href="/llms.txt" />
+    <link rel="llms-full-txt" href="/llms-full.txt" />
     <meta name="generator" content={Astro.generator} />
 
     <meta property="og:title" content={title} />
