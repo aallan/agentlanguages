@@ -39,7 +39,7 @@ NERD treats the problem as token economics. The site states "40% of code is LLM-
 
 <p class="pullquote">The irony: cryptic symbols don't save tokens. Plain words win.</p>
 
-The provocative move is what NERD does *not* ship: no type system, no error union, no contracts, no checker beyond the parser. This is the syntactic camp at its purest &mdash; the bet is that smoothing the generation surface buys more than verification would, and the difference shows up in the inference bill. Magpie reaches a similar diagnosis through the opposite mechanism (SSA form, every value named and typed at definition); NERD picks the lower-effort lever and accepts that "audit" rather than "verify" is the only safety net.
+The distinctive move is what NERD does *not* ship: no type system, no error union, no contracts, no checker beyond the parser. This is the syntactic camp at its purest &mdash; the bet is that smoothing the generation surface buys more than verification would, and the difference shows up in the inference bill. Magpie reaches a similar diagnosis through the opposite mechanism (SSA form, every value named and typed at definition); NERD picks the lower-effort lever and accepts that "audit" rather than "verify" is the only safety net.
 
 ## What it looks like.
 

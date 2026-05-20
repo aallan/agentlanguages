@@ -39,7 +39,7 @@ Plumbing is the catalogue's piece of infrastructure. It is not an orchestration 
 
 <p class="pullquote">Static typing prevents the waste.</p>
 
-The provocative move is to refuse the orchestration camp's normal framing. Where Boruna treats the unit of computation as an `.ax` workflow with declared effects, and Pel treats it as a grammar-level capability, Plumbing treats the unit as a channel between two processes, with the agent itself reduced to a stateful morphism with a typed protocol &mdash; main input, main output, plus control ports for runtime parameter modulation (e.g. temperature), tool-call ports, operator-in-the-loop ports, and telemetry. A judge agent that wants to cool down a debate sends a `set_temp` message on the debaters' control ports; the wiring is type-checked the same as the data path.
+The distinctive move is to refuse the orchestration camp's normal framing. Where Boruna treats the unit of computation as an `.ax` workflow with declared effects, and Pel treats it as a grammar-level capability, Plumbing treats the unit as a channel between two processes, with the agent itself reduced to a stateful morphism with a typed protocol &mdash; main input, main output, plus control ports for runtime parameter modulation (e.g. temperature), tool-call ports, operator-in-the-loop ports, and telemetry. A judge agent that wants to cool down a debate sends a `set_temp` message on the debaters' control ports; the wiring is type-checked the same as the data path.
 
 ## What it looks like.
 

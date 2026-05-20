@@ -36,7 +36,7 @@ Raskell's thesis is that the verification camp has the right diagnosis but the w
 
 <p class="pullquote">The language was right. The surrounding infrastructure was not.</p>
 
-The provocative move is the refusal to design a new language at all. Where AILANG, Vera, and Aver each ship a fresh syntax with effect typing built in, Raskell extends Haskell. The engineering lives under the arcanist-sh GitHub organisation: hx, a Rust binary that wraps GHC, Cabal, GHCup, and HLS behind one interface; and BHC, an in-development clean-slate compiler targeting the Haskell 2026 specification with profile-specific runtimes selected at compile time. The bet is that the typed substrate is already correct and the missing layer is operational, not linguistic.
+The distinctive move is the refusal to design a new language at all. Where AILANG, Vera, and Aver each ship a fresh syntax with effect typing built in, Raskell extends Haskell. The engineering lives under the arcanist-sh GitHub organisation: hx, a Rust binary that wraps GHC, Cabal, GHCup, and HLS behind one interface; and BHC, an in-development clean-slate compiler targeting the Haskell 2026 specification with profile-specific runtimes selected at compile time. The bet is that the typed substrate is already correct and the missing layer is operational, not linguistic.
 
 ## Distinctive moves.
 

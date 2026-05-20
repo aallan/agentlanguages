@@ -43,7 +43,7 @@ Aver is a verification-camp project that names its target audience explicitly: t
 
 <p class="pullquote">Code is cheap to generate. Expensive to trust.</p>
 
-The provocative move shows up in the comparison with Vera. The two share design DNA &mdash; mandatory verification artefacts, explicit effects, no `if`/`else`, no closures, no exceptions, no nulls, no loops &mdash; but disagree on what to drop. Vera drops names entirely via De Bruijn slot references (`@Int.0`). Aver keeps names and makes the surrounding metadata mandatory. Vera's bet is that names are the failure mode; Aver's is that absence of intent is.
+The distinctive move shows up in the comparison with Vera. The two share design DNA &mdash; mandatory verification artefacts, explicit effects, no `if`/`else`, no closures, no exceptions, no nulls, no loops &mdash; but disagree on what to drop. Vera drops names entirely via De Bruijn slot references (`@Int.0`). Aver keeps names and makes the surrounding metadata mandatory. Vera's bet is that names are the failure mode; Aver's is that absence of intent is.
 
 ## What it looks like.
 

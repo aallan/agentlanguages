@@ -64,7 +64,7 @@ Vera takes the verification camp's diagnosis literally. If LLMs make semantic er
 
 <p class="pullquote">The model doesn't need to be right. It needs to be checkable.</p>
 
-The provocative move is replacing variable names with typed slot references. A function `safe_divide(@Int, @Int -> @Int)` has no parameter names — its arguments are referred to as `@Int.0` (most recent) and `@Int.1` (next most recent) using De Bruijn indexing. The empirical literature shows models are particularly vulnerable to naming-related errors: choosing misleading names, reusing names incorrectly, losing track of which name refers to which value. Vera's answer is to remove names from the language entirely.
+The distinctive move is replacing variable names with typed slot references. A function `safe_divide(@Int, @Int -> @Int)` has no parameter names — its arguments are referred to as `@Int.0` (most recent) and `@Int.1` (next most recent) using De Bruijn indexing. The empirical literature shows models are particularly vulnerable to naming-related errors: choosing misleading names, reusing names incorrectly, losing track of which name refers to which value. Vera's answer is to remove names from the language entirely.
 
 ## What it looks like.
 

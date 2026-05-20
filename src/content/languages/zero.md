@@ -50,7 +50,7 @@ Zero is Vercel Labs' bet that the bottleneck in agentic coding is not the langua
 
 <p class="pullquote">Humans read the message. Agents read the JSON.</p>
 
-The provocative move sits at the language level, not the toolchain level: Zero collapses the syntactic and verification camps into a single product decision. The language documents itself as preferring "one obvious way to express most things, even when that makes code more explicit than a human might choose," which is syntactic-camp framing; but the obviousness is bought with capability objects on `main`, explicit `raises` markers, and effect-visible signatures, which is verification-camp machinery. Where MoonBit, the catalogue's other industrially backed verification entry, invests in semantic-aware token sampling, Zero invests in making the surface area small enough that an agent doesn't need help generating it in the first place.
+The distinctive move sits at the language level, not the toolchain level: Zero collapses the syntactic and verification camps into a single product decision. The language documents itself as preferring "one obvious way to express most things, even when that makes code more explicit than a human might choose," which is syntactic-camp framing; but the obviousness is bought with capability objects on `main`, explicit `raises` markers, and effect-visible signatures, which is verification-camp machinery. Where MoonBit, the catalogue's other industrially backed verification entry, invests in semantic-aware token sampling, Zero invests in making the surface area small enough that an agent doesn't need help generating it in the first place.
 
 ## What it looks like.
 

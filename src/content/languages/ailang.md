@@ -60,7 +60,7 @@ AILANG takes the verification camp's diagnosis and applies it at the layer of au
 
 <p class="pullquote">For humans, a language is a tool for expression. For AIs, it's a substrate for reasoning.</p>
 
-The provocative move is the no-loops decision. AILANG commits to lambda calculus, pattern matching, and ADTs as its only forms of control flow &mdash; no `for`, no `while`, no mutable accumulator. Where Vera tracks model calls as a single `<Inference>` effect, AILANG splits the world into five capability categories and refuses to let the language grow a construct that obscures any of them. The bet is that determinism, replay, and structured per-effect traces are worth giving up the loop.
+The distinctive move is the no-loops decision. AILANG commits to lambda calculus, pattern matching, and ADTs as its only forms of control flow &mdash; no `for`, no `while`, no mutable accumulator. Where Vera tracks model calls as a single `<Inference>` effect, AILANG splits the world into five capability categories and refuses to let the language grow a construct that obscures any of them. The bet is that determinism, replay, and structured per-effect traces are worth giving up the loop.
 
 ## What it looks like.
 

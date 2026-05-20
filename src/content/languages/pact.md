@@ -41,7 +41,7 @@ Pact's diagnosis is that most backend code is glue, and that the glue is exactly
 
 <p class="pullquote">Every function says why it exists. Errors are data, not explosions.</p>
 
-The provocative move is the breadth of what ships inside one binary. A `.pact` file declares `app Notes { port: 8080, db: "sqlite://notes.db" }` and `pact run` brings up an HTTP server with SSE streaming, SQLite in WAL mode, JWT auth, a structured logger, and a built-in MCP server &mdash; no dependencies, no ORM, tables auto-created from struct fields. This is close to Aver in design DNA (declared intent + declared effects + colocated checks), but where Aver lifts verify blocks into Lean 4 and Dafny, Pact spends its complexity budget on the runtime an agent will actually drive.
+The distinctive move is the breadth of what ships inside one binary. A `.pact` file declares `app Notes { port: 8080, db: "sqlite://notes.db" }` and `pact run` brings up an HTTP server with SSE streaming, SQLite in WAL mode, JWT auth, a structured logger, and a built-in MCP server &mdash; no dependencies, no ORM, tables auto-created from struct fields. This is close to Aver in design DNA (declared intent + declared effects + colocated checks), but where Aver lifts verify blocks into Lean 4 and Dafny, Pact spends its complexity budget on the runtime an agent will actually drive.
 
 ## What it looks like.
 

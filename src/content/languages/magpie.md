@@ -38,7 +38,7 @@ Magpie is a syntactic-camp project that takes the camp's premise to its logical 
 
 <p class="pullquote">~2.3× more tokens per operation, but eliminates the hidden rules that cause AI retries and borrow checker failures.</p>
 
-The provocative move shows up in the cross-camp comparison with Vera. Vera adds verification on top of conventional surface syntax (mandatory contracts, Z3 discharge, the `<Inference>` effect). Magpie strips the surface itself. Vera says "let the compiler catch what the model gets wrong." Magpie says "don't give the model anywhere to be wrong in the first place." NERD takes a similar diagnosis on the syntactic side but bets on minimal English-like tokens; Magpie bets on machine-style explicit SSA.
+The distinctive move shows up in the cross-camp comparison with Vera. Vera adds verification on top of conventional surface syntax (mandatory contracts, Z3 discharge, the `<Inference>` effect). Magpie strips the surface itself. Vera says "let the compiler catch what the model gets wrong." Magpie says "don't give the model anywhere to be wrong in the first place." NERD takes a similar diagnosis on the syntactic side but bets on minimal English-like tokens; Magpie bets on machine-style explicit SSA.
 
 ## What it looks like.
 
