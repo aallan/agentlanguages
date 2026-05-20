@@ -29,6 +29,7 @@ pnpm-debug.log*
 BRIEFING.md
 PLAN.md
 CLAUDE.md
+DETAIL_PAGE_BRIEF.md
 mockups/
 
 # Claude Code user-specific settings (the shareable launch.json is committed)
