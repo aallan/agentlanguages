@@ -4,6 +4,19 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  # Commits made by refresh-stars.yml using GITHUB_TOKEN do not trigger
+  # `push` workflows (GitHub's anti-recursion guard). The workflow_run
+  # trigger fires on completion of that workflow and bypasses the guard,
+  # so weekly star refreshes actually reach production.
+  workflow_run:
+    workflows: ["Refresh star counts"]
+    types: [completed]
+    branches: [main]
+
+# Opt into Node 24 for all JS-based actions ahead of GitHub's June 2026
+# forced switch. Without this we run on deprecated Node 20.
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 # Required for the deploy-pages action to write to the Pages environment.
 # Requires repository Settings → Pages → Source = "GitHub Actions".
@@ -20,10 +33,18 @@ concurrency:
 
 jobs:
   build:
+    # For workflow_run triggers, only proceed if the upstream workflow
+    # actually succeeded — don't deploy after a failed star refresh.
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          # workflow_run's default SHA is the commit that triggered the
+          # *upstream* workflow, not the commit the upstream made. Pin to
+          # main so we always pick up the freshly-committed stars.json.
+          ref: main
 
       - name: Set up Node
         uses: actions/setup-node@v4

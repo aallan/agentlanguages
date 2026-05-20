@@ -7,6 +7,11 @@ on:
     - cron: '0 6 * * 1'
   workflow_dispatch:
 
+# Opt into Node 24 for all JS-based actions ahead of GitHub's June 2026
+# forced switch. Without this we run on deprecated Node 20.
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 permissions:
   contents: write
 
