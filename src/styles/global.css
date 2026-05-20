@@ -238,8 +238,10 @@ section.band p + p { margin-top: 1rem; }
 }
 
 /* Inline camp names — coloured in their camp's hue so the encoding the
-   reader will see in the sections below is established at first mention. */
-.camp-name { font-weight: 500; }
+   reader will see in the sections below is established at first mention.
+   Weight 600 (rather than 500) so the less-saturated slate and moss
+   hues read with the same visual weight as the more-saturated amber. */
+.camp-name { font-weight: 600; }
 .camp-name.syn { color: var(--camp-syntactic); }
 .camp-name.ver { color: var(--camp-verification); }
 .camp-name.orc { color: var(--camp-orchestration); }
