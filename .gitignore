@@ -1,0 +1,32 @@
+# build output
+dist/
+# generated types
+.astro/
+
+# dependencies
+node_modules/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# environment variables
+.env
+.env.local
+.env.production
+
+# macOS-specific files
+.DS_Store
+
+# editors
+.idea/
+*.swp
+*.swo
+
+# working docs (kept local; not part of the public catalogue)
+BRIEFING.md
+PLAN.md
+CLAUDE.md
+mockups/
