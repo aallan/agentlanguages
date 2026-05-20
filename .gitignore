@@ -30,3 +30,6 @@ BRIEFING.md
 PLAN.md
 CLAUDE.md
 mockups/
+
+# Claude Code user-specific settings (the shareable launch.json is committed)
+.claude/settings.local.json

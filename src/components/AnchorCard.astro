@@ -1,0 +1,24 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  language: CollectionEntry<'languages'>;
+  quote: string;
+}
+
+const { language, quote } = Astro.props;
+const { data, id } = language;
+---
+<aside class="anchor-card">
+  <div class="anchor-label">anchor language</div>
+  <h3>{data.name}</h3>
+  <p class="one-liner">{data.one_liner}</p>
+  <div class="meta-row">
+    <span><span class="meta-key">by</span> {data.author}</span>
+    <span><span class="meta-key">impl</span> {data.implementation_language}</span>
+    <span><span class="meta-key">target</span> {data.compilation_target}</span>
+    <span><span class="meta-key">license</span> {data.license}</span>
+  </div>
+  <p class="anchor-quote">&ldquo;{quote}&rdquo;</p>
+  <a href={`/languages/${id}/`} class="anchor-cta">read analysis &rarr;</a>
+</aside>

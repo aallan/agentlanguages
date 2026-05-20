@@ -1,0 +1,38 @@
+---
+import AnchorCard from './AnchorCard.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  id?: string;
+  camp: 'syntactic' | 'verification' | 'orchestration';
+  sectionNumber: string;
+  campLabel: string;
+  campTitle: string;
+  thesis: string;
+  anchor: CollectionEntry<'languages'>;
+  anchorQuote: string;
+}
+
+const { id, camp, sectionNumber, campLabel, campTitle, thesis, anchor, anchorQuote } = Astro.props;
+
+const accentClass = {
+  syntactic: 'accent-syn',
+  verification: 'accent-ver',
+  orchestration: 'accent-orc',
+}[camp];
+---
+<section class={`camp ${camp}`} id={id}>
+  <div class="col col-full">
+    <div class="camp-body">
+      <div class="camp-prose">
+        <div class="eyebrow">
+          <span class="sec">§ {sectionNumber}</span> · <span class={accentClass}>{campLabel}</span>
+        </div>
+        <h2>{campTitle}</h2>
+        <p class="thesis">{thesis}</p>
+        <slot />
+      </div>
+      <AnchorCard language={anchor} quote={anchorQuote} />
+    </div>
+  </div>
+</section>

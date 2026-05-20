@@ -1,0 +1,90 @@
+---
+import LanguageCard from './LanguageCard.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  languages: CollectionEntry<'languages'>[];
+  stars: Record<string, { stars?: number } | undefined>;
+}
+
+const { languages, stars } = Astro.props;
+---
+<div class="filter-bar">
+  <div class="filter-group">
+    <span class="filter-label">Camp</span>
+    <button class="filter-chip active" data-camp="all">All</button>
+    <button class="filter-chip" data-camp="syntactic">Syntactic</button>
+    <button class="filter-chip" data-camp="verification">Verification</button>
+    <button class="filter-chip" data-camp="orchestration">Orchestration</button>
+  </div>
+  <div class="filter-group">
+    <span class="filter-label">Sort</span>
+    <select class="sort-select" id="sort">
+      <option value="stars">Stars (desc)</option>
+      <option value="name">Name (a-z)</option>
+      <option value="date">Date appeared</option>
+    </select>
+  </div>
+</div>
+<div class="grid" id="catalogue-grid">
+  {languages.map((lang) => (
+    <LanguageCard
+      language={lang}
+      stars={lang.data.repo ? stars[lang.data.repo]?.stars ?? null : null}
+    />
+  ))}
+</div>
+
+<script is:inline>
+  (function () {
+    var grid = document.getElementById('catalogue-grid');
+    if (!grid) return;
+    var cards = Array.prototype.slice.call(grid.querySelectorAll('.card'));
+    var chips = document.querySelectorAll('.filter-bar .filter-chip[data-camp]');
+    var sortSelect = document.getElementById('sort');
+    var activeCamp = 'all';
+
+    function applyFilter() {
+      cards.forEach(function (card) {
+        var camp = card.getAttribute('data-camp');
+        var matches = activeCamp === 'all' || camp === activeCamp;
+        card.style.display = matches ? '' : 'none';
+      });
+    }
+
+    function applySort() {
+      var mode = sortSelect ? sortSelect.value : 'stars';
+      var sorted = cards.slice().sort(function (a, b) {
+        if (mode === 'name') {
+          return (a.getAttribute('data-name') || '').localeCompare(b.getAttribute('data-name') || '');
+        }
+        if (mode === 'date') {
+          return (b.getAttribute('data-date') || '').localeCompare(a.getAttribute('data-date') || '');
+        }
+        var sa = parseInt(a.getAttribute('data-stars') || '-1', 10);
+        var sb = parseInt(b.getAttribute('data-stars') || '-1', 10);
+        return sb - sa;
+      });
+      sorted.forEach(function (card) { grid.appendChild(card); });
+    }
+
+    chips.forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        chips.forEach(function (c) {
+          c.classList.remove('active', 'syn', 'ver', 'orc');
+        });
+        chip.classList.add('active');
+        var camp = chip.getAttribute('data-camp');
+        if (camp === 'syntactic')    chip.classList.add('syn');
+        if (camp === 'verification') chip.classList.add('ver');
+        if (camp === 'orchestration') chip.classList.add('orc');
+        activeCamp = camp;
+        applyFilter();
+      });
+    });
+
+    if (sortSelect) sortSelect.addEventListener('change', applySort);
+
+    applySort();
+  })();
+</script>

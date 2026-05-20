@@ -1,0 +1,63 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  language: CollectionEntry<'languages'>;
+  stars?: number | null;
+}
+
+const { language, stars = null } = Astro.props;
+const { data, id, body } = language;
+
+const campShort: Record<typeof data.camp, string> = {
+  syntactic: 'syn',
+  verification: 'ver',
+  orchestration: 'orc',
+  adjacent: 'adj',
+  unclassified: 'unc',
+};
+
+const campLabel: Record<typeof data.camp, string> = {
+  syntactic: 'Syntactic',
+  verification: 'Verification',
+  orchestration: 'Orchestration',
+  adjacent: 'Adjacent / infrastructure',
+  unclassified: 'Unclassified',
+};
+
+const maturityLabel: Record<typeof data.maturity, string> = {
+  thought_experiment: 'thought experiment',
+  research_paper: 'research paper',
+  early_implementation: 'early',
+  working_compiler: 'working compiler',
+  production_ready: 'production-ready',
+};
+
+const [year, month] = data.date_appeared.split('-');
+const monthNames = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+const dateLabel = `${monthNames[parseInt(month, 10) - 1]} ${year}`;
+
+const hasDetail = (body ?? '').trim().length > 0;
+const starsDisplay = stars === null ? '—' : stars >= 1000 ? `${(stars / 1000).toFixed(1).replace(/\.0$/, '')}k+` : `${stars}`;
+const sortStars = stars === null ? -1 : stars;
+---
+<article
+  class={`card ${campShort[data.camp]}`}
+  data-stars={sortStars}
+  data-date={data.date_appeared}
+  data-camp={data.camp}
+  data-name={data.name}
+>
+  <div class="camp-label">{campLabel[data.camp]}</div>
+  <h3>{data.name}</h3>
+  <p class="one-liner">{data.one_liner}</p>
+  <p class="author">{data.author}</p>
+  <p class="stack">{data.implementation_language} &middot; {data.compilation_target}</p>
+  <div class="stats">
+    <span class="star">&#9733; {starsDisplay}</span>
+    <span>{data.license}</span>
+    <span>{dateLabel}</span>
+    <span class={`maturity-${data.maturity}`}>{maturityLabel[data.maturity]}</span>
+  </div>
+  {hasDetail && <a href={`/languages/${id}/`} class="read-more">read analysis &rarr;</a>}
+</article>

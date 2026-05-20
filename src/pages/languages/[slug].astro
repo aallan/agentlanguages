@@ -1,0 +1,175 @@
+---
+import { getCollection, render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+export async function getStaticPaths() {
+  const languages = await getCollection('languages');
+  // Only generate detail pages for entries with a non-empty body.
+  return languages
+    .filter((l) => (l.body ?? '').trim().length > 0)
+    .map((language) => ({
+      params: { slug: language.id },
+      props: { language, allLanguages: languages },
+    }));
+}
+
+interface Props {
+  language: CollectionEntry<'languages'>;
+  allLanguages: CollectionEntry<'languages'>[];
+}
+
+const { language, allLanguages } = Astro.props;
+const { data, id } = language;
+const { Content } = await render(language);
+
+const campLabelMap: Record<typeof data.camp, string> = {
+  syntactic: 'syntactic camp',
+  verification: 'verification camp',
+  orchestration: 'orchestration camp',
+  adjacent: 'adjacent',
+  unclassified: 'unclassified',
+};
+
+const campShort: Record<typeof data.camp, string> = {
+  syntactic: 'syn',
+  verification: 'ver',
+  orchestration: 'orc',
+  adjacent: 'adj',
+  unclassified: 'unc',
+};
+
+const longMonths = [
+  'January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December',
+];
+const [year, month] = data.date_appeared.split('-');
+const firstSeen = `${longMonths[parseInt(month, 10) - 1]} ${year}`;
+
+const maturityLong: Record<typeof data.maturity, string> = {
+  thought_experiment: 'thought experiment',
+  research_paper: 'research paper',
+  early_implementation: 'early implementation',
+  working_compiler: 'working compiler',
+  production_ready: 'production-ready',
+};
+
+// Prev/next walks only entries that have detail pages, so links never 404.
+const withDetail = allLanguages
+  .filter((l) => (l.body ?? '').trim().length > 0)
+  .sort((a, b) => {
+    const campOrder: Record<string, number> = {
+      syntactic: 0, verification: 1, orchestration: 2, adjacent: 3, unclassified: 4,
+    };
+    const ca = campOrder[a.data.camp];
+    const cb = campOrder[b.data.camp];
+    if (ca !== cb) return ca - cb;
+    return a.data.name.localeCompare(b.data.name);
+  });
+const detailIdx = withDetail.findIndex((l) => l.id === id);
+const prev = detailIdx > 0 ? withDetail[detailIdx - 1] : null;
+const next = detailIdx >= 0 && detailIdx < withDetail.length - 1 ? withDetail[detailIdx + 1] : null;
+
+const siteHost = (() => {
+  try { return new URL(data.url).hostname; } catch { return data.url; }
+})();
+---
+<Base
+  title={`${data.name} — agentlanguages.dev`}
+  description={data.one_liner}
+  campAccent={data.camp}
+>
+  <div class="col col-full">
+    <div class="breadcrumb">
+      <a href="/">agentlanguages</a>
+      <span class="sep">/</span>
+      <a href="/#catalogue">catalogue</a>
+      <span class="sep">/</span>
+      <span>{id}</span>
+    </div>
+  </div>
+
+  <section class="detail-header">
+    <div class="col col-full">
+      <div class="eyebrow"><span class="accent">{campLabelMap[data.camp]}</span></div>
+      <h1>{data.name}.</h1>
+      <p class="one-liner">{data.one_liner}</p>
+
+      <div class="metaprops">
+        <div class="metaprop"><span class="key">author</span><span class="val">{data.author}</span></div>
+        <div class="metaprop"><span class="key">implementation</span><span class="val">{data.implementation_language}</span></div>
+        <div class="metaprop"><span class="key">target</span><span class="val">{data.compilation_target}</span></div>
+        <div class="metaprop"><span class="key">licence</span><span class="val">{data.license}</span></div>
+        <div class="metaprop"><span class="key">first seen</span><span class="val">{firstSeen}</span></div>
+        <div class="metaprop"><span class="key">maturity</span><span class="val">{maturityLong[data.maturity]}</span></div>
+        <div class="metaprop"><span class="key">site</span><span class="val"><a href={data.url}>{siteHost}</a></span></div>
+        {data.repo && (
+          <div class="metaprop"><span class="key">repo</span><span class="val"><a href={`https://github.com/${data.repo}`}>{data.repo}</a></span></div>
+        )}
+        {data.paper && (
+          <div class="metaprop"><span class="key">paper</span><span class="val"><a href={data.paper}>arxiv</a></span></div>
+        )}
+        {data.benchmark && (
+          <div class="metaprop"><span class="key">{data.benchmark.label}</span><span class="val"><a href={data.benchmark.url}>{data.benchmark.label}</a></span></div>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <main class="body">
+    <div class="col col-full">
+      <Content />
+
+      {data.crossrefs && data.crossrefs.length > 0 && (
+        <div class="crossrefs">
+          <div class="label">design DNA</div>
+          <ul>
+            {data.crossrefs.map((ref) => (
+              <li>
+                <a href={`/languages/${ref.slug}/`} style="text-decoration: none;"><span class="xname">{ref.name}</span></a>
+                <span class={`xcamp ${campShort[ref.camp]}`}>{ref.camp}</span>
+                <span class="xrel" set:html={ref.relation}></span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  </main>
+
+  {data.history && data.history.length > 0 && (
+    <section class="history">
+      <div class="col col-full">
+        <div class="eyebrow"><span class="sec">§</span> history</div>
+        <h2>Timeline.</h2>
+        <div class="events">
+          {data.history.map((event) => (
+            <div class="event">
+              <div class="when">{event.when}</div>
+              <div class="what" set:html={event.what}></div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {(prev || next) && (
+    <nav class="nav-langs">
+      <div class="nav-inner">
+        {prev ? (
+          <a href={`/languages/${prev.id}/`}>
+            <span class="dir">&larr; previous</span>
+            <span class="lname">{prev.data.name}</span><span class={`lcamp ${campShort[prev.data.camp]}`}>{prev.data.camp}</span>
+          </a>
+        ) : <span />}
+        {next ? (
+          <a href={`/languages/${next.id}/`} class="next">
+            <span class="dir">next &rarr;</span>
+            <span class="lname">{next.data.name}</span><span class={`lcamp ${campShort[next.data.camp]}`}>{next.data.camp}</span>
+          </a>
+        ) : <span />}
+      </div>
+    </nav>
+  )}
+</Base>

@@ -1,0 +1,26 @@
+---
+import starsData from '../data/stars.json';
+
+const buildDate = new Date().toISOString().slice(0, 10);
+const fetchedDates = Object.values(starsData as Record<string, { fetched_at?: string }>)
+  .map((v) => v?.fetched_at)
+  .filter((d): d is string => Boolean(d))
+  .sort();
+const starsRefreshed = fetchedDates.length > 0 ? fetchedDates[fetchedDates.length - 1].slice(0, 10) : null;
+---
+<footer class="site">
+  <div class="footer-inner">
+    <div class="footer-left">
+      Maintained by Alasdair Allan. Originally catalogued in <a href="https://negroniventurestudios.com/2026/05/20/three-camps-alike-in-dignity/">&ldquo;Three camps alike in dignity&rdquo;</a> for Negroni Venture Studios.
+      <div class="stamp">
+        last updated {buildDate}
+        {starsRefreshed && ` · stars refreshed ${starsRefreshed}`}
+      </div>
+    </div>
+    <div class="footer-right">
+      <a href="https://github.com/aallan/agentlanguages">github</a>
+      <a href="https://github.com/aallan/agentlanguages/blob/main/CONTRIBUTING.md">submit a language</a>
+      <a href="/#about">methodology</a>
+    </div>
+  </div>
+</footer>
