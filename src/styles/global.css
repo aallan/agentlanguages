@@ -627,7 +627,14 @@ footer.site { padding: 3rem 0 4rem; }
   text-transform: uppercase;
   color: var(--ink-500);
 }
-.metaprop .val { font-size: 0.95rem; color: var(--ink-900); }
+.metaprop .val {
+  font-size: 0.95rem;
+  color: var(--ink-900);
+  /* Long URLs and descriptive values (e.g. "Native binaries (Linux x86_64,
+     macOS Apple Silicon)") would otherwise overflow the column and visibly
+     collide with the next metaprop. Allow breaks anywhere when needed. */
+  overflow-wrap: anywhere;
+}
 .metaprop .val a { color: var(--ink-900); }
 
 /* ===== Prose body ===== */
