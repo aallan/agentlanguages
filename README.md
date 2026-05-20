@@ -1,5 +1,7 @@
 # agentlanguages.dev
 
+![agentlanguages.dev — programming languages designed for AI agents to write](https://agentlanguages.dev/og-image.png)
+
 A community-edited catalogue of programming languages designed for AI agents to author code.
 
 The site catalogues an emerging field of language design that treats LLMs and autonomous agents — not humans — as the primary authors of code. As of May 2026, the catalogue tracks projects across three philosophical camps that disagree on how to frame the underlying problem:

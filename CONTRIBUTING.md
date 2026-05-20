@@ -28,7 +28,6 @@ Academic papers without a downloadable implementation are accepted if the paper 
 ```yaml
 ---
 name: Example
-slug: example
 camp: verification                 # syntactic | verification | orchestration | adjacent | unclassified
 spans_camps: []                    # optional secondary camp(s)
 one_liner: "One-sentence neutral description."

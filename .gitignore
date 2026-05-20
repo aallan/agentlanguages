@@ -31,9 +31,8 @@ pnpm-debug.log*
 *.swo
 
 # working docs (kept local; not part of the public catalogue)
-BRIEFING.md
-PLAN.md
-CLAUDE.md
+# CLAUDE.md is now committed (project orientation for AI agents); the
+# others remain gitignored as internal briefs.
 DETAIL_PAGE_BRIEF.md
 RESEARCH_PROMPT_*.md
 mockups/
