@@ -27,7 +27,11 @@ const ogImageUrl = new URL('/og-image.png', Astro.site).toString();
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl.toString()} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- ?v= bumps cache-bust the favicon. Chrome/Safari keep a persistent
+         favicon database keyed by URL that ignores normal cache headers;
+         changing the URL is the only reliable way to force a re-fetch.
+         Bump this when the favicon design changes. -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" />
     <link rel="icon" href="/favicon.ico" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <meta name="generator" content={Astro.generator} />
