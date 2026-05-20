@@ -2,7 +2,7 @@
 
 A community-edited catalogue of programming languages designed for AI agents to author code.
 
-The site catalogues an emerging field of language design that treats LLMs and autonomous agents — not humans — as the primary authors of code. As of May 2026, twenty projects qualify, organised around three philosophical camps that disagree about what the underlying problem actually is:
+The site catalogues an emerging field of language design that treats LLMs and autonomous agents — not humans — as the primary authors of code. As of May 2026, the catalogue tracks projects across three philosophical camps that disagree on how to frame the underlying problem:
 
 - **Syntactic** — Strip ambiguity at the token level. Make syntax easier for LLMs to parse and generate.
 - **Verification** — Make contracts mechanically checkable. The model doesn't need to be right; it needs to be checkable.
@@ -22,6 +22,8 @@ PRs are reviewed editorially by the maintainer. Not every submission is merged, 
 
 ## Local development
 
+### Site (Astro)
+
 Requirements: Node ≥ 22.12 and npm.
 
 ```sh
@@ -31,9 +33,20 @@ npm run build    # production build to ./dist/
 npm run preview  # preview the production build locally
 ```
 
-## Star refresh
+### Star refresh (Python)
 
 A GitHub Action runs weekly (Monday 06:00 UTC) and refreshes `src/data/stars.json` from the GitHub API. The site does not make live API calls — stars are baked in at build time, and the footer surfaces the most recent refresh date. If the refresh fails for a given repo, the previous value is kept.
+
+To refresh manually (e.g. after adding a new language entry and not wanting to wait until Monday):
+
+```sh
+./scripts/setup.sh                                                       # creates .venv/, installs scripts/requirements.txt
+GITHUB_TOKEN=$(gh auth token) .venv/bin/python scripts/refresh_stars.py  # writes src/data/stars.json
+```
+
+Then commit `src/data/stars.json`. Homebrew Python on macOS refuses system-level pip installs (PEP 668), so the script's `pyyaml` dependency lives in a project-local `.venv/` that `scripts/setup.sh` creates (and `.gitignore` ignores). The setup script is idempotent — safe to re-run.
+
+`GITHUB_TOKEN` is optional; without it the script falls back to unauthenticated requests with a 60/hour rate limit, fine for the catalogue's size but easy to exhaust on repeated runs.
 
 ## Credits and licence
 

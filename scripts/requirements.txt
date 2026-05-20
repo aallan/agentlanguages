@@ -1,0 +1,4 @@
+# Python dependencies for scripts/refresh_stars.py.
+# Installed into a local .venv/ by scripts/setup.sh; also installed into
+# the GitHub Actions runner by .github/workflows/refresh-stars.yml.
+pyyaml>=6.0
