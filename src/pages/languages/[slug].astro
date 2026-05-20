@@ -117,6 +117,10 @@ const siteHost = (() => {
         {data.benchmark && (
           <div class="metaprop"><span class="key">{data.benchmark.label}</span><span class="val"><a href={data.benchmark.url}>{data.benchmark.label}</a></span></div>
         )}
+        {/* Surface the markdown alternate visibly. The HTML `<link rel="alternate">`
+            in Base.astro makes it discoverable by crawlers; this metaprop makes it
+            discoverable by readers who want to send it to an agent. */}
+        <div class="metaprop"><span class="key">markdown</span><span class="val"><a href={`/languages/${id}.md`}>{id}.md</a></span></div>
       </div>
     </div>
   </section>
