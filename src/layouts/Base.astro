@@ -89,11 +89,15 @@ if (pathname === '/' || pathname === '') {
     />
 
     <script is:inline>
+      // System-preference detection lives in CSS now (see the
+      // @media (prefers-color-scheme: dark) block in global.css). All this
+      // inline script does is apply an explicit user override saved in
+      // localStorage — running synchronously in <head> so it lands before
+      // first paint and avoids a flash.
       (function () {
         var saved = localStorage.getItem('theme');
-        var prefers = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        if (saved === 'dark' || (!saved && prefers)) {
-          document.documentElement.setAttribute('data-theme', 'dark');
+        if (saved === 'dark' || saved === 'light') {
+          document.documentElement.setAttribute('data-theme', saved);
         }
       })();
     </script>
@@ -104,16 +108,26 @@ if (pathname === '/' || pathname === '') {
     <Footer />
 
     <script is:inline>
+      // Toggle sets data-theme to "light" or "dark" explicitly — never
+      // removes the attribute — so an explicit-light choice on a dark-pref
+      // OS still wins. Removing the attribute would re-expose the user to
+      // the @media (prefers-color-scheme: dark) rule and flip them back.
+      //
+      // To pick "follow my OS again", users can clear localStorage (devtools
+      // or a future "Reset" button); we don't yet expose a UI for that.
+      //
+      // The current state is read from the *computed* theme rather than the
+      // attribute alone, so the first click on a system-dark page where the
+      // attribute is unset still flips correctly to light.
       function toggleTheme() {
         var root = document.documentElement;
-        var current = root.getAttribute('data-theme');
-        if (current === 'dark') {
-          root.removeAttribute('data-theme');
-          localStorage.setItem('theme', 'light');
-        } else {
-          root.setAttribute('data-theme', 'dark');
-          localStorage.setItem('theme', 'dark');
-        }
+        var explicit = root.getAttribute('data-theme');
+        var isDark = explicit
+          ? explicit === 'dark'
+          : window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var next = isDark ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
       }
     </script>
   </body>

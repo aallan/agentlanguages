@@ -1,13 +1,28 @@
 /* ============================================================================
    agentlanguages.dev — global styles
    Tokens, base typography, and components ported from mockups/home.html and
-   mockups/detail.html. Light-mode default; dark mode via [data-theme="dark"].
+   mockups/detail.html.
+
+   Theme resolution order (highest precedence first):
+     1. html[data-theme="dark"]  — user explicitly chose dark via toggle
+     2. html[data-theme="light"] — user explicitly chose light via toggle
+     3. @media (prefers-color-scheme: dark) — OS preference
+     4. :root defaults                       — light fallback
+
+   The toggle in Base.astro sets data-theme to "light" or "dark" explicitly
+   (it never removes the attribute) so that explicit-light overrides a
+   dark-preferring OS. localStorage persists the user's choice; clearing it
+   hands control back to the OS via the media query.
    ============================================================================ */
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 /* ===== Design tokens ===== */
 :root {
+  /* Advertise both modes to the UA so native widgets (scrollbars, form
+     controls, the autofill highlight on input fields) follow suit. */
+  color-scheme: light dark;
+
   --page: #F7F6F2;
   --surface: #FFFFFF;
   --surface-2: #FDFDFB;
@@ -36,6 +51,34 @@
   --col-prose: 680px;
   --col-wide: 980px;
   --col-full: 1180px;
+}
+
+/* Dark-mode tokens. Defined once in a custom property mixin via the @media
+   block, and once via the [data-theme="dark"] attribute selector. The
+   :not([data-theme="light"]) qualifier on the media query is what makes
+   the toggle work: a user on a dark-mode OS who explicitly toggles to
+   light gets html[data-theme="light"] on the root, which excludes them
+   from the media-query rule. */
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) {
+    --page: #14141A;
+    --surface: #1E1E26;
+    --surface-2: #23232E;
+    --ink-900: #F0F0F0;
+    --ink-700: #C0C0C0;
+    --ink-500: #909090;
+    --ink-300: #606060;
+    --rule: rgba(255, 255, 255, 0.08);
+    --rule-hi: rgba(255, 255, 255, 0.14);
+    --code-bg: #0E0E14;
+    --code-ink: #E8E8E8;
+
+    --camp-syntactic: #6188B8;
+    --camp-verification: #C28055;
+    --camp-orchestration: #88AE7E;
+    --camp-adjacent: #909090;
+    --camp-unclassified: #606060;
+  }
 }
 
 html[data-theme="dark"] {
@@ -168,6 +211,13 @@ nav.primary a:hover { color: var(--ink-900); }
 .theme-toggle svg { width: 16px; height: 16px; }
 .theme-toggle .moon { display: none; }
 .theme-toggle .sun  { display: block; }
+/* Same precedence ladder as the token block above: media query for OS
+   preference (excluding explicit-light), attribute selector for the
+   explicit-dark choice. Both swap moon for sun. */
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) .theme-toggle .moon { display: block; }
+  html:not([data-theme="light"]) .theme-toggle .sun  { display: none; }
+}
 html[data-theme="dark"] .theme-toggle .moon { display: block; }
 html[data-theme="dark"] .theme-toggle .sun  { display: none; }
 
