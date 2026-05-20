@@ -83,7 +83,7 @@ export const GET: APIRoute = async ({ site }) => {
   lines.push('');
   lines.push(`> Complete machine-readable text of the agentlanguages.dev catalogue. ${trackedCount} languages designed for AI agents to author code, organised across five buckets: three philosophical camps (syntactic, verification, orchestration) plus adjacent and unclassified.`);
   lines.push('');
-  lines.push('This file is the full-text companion to the short index at https://agentlanguages.dev/llms.txt — included here so that an agent that wants the entire catalogue can fetch it in one HTTP round-trip rather than 27 (homepage + one per entry).');
+  lines.push(`This file is the full-text companion to the short index at https://agentlanguages.dev/llms.txt — included here so that an agent that wants the entire catalogue can fetch it in one HTTP round-trip rather than ${trackedCount + 1} (homepage + one per entry).`);
   lines.push('');
   lines.push('Each entry below carries a `## Name` heading and a metadata block (camp, author, implementation language, compilation target, licence, first seen, maturity, site, repo, paper, agent tooling) followed by the editorial prose and, where present, design-DNA cross-references and timeline events.');
   lines.push('');

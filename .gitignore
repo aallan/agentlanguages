@@ -30,6 +30,7 @@ BRIEFING.md
 PLAN.md
 CLAUDE.md
 DETAIL_PAGE_BRIEF.md
+RESEARCH_PROMPT_*.md
 mockups/
 
 # Claude Code user-specific settings (the shareable launch.json is committed)
