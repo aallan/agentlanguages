@@ -73,7 +73,7 @@ The provocative move sits at the language level, not the toolchain level: Zero c
 
 ## Maturity.
 
-v0.1.1, Apache-2.0, released 15 May 2026, 3.3k stars on `vercel-labs/zero` at first cataloguing. The README and homepage are explicit that this is a "pre-1 experiment": syntax and APIs are not a contract, breaking changes are expected, and security vulnerabilities should be expected &mdash; Vercel Labs recommends running Zero only in isolated environments. The repo maintains two compilers: `zero-c`, the C bootstrap; and `compiler-zero`, a self-hosting compiler written in Zero. Cross-compilation is limited to a documented target subset; there is no package registry yet; VS Code syntax highlighting ships in-repo. Named contributors are Chris Tate and Matt Van Horn.
+v0.1.1, Apache-2.0, released 15 May 2026, 3.3k stars on `vercel-labs/zerolang` at first cataloguing. The README and homepage are explicit that this is a "pre-1 experiment": syntax and APIs are not a contract, breaking changes are expected, and security vulnerabilities should be expected &mdash; Vercel Labs recommends running Zero only in isolated environments. The repo maintains two compilers: `zero-c`, the C bootstrap; and `compiler-zero`, a self-hosting compiler written in Zero. Cross-compilation is limited to a documented target subset; there is no package registry yet; VS Code syntax highlighting ships in-repo. Named contributors are Chris Tate and Matt Van Horn.
 
 The bet is that structured agent-first compiler output becomes table stakes once developers see what it does for repair loops. Even if Zero itself doesn't win, the design pattern &mdash; stable codes, typed repairs, version-matched skills &mdash; is a concrete argument for what every other compiler should ship.
 
