@@ -22,6 +22,10 @@ pnpm-debug.log*
 # system level (PEP 668), so the script's pyyaml dep lives in a local venv.
 .venv/
 
+# Audit log of cataloguing notices posted by scripts/post_notices.sh.
+# Local-only — the canonical audit trail is the GitHub issues themselves.
+scripts/notices.log
+
 # macOS-specific files
 .DS_Store
 
