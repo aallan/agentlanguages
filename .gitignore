@@ -22,8 +22,14 @@ pnpm-debug.log*
 # system level (PEP 668), so the script's pyyaml dep lives in a local venv.
 .venv/
 
-# Audit log of cataloguing notices posted by scripts/post_notices.sh.
-# Local-only — the canonical audit trail is the GitHub issues themselves.
+# Cataloguing-notice toolkit. Operational scaffolding for posting one-time
+# notices to the catalogued projects — kept local because the canonical
+# artefacts are the GitHub issues those notices create on other repos, not
+# the toolkit that produces them. The repo stays focused on editorial
+# content (src/content/languages/) rather than the side-effecting tooling.
+scripts/post_notices.sh
+scripts/notice-template.md
+scripts/notices.tsv
 scripts/notices.log
 
 # macOS-specific files
