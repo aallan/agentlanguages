@@ -22,7 +22,8 @@ const { languages, stars } = Astro.props;
     <select class="sort-select" id="sort">
       <option value="stars">Stars (desc)</option>
       <option value="name">Name (a-z)</option>
-      <option value="date">Date appeared</option>
+      <option value="date-newest">Newest first</option>
+      <option value="date-oldest">Oldest first</option>
     </select>
   </div>
 </div>
@@ -58,8 +59,13 @@ const { languages, stars } = Astro.props;
         if (mode === 'name') {
           return (a.getAttribute('data-name') || '').localeCompare(b.getAttribute('data-name') || '');
         }
-        if (mode === 'date') {
+        // data-date is YYYY-MM (ISO ordering), so plain string compare
+        // gives chronological order. b vs a swap inverts the direction.
+        if (mode === 'date-newest') {
           return (b.getAttribute('data-date') || '').localeCompare(a.getAttribute('data-date') || '');
+        }
+        if (mode === 'date-oldest') {
+          return (a.getAttribute('data-date') || '').localeCompare(b.getAttribute('data-date') || '');
         }
         var sa = parseInt(a.getAttribute('data-stars') || '-1', 10);
         var sb = parseInt(b.getAttribute('data-stars') || '-1', 10);
