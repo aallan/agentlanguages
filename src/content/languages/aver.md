@@ -8,10 +8,10 @@ repo: jasisz/aver
 paper: null
 author: jasisz
 implementation_language: Rust
-compilation_target: bytecode VM, Rust, WebAssembly GC (Lean 4 / Dafny via proof export)
+compilation_target: bytecode VM, Rust, WebAssembly GC + wasip2 (Lean 4 / Dafny via proof export)
 license: MIT
 maturity: working_compiler
-date_appeared: 2026-03
+date_appeared: 2026-02
 agent_tooling:
   - CLAUDE.md
   - llms.txt
@@ -73,7 +73,7 @@ The distinctive move shows up in the comparison with Vera. The two share design 
 
 ## Maturity.
 
-v0.21 on crates.io (`cargo install aver-lang`), MIT-licensed, written in Rust, primary author `jasisz`. Three backends: a bytecode VM, native Rust codegen, and a standalone WASM-GC target &mdash; the site demonstrates the latter with seven games compiled directly to WebAssembly GC, including Snake at 4.3&nbsp;KiB and a roguelike at 25.6&nbsp;KiB on Chrome 119+/Firefox 120+/Safari 18.2+. Proof export targets Lean 4 (via `lake build`) and Dafny. The GitHub repository is small (6 commits visible at time of cataloguing) but the toolchain surface is wide and functional. The bet is that the same source can serve as implementation and reviewable specification, with proof export as the upper-bound check.
+v0.21 on crates.io (`cargo install aver-lang`), MIT-licensed, written in Rust, primary author `jasisz`. Three backends: a bytecode VM, native Rust codegen, and a standalone WASM-GC target (additionally lowered to wasip2 / WASI 0.2 Component Model for server-side deployment) &mdash; the site demonstrates the latter with seven games compiled directly to WebAssembly GC, including Snake at 4.3&nbsp;KiB and a roguelike at 25.6&nbsp;KiB on Chrome 119+/Firefox 120+/Safari 18.2+. Proof export targets Lean 4 (via `lake build`) and Dafny. The toolchain surface is wide and functional. The bet is that the same source can serve as implementation and reviewable specification, with proof export as the upper-bound check.
 
 ## Agent tooling.
 
