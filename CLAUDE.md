@@ -193,6 +193,38 @@ we keep the wording count-free rather than try to inject a number.
 
 ---
 
+## Gotchas
+
+Things that have bitten us and are worth flagging up front so the next
+person doesn't repeat them.
+
+### "Pages built" ≠ "languages tracked"
+
+Astro's build output reports `X page(s) built`. That's the count of
+*HTML routes*, which equals `languages.length + 1` (the `+1` is the
+homepage). Endpoint routes — `llms.txt`, `llms-full.txt`, `sitemap.xml`,
+`robots.txt`, per-entry `<slug>.md` companions, `ai-plugin.json`,
+redirects — are *not* counted in that line, even though they're emitted
+by the same build.
+
+The number users see on the live site (e.g. "30 languages tracked" in
+the hero, "30 projects" in the lead / `llms.txt` / `llms-full.txt` /
+`ai-plugin.json`) comes from `languages.length` directly. It's always
+one less than the Astro page count.
+
+When reporting catalogue size in conversation, quote the site's number
+(`languages.length`), not the build's `X page(s) built` line. The right
+way to verify from the command line is:
+
+```sh
+curl -sS https://agentlanguages.dev/ | grep -oE '[0-9]+ languages tracked'
+```
+
+This bypasses any browser cache and reads straight from the deployed
+HTML.
+
+---
+
 ## Local development
 
 See [README.md](README.md) for the npm commands. tl;dr:
