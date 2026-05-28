@@ -223,6 +223,30 @@ curl -sS https://agentlanguages.dev/ | grep -oE '[0-9]+ languages tracked'
 This bypasses any browser cache and reads straight from the deployed
 HTML.
 
+### Posting a welcome notice — wait for the deploy first
+
+When a new catalogue entry is added and the workflow includes posting a
+GitHub-issue notice on the project's own repo, the notice body links to
+the entry's detail page (e.g. `https://agentlanguages.dev/languages/<slug>/`).
+That URL only exists after the deploy workflow completes — typically ~90
+seconds after the push.
+
+Posting the notice before the deploy finishes means recipients clicking
+the link immediately get a 404. Self-correcting (the page is live within
+a minute or two) but a broken first impression on the issue thread.
+
+The discipline:
+
+1. Push the catalogue entry commit.
+2. Wait for `deploy.yml` to complete: `gh run list --workflow=deploy.yml --limit 1 --json status,conclusion --jq '.[0] | "\(.status)/\(.conclusion // "—")"'` until it reads `completed/success`.
+3. Verify the URL is live: `curl -sS -o /dev/null -w "%{http_code}\n" https://agentlanguages.dev/languages/<slug>/` should return `200`.
+4. Then post the notice.
+
+The same applies whenever a notice body links to a freshly-deployed
+surface — not just per-entry detail pages, but also any new markdown
+companions, llms.txt entries, or anything else that propagates through
+the build pipeline rather than being live on push.
+
 ---
 
 ## Local development
