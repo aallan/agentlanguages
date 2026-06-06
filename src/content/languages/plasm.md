@@ -29,10 +29,10 @@ crossrefs:
     name: Boruna
     camp: orchestration
     relation: "Both separate plan from live execution and ship MCP as the agent surface. Boruna gates bytecode effects and hash-chains evidence; Plasm gates HTTP/API effects via CGS capabilities and dry-run plans."
-  - slug: pact
-    name: Pact
-    camp: verification
-    relation: "Pact puts intent and effects in function signatures for web apps; Plasm puts domain vocabulary in catalog graphs and keeps agent programs token-compact via symbol tuning."
+  - slug: lume
+    name: Lume
+    camp: syntactic
+    relation: "Both treat context budget as a first-class design constraint. Lume packs docs and diagnostics under a caller-set token cap; Plasm compresses vendor API vocabulary into session-local e#/p#/r# symbols and a live DOMAIN teaching TSV."
   - slug: plumbing
     name: Plumbing
     camp: adjacent
