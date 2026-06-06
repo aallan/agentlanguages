@@ -18,7 +18,7 @@ agent_tooling:
   - SKILL.md
   - MCP server (plasm_context, plasm, plasm_run)
   - plasm CLI client (init, search, context, run)
-  - Teaching TSV (DOMAIN symbol map)
+  - Teaching TSV (session symbol map)
 key_idea: |
   APIs are authored as typed capability graphs (CGS); agents write compact
   path-expression programs against a live teaching table of opaque e#/m#/p#/r#
@@ -33,7 +33,7 @@ crossrefs:
   - slug: lume
     name: Lume
     camp: syntactic
-    relation: "Both treat context budget as a first-class design constraint. Lume packs docs and diagnostics under a caller-set token cap; Plasm compresses vendor API vocabulary into session-local e#/p#/r# symbols and a live DOMAIN teaching TSV."
+    relation: "Both treat context budget as a first-class design constraint. Lume packs docs and diagnostics under a caller-set token cap; Plasm compresses vendor API vocabulary into session-local e#/p#/r# symbols and a live teaching TSV."
   - slug: plumbing
     name: Plumbing
     camp: adjacent
@@ -42,9 +42,9 @@ crossrefs:
 
 ## The thesis.
 
-Plasm treats the agent integration problem as a **language and plan** problem, not a transport problem. MCP and HTTP give agents a common way to call tools; Plasm asks what **typed domain** those calls should compose over. APIs are authored as **Capability Graph Schemas (CGS)**: entities, relations, queries, searches, and declared effects mapped to real HTTP or GraphQL via CML templates. Agents do not memorize OpenAPI field names per vendor — they copy opaque **`e#` / `m#` / `p#` / `r#`** symbols from a live **DOMAIN teaching table** (TSV) and write **path-expression programs** that the runtime type-checks and lowers to an execution DAG.
+Plasm treats the agent integration problem as a **language and plan** problem, not a transport problem. MCP and HTTP give agents a common way to call tools; Plasm asks what **typed domain** those calls should compose over. APIs are authored as **Capability Graph Schemas (CGS)**: entities, relations, queries, searches, and declared effects mapped to real HTTP or GraphQL via CML templates. Agents do not memorize OpenAPI field names per vendor — they copy opaque **`e#` / `m#` / `p#` / `r#`** symbols from a live **teaching table** (TSV) and write **path-expression programs** that the runtime type-checks and lowers to an execution DAG.
 
-**Plan before live HTTP.** The same program string is reviewed dry-run, then executed live. Agents reach that flow through **two execution environments**: **Streamable HTTP MCP** (`plasm_context` → `plasm` → `plasm_run`, server-held session and teaching TSV) and the **`plasm` CLI client** (`init` → `search` → `context` → `run` against a remote HTTP host, with the **client-owned** symbol table under `.plasm/`). Both compile the same surface language to the same plan IR; they differ in transport and where DOMAIN symbols are authoritative.
+**Plan before live HTTP.** The same program string is reviewed dry-run, then executed live. Agents reach that flow through **two execution environments**: **Streamable HTTP MCP** (`plasm_context` → `plasm` → `plasm_run`, server-held session and teaching TSV) and the **`plasm` CLI client** (`init` → `search` → `context` → `run` against a remote HTTP host, with the **client-owned** symbol table under `.plasm/`). Both compile the same surface language to the same plan IR; they differ in transport and where session symbols are authoritative.
 
 ## What it looks like.
 
@@ -63,11 +63,11 @@ Symbols are **session-local**: `e1` might mean GitHub `Issue` in one federated s
 
 ## Distinctive moves.
 
-- **Teaching TSV, not raw schema.** DOMAIN emits valid expression exemplars plus a compact symbol map. **Symbol tuning** renames wire tokens to short opaque IDs to save context — notation on the same grammar, not a second language tier.
-- **Incremental DOMAIN waves.** Federated sessions append entities and capabilities monotonically; `e#`/`m#`/`p#`/`r#` stay append-only within a logical session.
+- **Teaching TSV, not raw schema.** Context exposure emits valid expression exemplars plus a compact symbol map. **Symbol tuning** renames wire tokens to short opaque IDs to save context — notation on the same grammar, not a second language tier.
+- **Incremental teaching waves.** Federated sessions append entities and capabilities monotonically; `e#`/`m#`/`p#`/`r#` stay append-only within a logical session.
 - **Dry-run gate.** Open context (`plasm_context` or `plasm context`), plan with `plasm`, execute with `plasm_run` / `plasm run` after review; run snapshots may attach for audit.
 - **Capability-scoped row validation.** Postfix transforms such as `.group_by` validate against the **upstream capability's projected fields** (explicit `provides:` in CGS), not the full entity — so search-then-aggregate stays honest when search returns a subset of fields.
-- **Deterministic semantic correction.** Parse failures on predicate fields can rewrite to canonical wire names when the domain lexicon has a unique match; ambiguous cases return structured recovery hints instead of silent nulls.
+- **Deterministic semantic correction.** Parse failures on predicate fields can rewrite to canonical wire names when the catalog lexicon has a unique match; ambiguous cases return structured recovery hints instead of silent nulls.
 
 ## Maturity.
 
@@ -78,9 +78,9 @@ Open-source workspace **`PlasmTools/plasm-core`**, Rust compiler/runtime, v0.1.x
 Plasm ships **two agent execution environments** for the same language:
 
 - **MCP (in-process with the host).** `plasm_context` opens or extends a logical session and returns teaching TSV; `plasm` dry-runs; `plasm_run` executes live. The MCP host holds session state and the append-only symbol map.
-- **`plasm` CLI (remote HTTP terminal).** `plasm init` configures a server profile; `plasm search` discovers catalogs; `plasm context` builds a **client-local** DOMAIN table (`domain.tsv` under `.plasm/`); `plasm run` expands programs against that table and POSTs to the server's execute API. Suited to CI, scripts, and agents that prefer a transport-only boundary.
+- **`plasm` CLI (remote HTTP terminal).** `plasm init` configures a server profile; `plasm search` discovers catalogs; `plasm context` builds a **client-local** teaching table (cumulative TSV under `.plasm/`); `plasm run` expands programs against that table and POSTs to the server's execute API. Suited to CI, scripts, and agents that prefer a transport-only boundary.
 
-**Authoring and eval:** root `AGENTS.md`, `CLAUDE.md`, and the `plasm-authoring` skill suite for CGS catalogs; `plasm-eval` for NL conformance against DOMAIN. **`plasm-server`** / **`plasm-mcp`** provide the HTTP + MCP listener; **`plasm-repl`** remains a local schema debugger, not the remote agent path.
+**Authoring and eval:** root `AGENTS.md`, `CLAUDE.md`, and the `plasm-authoring` skill suite for CGS catalogs; `plasm-eval` for NL conformance against the teaching table. **`plasm-server`** / **`plasm-mcp`** provide the HTTP + MCP listener; **`plasm-repl`** remains a local schema debugger, not the remote agent path.
 
 ## Design constraints.
 
