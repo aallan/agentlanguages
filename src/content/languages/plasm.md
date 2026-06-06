@@ -76,11 +76,4 @@ Open-source workspace **`PlasmTools/plasm-core`**, Rust compiler/runtime, v0.1.x
 
 **MCP:** `plasm_context` (session + teaching TSV), `plasm` (plan-only), `plasm_run` (live), `discover_capabilities`. **Repo guidance:** root `AGENTS.md`, `CLAUDE.md`, and the `plasm-authoring` skill suite for catalog authoring. **Eval:** `plasm-eval` drives NL cases against DOMAIN with deterministic coverage reporting. **HTTP / CLI:** discovery, execute, and the `plasm` remote terminal for transport-only clients that own symbol tables locally.
 
-## Where it strains.
-
-- **Catalog-parameterized tokens** — valid entity and field names change per loaded CGS and exposure wave; agents must read the latest TSV, not cache symbols across unrelated sessions.
-- **Federated duplicate wire names** — `github/Issue` and `linear/Issue` require distinct `e#` symbols in one session; the runtime stamps `catalog_entry_id` on dispatch, but teaching must never collide opaque IDs.
-- **No first-class `:llm` in the surface language** — model calls live in REPL/eval harnesses; Plasm programs target **API effects**, not typed Inference effects.
-- **Product surface area** — CGS authoring, CML mappings, MCP host, and traces are part of the shipped stack; the catalogue entry is the **agent-facing program language** hosted by that runtime.
-
 Compared to **Code Mode**-style "write code against one API," Plasm optimizes for **multi-catalog row workflows** under governance: typed graphs, composable row sets, and reviewable plans rather than an unconstrained sandbox script.
