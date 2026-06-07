@@ -9,20 +9,20 @@ paper: null
 author: Ryan Roberts
 implementation_language: Rust
 compilation_target: Native binaries (HTTP/API execution plans)
-license: Business Source License 1.1
+license: Business Source License 1.1 (Change Date 2030-04-24, Change Licence Apache-2.0)
 maturity: working_compiler
 date_appeared: 2026-04
 agent_tooling:
   - AGENTS.md
   - CLAUDE.md
   - SKILL.md
-  - MCP server (plasm_context, plasm, plasm_run)
+  - MCP server (plasm_context, discover_capabilities, plasm, plasm_run)
   - plasm CLI client (init, search, context, run)
   - Teaching TSV (session symbol map)
 key_idea: |
   APIs are authored as typed capability graphs (CGS); agents write compact
   path-expression programs against a live teaching table of opaque e#/m#/p#/r#
-  symbols instead of memorizing vendor JSON schemas. Programs lower to
+  symbols instead of memorising vendor JSON schemas. Programs lower to
   reviewable execution plans (dry-run before live HTTP), with federated
   sessions keeping one append-only symbol space across multiple catalogs.
 crossrefs:
@@ -42,7 +42,7 @@ crossrefs:
 
 ## The thesis.
 
-Plasm treats the agent integration problem as a **language and plan** problem, not a transport problem. MCP and HTTP give agents a common way to call tools; Plasm asks what **typed domain** those calls should compose over. APIs are authored as **Capability Graph Schemas (CGS)**: entities, relations, queries, searches, and declared effects mapped to real HTTP or GraphQL via CML templates. Agents do not memorize OpenAPI field names per vendor — they copy opaque **`e#` / `m#` / `p#` / `r#`** symbols from a live **teaching table** (TSV) and write **path-expression programs** that the runtime type-checks and lowers to an execution DAG.
+Plasm treats the agent integration problem as a **language and plan** problem, not a transport problem. MCP and HTTP give agents a common way to call tools; Plasm asks what **typed domain** those calls should compose over. APIs are authored as **Capability Graph Schemas (CGS)**: entities, relations, queries, searches, and declared effects mapped to real HTTP or GraphQL via CML templates. Agents do not memorise OpenAPI field names per vendor — they copy opaque **`e#` / `m#` / `p#` / `r#`** symbols from a live **teaching table** (TSV) and write **path-expression programs** that the runtime type-checks and lowers to an execution DAG.
 
 **Plan before live HTTP.** The same program string is reviewed dry-run, then executed live. Agents reach that flow through **two execution environments**: **Streamable HTTP MCP** (`plasm_context` → `plasm` → `plasm_run`, server-held session and teaching TSV) and the **`plasm` CLI client** (`init` → `search` → `context` → `run` against a remote HTTP host, with the **client-owned** symbol table under `.plasm/`). Both compile the same surface language to the same plan IR; they differ in transport and where session symbols are authoritative.
 
@@ -59,7 +59,7 @@ sent = e1.m13(p91=report.content)
 issues, sent
 ```
 
-Symbols are **session-local**: `e1` might mean GitHub `Issue` in one federated session and Linear `Issue` as `e2` when both catalogs are seeded. The grammar rules are stable; the vocabulary is **catalog-parameterized** (like SQL over a schema). Canonical surface spec: [Plasm language definition](https://plasmtools.github.io/plasm-core/reference/plasm-language-definition/).
+Symbols are **session-local**: `e1` might mean GitHub `Issue` in one federated session and Linear `Issue` as `e2` when both catalogs are seeded. The grammar rules are stable; the vocabulary is **catalog-parameterised** (like SQL over a schema). Canonical surface spec: [Plasm language definition](https://plasmtools.github.io/plasm-core/reference/plasm-language-definition/).
 
 ## Distinctive moves.
 
@@ -71,7 +71,7 @@ Symbols are **session-local**: `e1` might mean GitHub `Issue` in one federated s
 
 ## Maturity.
 
-Open-source workspace **`PlasmTools/plasm-core`**, Rust compiler/runtime, v0.1.x releases. Conformance is an executable **`plasm_language_matrix`** e2e suite (parse → DAG → dry → live Hermit) against dedicated fixtures — not production API catalogs. Dozens of packaged API catalogs (GitHub, Linear, Notion, …) ship as CGS + mappings. License is **Business Source License 1.1** (non-production OSS use permitted under Additional Use Grant). A Lean-oriented formal sketch exists in the language definition; it is not a complete verification story — camp fit is **orchestration** with **syntactic** secondary (symbol tuning), not SMT/refinement typing.
+Open-source workspace **`PlasmTools/plasm-core`**, Rust compiler/runtime, v0.1.x releases. Conformance is an executable **`plasm_language_matrix`** e2e suite (parse → DAG → dry → live Hermit) against dedicated fixtures — not production API catalogs. Dozens of packaged API catalogs (GitHub, Linear, Notion, …) ship as CGS + mappings. The Additional Use Grant under Business Source License 1.1 permits personal and internal-infrastructure use but excludes competing execution-as-a-service products; the four-year Change Date converts the licence to Apache-2.0 on 2030-04-24. A Lean-oriented formal sketch exists in the language definition; it is not a complete verification story — camp fit is **orchestration** with **syntactic** secondary (symbol tuning), not SMT/refinement typing.
 
 ## Agent tooling.
 
@@ -84,8 +84,8 @@ Plasm ships **two agent execution environments** for the same language:
 
 ## Design constraints.
 
-- **Catalog-parameterized tokens** — valid entity and field names change per loaded CGS and exposure wave; agents must read the latest TSV, not cache symbols across unrelated sessions.
+- **Catalog-parameterised tokens** — valid entity and field names change per loaded CGS and exposure wave; agents must read the latest TSV, not cache symbols across unrelated sessions.
 - **Federated duplicate wire names** — `github/Issue` and `linear/Issue` require distinct `e#` symbols in one session; the runtime stamps `catalog_entry_id` on dispatch, but teaching must never collide opaque IDs.
 - **Product surface area** — CGS authoring, CML mappings, MCP host, and traces are part of the shipped stack; the catalogue entry is the **agent-facing program language** hosted by that runtime.
 
-Compared to **Code Mode**-style "write code against one API," Plasm optimizes for **multi-catalog row workflows** under governance: typed graphs, composable row sets, and reviewable plans rather than an unconstrained sandbox script.
+Compared to **Code Mode**-style "write code against one API," Plasm optimises for **multi-catalog row workflows** under governance: typed graphs, composable row sets, and reviewable plans rather than an unconstrained sandbox script.
