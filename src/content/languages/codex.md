@@ -9,7 +9,7 @@ paper: null
 author: Damian Tedrow (with a multi-agent AI team)
 implementation_language: Codex (self-hosted; the bootstrap reference compiler is retired)
 compilation_target: "Bare-metal x86-64 (CDX binary, no OS or libc); transpiler plugs for ~48 targets including WebAssembly and LLVM IR"
-license: None (source-available)
+license: Not published
 maturity: working_compiler
 date_appeared: 2026-03
 agent_tooling:
