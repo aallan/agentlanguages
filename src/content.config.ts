@@ -53,18 +53,15 @@ const languages = defineCollection({
       })
       .optional(),
 
-    // Optional structured detail-page fields. Presence of a non-empty MDX body
-    // is what causes a detail page to render; these fields shape what goes on it.
-    pullquote: z.string().optional(),
-
-    code_sample: z
-      .object({
-        // `code` may contain raw HTML for hand-tuned syntax highlighting
-        // (e.g. <span class="kw">...). Rendered with `set:html`.
-        code: z.string(),
-        caption: z.string().optional(),
-      })
-      .optional(),
+    // Presence of a non-empty MDX body is what causes a detail page to render.
+    //
+    // NOTE: pullquotes and code samples go INLINE in the MDX body, as
+    // `<p class="pullquote">…</p>` and `<div class="code-sample">…</div>`
+    // respectively (see vera.md, codong.md, fabro.md for the pattern). There
+    // were once `pullquote` and `code_sample` frontmatter fields here, but the
+    // detail-page template never rendered them — a submission that used them
+    // (codex.md, PR #8) had its sample silently vanish. Removed to keep one
+    // code-sample mechanism. Inline-in-body is the only supported way.
 
     crossrefs: z
       .array(
