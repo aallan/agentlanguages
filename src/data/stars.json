@@ -1,141 +1,146 @@
 {
   "AvitalTamir/sever": {
-    "fetched_at": "2026-06-08T11:11:39Z",
+    "fetched_at": "2026-06-14T21:28:03Z",
     "forks": 8,
     "stars": 68
   },
   "KikotVit/pact-lang": {
-    "fetched_at": "2026-06-08T11:11:39Z",
+    "fetched_at": "2026-06-14T21:28:02Z",
     "forks": 0,
     "stars": 1
   },
   "Nerd-Lang/nerd-lang-core": {
-    "fetched_at": "2026-06-08T11:11:39Z",
+    "fetched_at": "2026-06-14T21:28:02Z",
     "forks": 7,
     "stars": 135
   },
   "PlasmTools/plasm-core": {
-    "fetched_at": "2026-06-08T11:11:39Z",
+    "fetched_at": "2026-06-14T21:28:03Z",
     "forks": 1,
     "stars": 3
   },
   "aallan/vera": {
-    "fetched_at": "2026-06-08T11:11:40Z",
+    "fetched_at": "2026-06-14T21:28:04Z",
     "forks": 20,
-    "stars": 376
+    "stars": 382
   },
   "alantech/marsha": {
-    "fetched_at": "2026-06-08T11:11:38Z",
+    "fetched_at": "2026-06-14T21:28:01Z",
     "forks": 17,
-    "stars": 467
+    "stars": 466
   },
   "alliecatowo/lumen": {
-    "fetched_at": "2026-06-08T11:11:37Z",
+    "fetched_at": "2026-06-14T21:28:00Z",
     "forks": 0,
     "stars": 1
   },
   "arcanist-sh/hx": {
-    "fetched_at": "2026-06-08T11:11:35Z",
+    "fetched_at": "2026-06-14T21:27:57Z",
     "forks": 1,
     "stars": 23
   },
   "brettinhere/Codong": {
-    "fetched_at": "2026-06-08T11:11:36Z",
+    "fetched_at": "2026-06-14T21:27:57Z",
     "forks": 7,
     "stars": 69
   },
   "escapeboy/boruna": {
-    "fetched_at": "2026-06-08T11:11:36Z",
+    "fetched_at": "2026-06-14T21:27:57Z",
     "forks": 0,
-    "stars": 3
+    "stars": 4
+  },
+  "fabro-sh/fabro": {
+    "fetched_at": "2026-06-14T21:27:58Z",
+    "forks": 133,
+    "stars": 1221
   },
   "hvoetsch/valea": {
-    "fetched_at": "2026-06-08T11:11:40Z",
+    "fetched_at": "2026-06-14T21:28:04Z",
     "forks": 0,
     "stars": 3
   },
   "imjasonh/loom": {
-    "fetched_at": "2026-06-08T11:11:35Z",
+    "fetched_at": "2026-06-14T21:27:56Z",
     "forks": 0,
     "stars": 0
   },
   "jasisz/aver": {
-    "fetched_at": "2026-06-08T11:11:35Z",
+    "fetched_at": "2026-06-14T21:27:55Z",
     "forks": 0,
-    "stars": 48
+    "stars": 49
   },
   "jordanhubbard/nanolang": {
-    "fetched_at": "2026-06-08T11:11:38Z",
+    "fetched_at": "2026-06-14T21:28:01Z",
     "forks": 23,
-    "stars": 601
+    "stars": 602
   },
   "kerv/laze": {
-    "fetched_at": "2026-06-08T11:11:37Z",
+    "fetched_at": "2026-06-14T21:27:59Z",
     "forks": 2,
     "stars": 3
   },
   "korulang/koru": {
-    "fetched_at": "2026-06-08T11:11:36Z",
+    "fetched_at": "2026-06-14T21:27:58Z",
     "forks": 0,
     "stars": 14
   },
   "lhaig/intent": {
-    "fetched_at": "2026-06-08T11:11:36Z",
+    "fetched_at": "2026-06-14T21:27:58Z",
     "forks": 0,
     "stars": 5
   },
   "magpie-lang/magpie": {
-    "fetched_at": "2026-06-08T11:11:38Z",
+    "fetched_at": "2026-06-14T21:28:00Z",
     "forks": 3,
     "stars": 52
   },
   "mavboas/lume": {
-    "fetched_at": "2026-06-08T11:11:37Z",
+    "fetched_at": "2026-06-14T21:27:59Z",
     "forks": 0,
     "stars": 1
   },
   "mronus/spec": {
-    "fetched_at": "2026-06-08T11:11:40Z",
+    "fetched_at": "2026-06-14T21:28:03Z",
     "forks": 1,
     "stars": 7
   },
   "paulprogrammer/llmlang": {
-    "fetched_at": "2026-06-08T11:11:37Z",
+    "fetched_at": "2026-06-14T21:27:59Z",
     "forks": 0,
     "stars": 1
   },
   "sunholo-data/ailang": {
-    "fetched_at": "2026-06-08T11:11:35Z",
+    "fetched_at": "2026-06-14T21:27:55Z",
     "forks": 5,
-    "stars": 31
+    "stars": 32
   },
   "vercel-labs/zerolang": {
-    "fetched_at": "2026-06-08T11:11:41Z",
-    "forks": 320,
-    "stars": 4916
+    "fetched_at": "2026-06-14T21:28:06Z",
+    "forks": 336,
+    "stars": 5048
   },
   "vmelnic/axis": {
-    "fetched_at": "2026-06-08T11:11:35Z",
+    "fetched_at": "2026-06-14T21:27:56Z",
     "forks": 0,
     "stars": 3
   },
   "voltropy/mog": {
-    "fetched_at": "2026-06-08T11:11:38Z",
+    "fetched_at": "2026-06-14T21:28:01Z",
     "forks": 9,
     "stars": 138
   },
   "vow-lang/vow": {
-    "fetched_at": "2026-06-08T11:11:41Z",
+    "fetched_at": "2026-06-14T21:28:05Z",
     "forks": 0,
-    "stars": 5
+    "stars": 6
   },
   "weetster/tacit": {
-    "fetched_at": "2026-06-08T11:11:40Z",
+    "fetched_at": "2026-06-14T21:28:04Z",
     "forks": 2,
     "stars": 4
   },
   "x07lang/x07": {
-    "fetched_at": "2026-06-08T11:11:41Z",
+    "fetched_at": "2026-06-14T21:28:05Z",
     "forks": 0,
     "stars": 8
   }
