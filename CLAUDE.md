@@ -247,6 +247,40 @@ surface — not just per-entry detail pages, but also any new markdown
 companions, llms.txt entries, or anything else that propagates through
 the build pipeline rather than being live on push.
 
+### Hand-tuned code samples — no blank lines inside `<pre>` when content is indented
+
+Detail-page code samples use a hand-tuned HTML pattern (`<div
+class="code-sample"><div class="code"><pre>…<span class="kw">…`). That
+opening `<div>` starts a CommonMark **type-6 HTML block**, which is
+passed through as raw HTML — until the parser hits a **blank line**,
+which terminates the block. Anything after the blank line is re-parsed
+as markdown.
+
+If the post-blank-line content is indented **4+ spaces** (common for
+nested-block languages — Graphviz DOT, C-family bodies, anything with a
+`{ … }` block), markdown treats it as an **indented code block**, hands
+it to Shiki, and Shiki escapes the `<` in your `<span>` tags to
+`&#x3C;`. Result: the back half of the sample renders as literal
+`<span class="ty">…</span>` text instead of highlighted tokens. (The
+escape is `&#x3C;`, not `&lt;` — so a `grep '&lt;span'` check misses it;
+grep for `class="line"` or `&#x3C;span` instead.)
+
+Two safe fixes:
+
+1. **No blank lines inside `<pre>`.** If you want visual grouping, replace
+   the blank line with a comment line in the language's own comment syntax,
+   styled with `<span class="cm">` (e.g. `// nodes: …` in the Fabro DOT
+   sample). A comment line is not blank, so the HTML block survives.
+2. **Resume at column 0 after any blank line.** Samples whose blank lines
+   are followed by unindented content (Codong, Axis, Vow) render fine —
+   column-0 `<span>` after a blank line is parsed as inline HTML in a
+   paragraph and passes through. Only 4-space-indented resumption triggers
+   the indented-code-block path.
+
+Verify after editing a sample: `npm run build`, then check the `<pre>`
+in `dist/languages/<slug>/index.html` has zero `class="line"` wrappers
+(those are Shiki's, and their presence means the block broke).
+
 ---
 
 ## Local development
