@@ -83,14 +83,14 @@ The distinctive move sits at the file level: every `.fabro` workflow is a Graphv
             #review  { model: gpt-5.2; }
         "</span>
     ]
-
+    <span class="cm">// nodes: the shape attribute selects the handler</span>
     start     [shape=<span class="ty">Mdiamond</span>, label=<span class="str">"Start"</span>]
     exit      [shape=<span class="ty">Msquare</span>,  label=<span class="str">"Exit"</span>]
     plan      [label=<span class="str">"Plan"</span>, prompt=<span class="str">"Write a plan."</span>]
     approve   [shape=<span class="ty">hexagon</span>, label=<span class="str">"Approve Plan"</span>]
     implement [label=<span class="str">"Implement"</span>, class=<span class="str">"coding"</span>]
     review    [label=<span class="str">"Review"</span>, class=<span class="str">"coding"</span>]
-
+    <span class="cm">// edges: labels are options at gates; conditions gate flow</span>
     start -&gt; plan -&gt; approve
     approve -&gt; implement [label=<span class="str">"[A] Approve"</span>,
                           condition=<span class="str">"outcome=succeeded"</span>]
