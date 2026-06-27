@@ -170,6 +170,23 @@ Then commit `src/data/stars.json`. The push triggers a deploy. Homebrew
 Python on macOS refuses system-level installs (PEP 668), hence the venv.
 See `scripts/setup.sh` for details.
 
+### Maintainer editorial passes go through a PR
+
+When an author submits or updates an entry via PR, that content is
+reviewed through its own PR. Any **editorial pass the maintainer makes on
+top** — tone/attribution fixes, softening self-reported benchmarks,
+convention cleanups, British-English/typography — goes through *its own
+PR* too, not a direct push to `main`. The maintainer's subjective edits to
+someone's submission should be reviewable the same way the submission was.
+
+(Historical exception: the editorial passes on Plasm `31724fe`, Codex
+`95bdd8b`, and the Codex update `0519ef5` were committed straight to main
+before this rule was set. They stand; the rule applies from there on.)
+
+This does **not** change the deploy mechanics — a merged PR triggers the
+same deploy. It only changes *how the change lands*: branch → PR → review
+→ merge, rather than push-to-main.
+
 ### Editorial reword
 
 Most editorial copy is dynamic. A change to a language MDX cascades to
