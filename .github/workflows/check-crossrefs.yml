@@ -1,0 +1,31 @@
+name: Check crossrefs
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+# Opt into Node 24 for all JS-based actions ahead of GitHub's June 2026
+# forced switch. Without this we run on deprecated Node 20.
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install pyyaml
+
+      - name: Run crossref check
+        run: python3 scripts/check_crossrefs.py

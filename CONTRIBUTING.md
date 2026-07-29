@@ -72,3 +72,11 @@ PRs that pass merge. PRs that don't get either change requests or a polite close
 ## Code of conduct
 
 Be civil. Disagree on substance. The Three Camps disagree philosophically; we should be able to catalogue that disagreement without it becoming personal.
+
+## CI checks
+
+A pull request check validates that crossrefs between entries are bidirectional.
+If you add a `crossrefs:` entry pointing to an existing language, the check will
+warn if that language doesn't crossref back. It warns but does not block
+merging; maintainers make the final editorial call on whether a reverse pointer
+is appropriate.
