@@ -1,151 +1,166 @@
 {
   "AvitalTamir/sever": {
-    "fetched_at": "2026-08-03T09:59:12Z",
+    "fetched_at": "2026-08-07T10:49:44Z",
     "forks": 8,
     "stars": 69
   },
   "KikotVit/pact-lang": {
-    "fetched_at": "2026-08-03T09:59:11Z",
+    "fetched_at": "2026-08-07T10:49:44Z",
     "forks": 0,
     "stars": 1
   },
   "Nerd-Lang/nerd-lang-core": {
-    "fetched_at": "2026-08-03T09:59:11Z",
+    "fetched_at": "2026-08-07T10:49:43Z",
     "forks": 11,
     "stars": 168
   },
   "PlasmTools/plasm-core": {
-    "fetched_at": "2026-08-03T09:59:11Z",
+    "fetched_at": "2026-08-07T10:49:44Z",
     "forks": 2,
     "stars": 6
   },
   "aallan/vera": {
-    "fetched_at": "2026-08-03T09:59:13Z",
+    "fetched_at": "2026-08-07T10:49:46Z",
     "forks": 26,
-    "stars": 399
+    "stars": 404
   },
   "alantech/marsha": {
-    "fetched_at": "2026-08-03T09:59:10Z",
+    "fetched_at": "2026-08-07T10:49:42Z",
     "forks": 17,
     "stars": 466
   },
   "alliecatowo/lumen": {
-    "fetched_at": "2026-08-03T09:59:09Z",
+    "fetched_at": "2026-08-07T10:49:42Z",
     "forks": 0,
     "stars": 1
   },
   "arcanist-sh/hx": {
-    "fetched_at": "2026-08-03T09:59:06Z",
+    "fetched_at": "2026-08-07T10:49:38Z",
     "forks": 1,
-    "stars": 28
+    "stars": 29
   },
   "brettinhere/Codong": {
-    "fetched_at": "2026-08-03T09:59:07Z",
+    "fetched_at": "2026-08-07T10:49:39Z",
     "forks": 6,
     "stars": 72
   },
   "damiant3/NewRepository": {
-    "fetched_at": "2026-08-03T09:59:07Z",
+    "fetched_at": "2026-08-07T10:49:38Z",
     "forks": 0,
     "stars": 14
   },
+  "dollspace-gay/Thermite": {
+    "fetched_at": "2026-08-07T10:49:45Z",
+    "forks": 2,
+    "stars": 52
+  },
   "escapeboy/boruna": {
-    "fetched_at": "2026-08-03T09:59:06Z",
+    "fetched_at": "2026-08-07T10:49:38Z",
     "forks": 0,
     "stars": 4
   },
   "fabro-sh/fabro": {
-    "fetched_at": "2026-08-03T09:59:07Z",
-    "forks": 155,
-    "stars": 1462
+    "fetched_at": "2026-08-07T10:49:39Z",
+    "forks": 159,
+    "stars": 1472
+  },
+  "hale-lang/hale": {
+    "fetched_at": "2026-08-07T10:49:39Z",
+    "forks": 1,
+    "stars": 30
   },
   "hvoetsch/valea": {
-    "fetched_at": "2026-08-03T09:59:12Z",
+    "fetched_at": "2026-08-07T10:49:46Z",
     "forks": 0,
     "stars": 4
   },
+  "ilo-lang/ilo": {
+    "fetched_at": "2026-08-07T10:49:40Z",
+    "forks": 0,
+    "stars": 5
+  },
   "imjasonh/loom": {
-    "fetched_at": "2026-08-03T09:59:06Z",
+    "fetched_at": "2026-08-07T10:49:37Z",
     "forks": 0,
     "stars": 0
   },
   "jasisz/aver": {
-    "fetched_at": "2026-08-03T09:59:05Z",
+    "fetched_at": "2026-08-07T10:49:37Z",
     "forks": 2,
     "stars": 58
   },
   "jordanhubbard/nanolang": {
-    "fetched_at": "2026-08-03T09:59:10Z",
-    "forks": 23,
-    "stars": 613
+    "fetched_at": "2026-08-07T10:49:43Z",
+    "forks": 22,
+    "stars": 614
   },
   "kerv/laze": {
-    "fetched_at": "2026-08-03T09:59:08Z",
+    "fetched_at": "2026-08-07T10:49:41Z",
     "forks": 2,
-    "stars": 3
+    "stars": 4
   },
   "korulang/koru": {
-    "fetched_at": "2026-08-03T09:59:08Z",
+    "fetched_at": "2026-08-07T10:49:40Z",
     "forks": 0,
-    "stars": 18
+    "stars": 19
   },
   "lhaig/intent": {
-    "fetched_at": "2026-08-03T09:59:08Z",
+    "fetched_at": "2026-08-07T10:49:40Z",
     "forks": 0,
     "stars": 5
   },
   "magpie-lang/magpie": {
-    "fetched_at": "2026-08-03T09:59:09Z",
+    "fetched_at": "2026-08-07T10:49:42Z",
     "forks": 3,
     "stars": 55
   },
   "mavboas/lume": {
-    "fetched_at": "2026-08-03T09:59:09Z",
+    "fetched_at": "2026-08-07T10:49:41Z",
     "forks": 0,
     "stars": 1
   },
   "mronus/spec": {
-    "fetched_at": "2026-08-03T09:59:12Z",
+    "fetched_at": "2026-08-07T10:49:45Z",
     "forks": 1,
     "stars": 8
   },
   "paulprogrammer/llmlang": {
-    "fetched_at": "2026-08-03T09:59:08Z",
+    "fetched_at": "2026-08-07T10:49:41Z",
     "forks": 0,
     "stars": 1
   },
   "sunholo-data/ailang": {
-    "fetched_at": "2026-08-03T09:59:05Z",
+    "fetched_at": "2026-08-07T10:49:36Z",
     "forks": 5,
     "stars": 33
   },
   "vercel-labs/zerolang": {
-    "fetched_at": "2026-08-03T09:59:13Z",
+    "fetched_at": "2026-08-07T10:49:47Z",
     "forks": 339,
-    "stars": 5240
+    "stars": 5259
   },
   "vmelnic/axis": {
-    "fetched_at": "2026-08-03T09:59:06Z",
+    "fetched_at": "2026-08-07T10:49:37Z",
     "forks": 0,
     "stars": 3
   },
   "voltropy/mog": {
-    "fetched_at": "2026-08-03T09:59:10Z",
+    "fetched_at": "2026-08-07T10:49:43Z",
     "forks": 9,
     "stars": 140
   },
   "vow-lang/vow": {
-    "fetched_at": "2026-08-03T09:59:13Z",
+    "fetched_at": "2026-08-07T10:49:46Z",
     "forks": 0,
-    "stars": 6
+    "stars": 7
   },
   "weetster/tacit": {
-    "fetched_at": "2026-08-03T09:59:12Z",
+    "fetched_at": "2026-08-07T10:49:45Z",
     "forks": 2,
     "stars": 4
   },
   "x07lang/x07": {
-    "fetched_at": "2026-08-03T09:59:13Z",
+    "fetched_at": "2026-08-07T10:49:47Z",
     "forks": 0,
     "stars": 8
   }
