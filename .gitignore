@@ -32,6 +32,12 @@ scripts/notice-template.md
 scripts/notices.tsv
 scripts/notices.log
 
+# Inbound-PR provenance screening log. Local-only: it records assessments of
+# named GitHub accounts, which should not be published in a public repo —
+# both to avoid publicly accusing individuals and to avoid disclosing to a
+# farm network which fingerprints were detected.
+scripts/pr-screening-log.md
+
 # macOS-specific files
 .DS_Store
 
