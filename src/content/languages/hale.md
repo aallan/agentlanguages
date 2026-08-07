@@ -1,7 +1,7 @@
 ---
 name: Hale
 camp: verification
-spans_camps: [syntactic]
+spans_camps: [orchestration]
 one_liner: "Concurrent systems language where architecture is mechanically checked: compile-time effect certificates and reachability claims that fail closed on unresolvable indirection. Human-and-LLM authorship is one of four stated design pillars."
 url: https://hale-lang.org
 repo: hale-lang/hale
@@ -25,7 +25,7 @@ key_idea: |
   (@no_syscall, @effects(only:)) to program-wide claims (forbid
   reaches(A, B)) checked at compile time, with unknown call targets
   treated as violations and minimal countermodel witnesses on failure.
-  The case for LLM authorship is subtractive: no async coloring, no
+  The case for LLM authorship is subtractive: no async colouring, no
   lifetimes, no lock selection — the shapes models tend to hallucinate
   aren't in the language.
 benchmark:
@@ -38,7 +38,7 @@ crossrefs:
     relation: "Same camp, different altitude of contract. Vera discharges per-function requires/ensures with an SMT solver; Hale checks whole-program sentences — reachability, publisher counts, allocation bounds — over the assembled locus graph, without a solver."
 history:
   - when: "May 2026"
-    what: "First public release. Locus/bus core, arena-per-locus runtime, GenMC model checking of the runtime's concurrent primitives in CI."
+    what: "First public release. Locus/bus core, arena-per-locus runtime, GenMC model checking of the runtime's concurrent primitives in CI &mdash; against hand-written transcriptions of the primitives rather than the shipping C, a limitation the project's own verification notes tabulate."
   - when: "Jun 2026"
     what: "v0.9.0: native codegen with static devirtualization, lock-free bus, cross-language benchmark grid."
   - when: "Jul 2026"
@@ -53,7 +53,7 @@ history:
 
 Hale's position is that the distance between how you describe a system out loud and what you type should be near zero — and that the same property that helps a human helps a model. One primitive, the locus, stands in for class, module, package, actor, and service. Loci communicate over a typed topic bus and never reach sideways into each other; a `main` locus declares placement (threads, cores, NUMA nodes) and bindings (in-process queue, Unix socket, shared-memory ring), so deployment shape is an edit to one block, not a rewrite.
 
-LLM authorship is one of four stated design pillars, not the whole thesis, and the argument for it is subtractive rather than additive: there is no async coloring, no lifetime annotation, no lock vocabulary, no iterator/closure machinery. The constructs a model is most likely to hallucinate are absent, so a large class of plausible-looking wrong programs does not parse.
+LLM authorship is one of four stated design pillars, not the whole thesis, and the argument for it is subtractive rather than additive: there is no async colouring, no lifetime annotation, no lock vocabulary, no iterator/closure machinery. The constructs a model is most likely to hallucinate are absent, so a large class of plausible-looking wrong programs does not parse.
 
 The verification story is what earns the camp placement. Per-function effect certificates (`@no_syscall`, `@deterministic`, `@budget`, `@effects(only: …)`) are proven transitively through helpers and imported libraries. Above them sit claims: named sentences over the assembled program graph — `forbid reaches(A, B)`, `only edges A -> B { publish T; }`, `count publishers(topic T) <= 1`, allocation bounds on paths — declared in the main locus, evaluated by `hale check` as errors, lowered to zero runtime code. Where the graph cannot be resolved, the checker refuses rather than guesses.
 
@@ -96,4 +96,4 @@ The witness is a minimal countermodel in the program's own vocabulary, with seco
 
 The agent tooling ships in the compiler binary itself: `hale mcp` exposes the checker, build, tests, the bus graph, placement, and spec search as MCP tools, and the checked-in AGENTS.md is treated as load-bearing surface rather than documentation garnish. The topology the claims are checked against can be dumped as a versioned JSON artifact and re-checked in CI, so an agent (or a reviewer) can diff the architecture, not just the text.
 
-Certain workloads are still outperformed by mainstream languages; the cross-language comparison grid is tracked in [hale-lang/bench](https://github.com/hale-lang/bench).
+Certain workloads are still outperformed by mainstream languages; the cross-language comparison grid, run by the project on a single machine, is tracked in [hale-lang/bench](https://github.com/hale-lang/bench) with the losses stated alongside the wins.
