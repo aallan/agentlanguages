@@ -1,7 +1,7 @@
 ---
 name: Thermite
 camp: verification
-spans_camps: []
+spans_camps: [syntactic]
 one_liner: "Contract-first language with mandatory req, ens, and fx clauses; Forge reports per-obligation assurance through Verus, bounded checking, runtime contracts, or Lean-checked reconstruction."
 url: https://github.com/dollspace-gay/Thermite
 repo: dollspace-gay/Thermite
@@ -86,19 +86,28 @@ counterexample does not.
   scope, so one runtime-only boundary is not hidden behind a proof elsewhere.
 - **Checked solver reconstruction.** Eligible nonlinear arithmetic,
   fixed-width bit-vector, and finite first-order relation or array clauses take
-  specialised L4 routes. External solving finds the answer; generated proof
-  artefacts are replayed through Lean before the certificate records checked
-  reconstruction. This claim does not extend to every Thermite program or
-  every assurance rung.
+  specialised L4 routes, and the three differ in what Lean is asked to check.
+  Finite relation and array clauses get genuine certificate replay: an external
+  SAT run's LRAT proof is re-checked against a problem Lean recomputes for
+  itself. Bit-vector and linear-integer clauses are re-proved in Lean
+  independently, with the solver's own proof never consumed. The nonlinear
+  route transports a trusted solver answer from the reals to the integers
+  through a kernel-checked lemma. The ordinary all-input route through Verus is
+  not reconstructed, and the project's trust document enumerates what remains
+  trusted.
 - **Contract-quality checks.** Mandatory contracts ensure that a specification
   exists, but do not establish that it expresses the author's intent. Forge
   probes for vacuous conditions and tests whether mutations survive the stated
   contract. These checks reduce the space of weak specifications without
   claiming to close the intent gap.
-- **Effects cross the compilation boundary.** The `fx` row is checked
-  statically, then used to derive a seccomp allowlist for hosted executables.
-  Rust lowering also retains runtime contract checks, keeping the L1 result
-  active when stronger evidence is unavailable.
+- **Effects cross the compilation boundary.** The `fx` row is checked for
+  subsumption up the call graph, then used to derive a seccomp allowlist for
+  hosted executables. Rust lowering also retains runtime contract checks,
+  keeping the L1 result active when stronger evidence is unavailable. The
+  allowlist is per effect verb rather than per resource &mdash; the
+  parenthesised path or domain is discarded &mdash; and an open project RFC
+  records that a declared `write` to a region the body never touches still
+  certifies. The row constrains syscalls rather than confining resources.
 - **Holes are a supported workflow.** An agent can write the contract around a
   typed hole, inspect the open goal with `forge goal`, apply a candidate with
   `forge fill`, and check again. A remaining hole prevents the item from being
