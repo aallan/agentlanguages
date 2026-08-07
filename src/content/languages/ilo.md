@@ -1,7 +1,7 @@
 ---
 name: ilo
 camp: syntactic
-spans_camps: []
+spans_camps: [verification]
 one_liner: "Token-minimal language where every builtin has a short fixed alias and design changes are argued against measured token cost. Development is driven by scripted agent sessions whose failures are filed as language bugs."
 url: https://ilo-lang.ai
 repo: ilo-lang/ilo
@@ -43,7 +43,7 @@ crossrefs:
 
 ## What it is.
 
-ilo is a token-minimal language whose stated premise is that the cost of a program is not its runtime but its token count across generation, retries, and context loading. The surface follows from that: builtins have short fixed aliases (`mapr`, `fld`, `rdjl`, `jpth`, `spl`), function parameters take no parentheses, `>` separates parameters from the return type, `;` separates statements, and the last expression is the return value. A file-level `^26.5` pragma declares the minimum runtime. The implementation is Rust, compiling through a bytecode VM and a Cranelift backend for JIT and object output, with 2,700+ commits, 8,700+ tests, and 369 example programs that double as a cross-engine regression suite.
+ilo is a token-minimal language whose stated premise is that the cost of a program is not its runtime but its token count across generation, retries, and context loading. The surface follows from that: builtins have short fixed aliases (`mapr`, `fld`, `rdjl`, `jpth`, `spl`), function parameters take no parentheses, `>` separates parameters from the return type, `;` separates statements, and the last expression is the return value. A file-level `^26.5` pragma declares the minimum runtime. The implementation is Rust, compiling through a bytecode VM and a Cranelift backend for JIT and object output, with 2,700+ commits, 8,700+ tests, and 369 example programs that double as a cross-engine regression suite. A 13,000-line verifier runs ahead of execution and gates it, and later cycles added effect sets and capability builtins with static enforcement &mdash; machinery in service of the token thesis, since an error caught before execution is a retry not spent, rather than of correctness as a terminal value. That is why verification sits as the secondary camp here.
 
 ## The distinctive move.
 
@@ -51,4 +51,6 @@ Where most entries in the syntactic camp argue from design principle, ilo argues
 
 ## Where it strains.
 
-The spec has grown against the thesis. ilo's own strategy document, written in May 2026, measured the spec at roughly 16,000 tokens against Zero's 4,300 and concluded that spec loading dominates per-task cost, that per-generation savings of ~600 tokens versus Python are eaten by context overhead in short sessions, and that modular skills were therefore "existential economics." Since then `SPEC.md` has reached ~173 KB and `ai.txt` ~161 KB, on the order of 44,000 and 41,000 tokens; the modular-skills work was never scheduled. The 13 KB `SKILL.md` is the artefact actually sized for a per-task load, and it is the honest number to compare against Mog's 3,200-token spec. Adoption is minimal, with single-digit GitHub stars and no Show HN. The language ships a working compiler, a package manager, an HTTP server, and streaming primitives, which is more surface than most of the catalogue at this star count, but it has not yet published the closed-loop benchmark its own strategy identifies as the thing that would make its central claim checkable.
+The spec has grown against the thesis. ilo's own strategy document, written in May 2026, measured the spec at roughly 16,000 tokens against Zero's 4,300 and concluded that spec loading dominates per-task cost, that per-generation savings of ~600 tokens versus Python are eaten by context overhead in short sessions, and that modular skills were therefore "existential economics." `SPEC.md` has since reached 179 KB and the `ai.txt` variant 167 KB &mdash; around 51,000 and 48,000 tokens on a cl100k count. The modular-skills work did ship: twelve task-scoped modules totalling roughly 13,800 tokens sit under a 14,000-token aggregate cap enforced in CI, with the 14 KB `SKILL.md` (~4,900 tokens) as the per-task entry point, and that is the honest figure to set against Mog's 3,200-token spec. The caps were raised in May to absorb accumulated diagnostic and hint text, and now run at about 98% utilisation.
+
+The project publishes the number that bears hardest on its own premise. A committed CI baseline from August 2026 records thirteen scripted personas attempting real tasks with Haiku 4.5: one produced working code, one partially, and eleven failed, with twelve of the thirteen exhausting a three-attempt ceiling. Adoption is minimal &mdash; single-digit GitHub stars, a few hundred lifetime crates.io downloads, two GitHub issues ever, and a roadmap tracked on a private instance. The language ships a working compiler, a package manager, an HTTP server, and streaming primitives, which is more surface than most of the catalogue at this star count, but it has not yet published the closed-loop benchmark its own strategy identifies as the thing that would make its central claim checkable.
