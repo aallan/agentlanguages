@@ -32,7 +32,7 @@ const findById = (id: string) => {
   return entry;
 };
 
-const magpie = findById('magpie');
+const nerd = findById('nerd');
 const vera = findById('vera');
 const boruna = findById('boruna');
 
@@ -71,8 +71,8 @@ const trackedCount = languages.length;
     campLabel="the representational camp"
     campTitle="Syntactic."
     thesis={camps.syntactic.thesis}
-    anchor={magpie}
-    anchorQuote="~2.3× more tokens per operation — and that’s the point."
+    anchor={nerd}
+    anchorQuote="The irony: cryptic symbols don’t save tokens. Plain words win."
   >
     {camps.syntactic.paragraphs.map((p) => (<p set:html={inlineMarkdownToHtml(p)}></p>))}
   </CampSection>
