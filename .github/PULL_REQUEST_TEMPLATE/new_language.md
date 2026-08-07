@@ -45,9 +45,21 @@ date_appeared: 2026-05             # YYYY-MM
 agent_tooling: [SKILL.md, AGENTS.md]
 key_idea: |
   Two to four sentences explaining the central design move.
+crossrefs:                         # optional but worth including; 2-4 is the sweet spot
+  - slug: vera                     # must match a filename in src/content/languages/
+    name: Vera
+    camp: verification
+    relation: "What is the same, and where the two part company."
+history:                           # optional; include if you can source the dates
+  - when: "May 2026"
+    what: "What happened, in one sentence."
 ---
 ```
 
-### Optional detail page
+`crossrefs` is the catalogue's main editorial device and appears on nearly every entry. See [CONTRIBUTING.md](../../CONTRIBUTING.md#frontmatter-schema) for `benchmark` and the rest.
 
-If you can write 200+ words with first-hand familiarity (the design DNA, how it compares to neighbours in the catalogue, where it strains under real use), add a Markdown body after the frontmatter. A non-empty body triggers a detail page at `/languages/<slug>/`. Card-only is the default and is fine for most submissions.
+### Detail page body
+
+Add a Markdown body after the frontmatter: 200+ words with first-hand familiarity, covering the design DNA, how it compares to neighbours in the catalogue, and where it strains under real use. A non-empty body renders a detail page at `/languages/<slug>/`, and every entry in the catalogue has one.
+
+**Code samples and pullquotes go inline in the body as raw HTML, not in frontmatter** — there is no frontmatter field for either, and anything placed there is silently dropped. Copy the `<div class="code-sample">` and `<p class="pullquote">` pattern from an existing entry; [CONTRIBUTING.md](../../CONTRIBUTING.md#detail-pages) documents the token classes and one Markdown parser quirk to avoid.

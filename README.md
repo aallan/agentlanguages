@@ -4,7 +4,7 @@
 
 A community-edited catalogue of programming languages designed for AI agents to author code, the site is live at [agentlanguages.dev](https://agentlanguages.dev).
 
-The site catalogues an emerging field of language design that treats LLMs and autonomous agents — not humans — as the primary authors of code. As of May 2026, the catalogue tracks projects across three philosophical camps that disagree on how to frame the underlying problem:
+The site catalogues an emerging field of language design that treats LLMs and autonomous agents — not humans — as the primary authors of code. The catalogue tracks projects across three philosophical camps that disagree on how to frame the underlying problem:
 
 - **Syntactic** — Strip ambiguity at the token level. Make syntax easier for LLMs to parse and generate.
 - **Verification** — Make contracts mechanically checkable. The model doesn't need to be right; it needs to be checkable.
