@@ -47,6 +47,8 @@ history:
     what: "v0.12–v0.13: effect certificates made fail-closed end to end; @effects(only:) closed-set contracts."
   - when: "Aug 2026"
     what: "v0.14–v0.15: claims land — architectural law (forbid reaches, only edges, bound, cover) evaluated by hale check as errors, zero runtime cost; library-tier claims travel with imports."
+  - when: "Aug 2026"
+    what: "v0.16.0: constitutions share one claimset across entrypoints and environments; fleet plans compose per-binary topology artifacts into a deployment model with cross-process witnesses; ES256 signatures over artifact bytes and binary attestation gate what a composition admits."
 ---
 
 ## The bet.
@@ -63,23 +65,32 @@ The verification story is what earns the camp placement. Per-function effect cer
 
 <div class="code-sample">
   <div class="code">
-<pre><span class="kw">topic</span> Metrics { payload: Metric; }
-
+<pre><span class="kw">type</span> Metric { n: Int; }
+<span class="kw">topic</span> Metrics { payload: Metric; }
+<!-- -->
 <span class="kw">locus</span> DeltaTriage {
-    <span class="kw">bus</span> { <span class="kw">subscribe</span> Tasks <span class="kw">as</span> on_task; <span class="kw">publish</span> Metrics; }
-    <span class="kw">fn</span> on_task(t: Task) {
-        Metrics &lt;- Metric { n: t.id };
-    }
+    <span class="kw">bus</span> { <span class="kw">publish</span> Metrics; }
+    <span class="kw">fn</span> on_task(id: Int) { Metrics &lt;- Metric { n: id }; }
 }
-
+<!-- -->
+<span class="kw">locus</span> GammaResearch {
+    <span class="kw">params</span> { total: Int = <span class="num">0</span>; }
+    <span class="kw">bus</span> { <span class="kw">subscribe</span> Metrics <span class="kw">as</span> on_metric; }
+    <span class="kw">fn</span> on_metric(m: Metric) { self.total = self.total + m.n; }
+}
+<!-- -->
 <span class="kw">group</span> delta_wing = { DeltaTriage };
 <span class="kw">group</span> gamma_wing = { GammaResearch };
-
+<!-- -->
 <span class="kw">main locus</span> Org {
-    <span class="ct">claims</span> {
-        iso_dg: <span class="ct">forbid reaches</span>(delta_wing, gamma_wing);
+    <span class="kw">params</span> {
+        triage: DeltaTriage = DeltaTriage { };
+        research: GammaResearch = GammaResearch { };
     }
-}</pre>
+    <span class="ct">claims</span> { iso_dg: <span class="ct">forbid reaches</span>(delta_wing, gamma_wing); }
+}
+<!-- -->
+<span class="kw">fn</span> main() { Org { }; }</pre>
   </div>
 </div>
 
