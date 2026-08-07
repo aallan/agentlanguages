@@ -12,7 +12,7 @@ this document useful as a map of how things fit together.
 A community-edited catalogue of programming languages designed for AI agents
 to *author* code. It is **not** a Vera marketing site (`veralang.dev`) or a
 Negroni Venture Studios product. It is a neutral directory that catalogues
-Vera alongside ~30 other languages with the same metadata format, organised
+Vera alongside three dozen other languages with the same metadata format, organised
 around three philosophical camps (Syntactic, Verification, Orchestration)
 plus Adjacent and Unclassified.
 
@@ -331,13 +331,22 @@ npm run preview  # serves the built site
 
 ## What's currently catalogued
 
-A live list is at `/llms.txt`; this section is illustrative of the
-balance across camps. As of the last refresh, the catalogue tracks
-projects across Syntactic (largest), Verification (largest and most
-mature implementations), Orchestration (smallest but most diverse),
-Adjacent (single-entry — Plumbing) and Unclassified (two entries with
-limited public evidence). Vera, MoonBit, and Boruna anchor each camp's
-detail-page treatment.
+A live list is at `/llms.txt`, and `languages.length` is the only count
+worth quoting. Do not restate a total here; it goes stale within days.
+
+The shape as of August 2026, for orientation rather than as a fact to
+cite: Verification and Syntactic are close to each other and much larger
+than the rest, Orchestration is roughly half their size but the most
+internally varied, Unclassified holds a handful of entries with limited
+public evidence, and Adjacent has just Plumbing. Verification carries the
+most mature implementations. Vera, Magpie, and Boruna anchor the three
+camps' detail-page treatments on the homepage.
+
+To get the current distribution rather than trusting this paragraph:
+
+```sh
+grep -h '^camp:' src/content/languages/*.md | sort | uniq -c | sort -rn
+```
 
 ---
 
