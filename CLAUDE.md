@@ -28,7 +28,7 @@ CC BY 4.0 for content.
 
 ## Architecture in one screen
 
-- **Framework:** Astro 6.x, static-output. No JS framework. Vanilla JS only
+- **Framework:** Astro 7.x, static-output. No JS framework. Vanilla JS only
   for the theme toggle.
 - **Content:** A single content collection at `src/content/languages/*.md`,
   schema-validated by Zod in `src/content.config.ts`. Each MDX file is one
