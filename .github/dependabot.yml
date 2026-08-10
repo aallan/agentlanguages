@@ -1,0 +1,49 @@
+# Dependency and action updates. Alerts and automated security fixes are also
+# enabled in the repository settings; this file adds the scheduled sweep so
+# routine updates arrive as reviewable PRs rather than waiting for an advisory.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+      time: "07:00"
+      timezone: Europe/London
+    open-pull-requests-limit: 5
+    groups:
+      # Astro and its first-party integrations move together; separate PRs for
+      # them tend to conflict in package-lock.json.
+      astro:
+        patterns:
+          - astro
+          - "@astrojs/*"
+      # Everything else in one PR to keep the review surface small on a repo
+      # whose runtime dependency surface is a static site generator.
+      minor-and-patch:
+        patterns:
+          - "*"
+        exclude-patterns:
+          - astro
+          - "@astrojs/*"
+        update-types:
+          - minor
+          - patch
+    labels:
+      - dependencies
+
+  # The workflows pin actions by major tag; this keeps those current.
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: monthly
+    labels:
+      - dependencies
+
+  # scripts/refresh_stars.py depends on pyyaml via scripts/requirements.txt.
+  - package-ecosystem: pip
+    directory: "/scripts"
+    schedule:
+      interval: monthly
+    labels:
+      - dependencies
