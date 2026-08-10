@@ -6,7 +6,7 @@ one_liner: "Contract-first language with mandatory req, ens, and fx clauses; For
 url: https://github.com/dollspace-gay/Thermite
 repo: dollspace-gay/Thermite
 paper: null
-author: dollspace-gay
+author: dollspace-gay and maxinelevesque
 implementation_language: Rust and Lean 4
 compilation_target: "Rust; native Linux executables and freestanding libraries via rustc"
 license: MIT
