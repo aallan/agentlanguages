@@ -39,7 +39,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           # workflow_run's default SHA is the commit that triggered the
           # *upstream* workflow, not the commit the upstream made. Pin to
