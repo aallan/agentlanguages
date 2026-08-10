@@ -28,7 +28,7 @@ CC BY 4.0 for content.
 
 ## Architecture in one screen
 
-- **Framework:** Astro 6.x, static-output. No JS framework. Vanilla JS only
+- **Framework:** Astro 7.x, static-output. No JS framework. Vanilla JS only
   for the theme toggle.
 - **Content:** A single content collection at `src/content/languages/*.md`,
   schema-validated by Zod in `src/content.config.ts`. Each MDX file is one
@@ -273,30 +273,49 @@ passed through as raw HTML — until the parser hits a **blank line**,
 which terminates the block. Anything after the blank line is re-parsed
 as markdown.
 
-If the post-blank-line content is indented **4+ spaces** (common for
-nested-block languages — Graphviz DOT, C-family bodies, anything with a
-`{ … }` block), markdown treats it as an **indented code block**, hands
-it to Shiki, and Shiki escapes the `<` in your `<span>` tags to
-`&#x3C;`. Result: the back half of the sample renders as literal
-`<span class="ty">…</span>` text instead of highlighted tokens. (The
-escape is `&#x3C;`, not `&lt;` — so a `grep '&lt;span'` check misses it;
-grep for `class="line"` or `&#x3C;span` instead.)
+The damage comes in **two variants**, depending on how the content after
+the blank line is indented. Both are breakage; one is just louder.
 
-Two safe fixes:
+**Severe — indented 4+ spaces.** Common for nested-block languages
+(Graphviz DOT, C-family bodies, anything with a `{ … }` block). Markdown
+treats it as an **indented code block**, hands it to Shiki, and Shiki
+escapes the `<` in your `<span>` tags to `&#x3C;`. The back half of the
+sample renders as literal `<span class="ty">…</span>` text instead of
+highlighted tokens. Note the escape is `&#x3C;`, not `&lt;`, so a
+`grep '&lt;span'` check sails straight past it.
 
-1. **No blank lines inside `<pre>`.** If you want visual grouping, replace
-   the blank line with a comment line in the language's own comment syntax,
-   styled with `<span class="cm">` (e.g. `// nodes: …` in the Fabro DOT
-   sample). A comment line is not blank, so the HTML block survives.
-2. **Resume at column 0 after any blank line.** Samples whose blank lines
-   are followed by unindented content (Codong, Axis, Vow) render fine —
-   column-0 `<span>` after a blank line is parsed as inline HTML in a
-   paragraph and passes through. Only 4-space-indented resumption triggers
-   the indented-code-block path.
+**Mild — resuming at column 0.** Markdown parses the remainder as a
+paragraph, which injects `<p>` tags *inside* the `<pre>`. The tokens
+survive, so nothing looks escaped, but the sample loses its indentation
+and its line breaks go wrong. This variant emits no `class="line"` and no
+`&#x3C;`, so it passes any check that only looks for Shiki's fingerprints.
 
-Verify after editing a sample: `npm run build`, then check the `<pre>`
-in `dist/languages/<slug>/index.html` has zero `class="line"` wrappers
-(those are Shiki's, and their presence means the block broke).
+The fix, in preference order:
+
+1. **Use `<!-- -->` as the separator.** An HTML comment is not a blank
+   line to the parser, and renders as nothing inside a `<pre>`, so you get
+   the visual gap with the HTML block intact. Contributed by @rileyr on
+   the Hale entry, and better than what this file recommended before it.
+2. **A comment in the language's own syntax**, styled with `<span
+   class="cm">` (e.g. `// nodes: …` in the Fabro DOT sample). Also
+   non-blank, but it puts a visible comment in the sample.
+
+Verify after editing a sample with `npm run build`, then check the `<pre>`
+in `dist/languages/<slug>/index.html` for **all three** fingerprints —
+`class="line"` and `&#x3C;` catch the severe variant, `<p>` catches the
+mild one. To sweep the whole catalogue:
+
+```sh
+npm run build && python3 -c "
+import re, pathlib
+for f in sorted(pathlib.Path('dist/languages').glob('*/index.html')):
+    for p in re.findall(r'<pre[^>]*>.*?</pre>', f.read_text(), re.S):
+        if p.count('class=\"line\"') or '&#x3C;' in p or '<p>' in p:
+            print(f.parent.name); break
+"
+```
+
+A clean run prints nothing. Anything it lists has a broken sample.
 
 ---
 
