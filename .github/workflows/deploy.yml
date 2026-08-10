@@ -13,17 +13,15 @@ on:
     types: [completed]
     branches: [main]
 
-# Opt into Node 24 for all JS-based actions ahead of GitHub's June 2026
-# forced switch. Without this we run on deprecated Node 20.
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
 # Required for the deploy-pages action to write to the Pages environment.
 # Requires repository Settings → Pages → Source = "GitHub Actions".
+# `actions: read` is mandatory from deploy-pages v4 onwards — it reads the
+# artifact back through the Actions API, and the deploy fails without it.
 permissions:
   contents: read
   pages: write
   id-token: write
+  actions: read
 
 # Only one deployment at a time; don't cancel a running one (so a
 # completed deploy isn't replaced mid-flight by a less-baked build).
@@ -39,7 +37,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           # workflow_run's default SHA is the commit that triggered the
           # *upstream* workflow, not the commit the upstream made. Pin to
@@ -47,7 +45,7 @@ jobs:
           ref: main
 
       - name: Set up Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: '22'
           cache: npm
@@ -59,9 +57,13 @@ jobs:
         run: npm run build
 
       - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: dist
+          # From v4 the action excludes dotfiles by default. We publish
+          # dist/.well-known/ai-plugin.json, so without this the agent-plugin
+          # manifest silently disappears from the deployed site.
+          include-hidden-files: true
 
   deploy:
     needs: build
@@ -72,4 +74,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5

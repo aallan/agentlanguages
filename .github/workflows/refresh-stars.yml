@@ -7,11 +7,6 @@ on:
     - cron: '0 6 * * 1'
   workflow_dispatch:
 
-# Opt into Node 24 for all JS-based actions ahead of GitHub's June 2026
-# forced switch. Without this we run on deprecated Node 20.
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
 permissions:
   contents: write
 
@@ -20,10 +15,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: '3.12'
 
