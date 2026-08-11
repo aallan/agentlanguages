@@ -315,7 +315,19 @@ for f in sorted(pathlib.Path('dist/languages').glob('*/index.html')):
 "
 ```
 
-A clean run prints nothing. Anything it lists has a broken sample.
+Anything it lists renders wrongly, but for one of **two unrelated causes**,
+and the fingerprints do not distinguish them. To tell which, look at the
+entry's source:
+
+- Source has `class="code-sample"` and a blank line inside the `<pre>` —
+  the parser break described above. Fix with `<!-- -->`. Tracked in issue #40.
+- Source has a markdown fence (```` ```tacit ````, ```` ```text ````) and no
+  `class="code-sample"` — never converted to the hand-tuned pattern, so Shiki
+  handles it and there are no hand-tuned colours. Tracked in issue #5.
+
+Both routes leave Shiki's fingerprints in the output, so a hit on the sweep
+is not by itself evidence of the blank-line bug. Check the source before
+concluding which one you have.
 
 ---
 
