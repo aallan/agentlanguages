@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@astrojs/mdx": "^7.0.5",
-    "astro": "^7.2.0"
+    "astro": "^7.2.2"
   },
   "devDependencies": {
     "png-to-ico": "^3.0.2"
