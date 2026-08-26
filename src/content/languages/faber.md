@@ -1,5 +1,5 @@
 ---
-name: Faber
+name: Faber Romanus
 camp: syntactic
 spans_camps: []
 one_liner: "Typed compute language designed for coding agents to author and for humans to read. Mechanical syntax; English keywords chosen by a multi-model council for the most stable, highest-probability hit on each concept; other locales render the same HIR."
@@ -19,7 +19,7 @@ agent_tooling:
   - Markdown agent guide under /en-US/
   - faber explain for glyphs, keywords, and diagnostic codes
 key_idea: |
-  Faber is built for a split audience. Coding agents write the source;
+  Faber Romanus is built for a split audience. Coding agents write the source;
   humans read it. The surface is mechanical and predictable — type-first
   declarations, sealed keywords, math glyphs for tensor work — so a model
   can emit it without inventing syntax. Humans are not expected to type
@@ -56,7 +56,7 @@ history:
 
 ## The thesis.
 
-Faber is a language for coding agents to write and for humans to read. The syntax is deliberately mechanical: type-first bindings, one locale pack per file, a small glyph set for tensor work, no mixed-language spellings. A model is supposed to emit that surface without guessing. A person is supposed to read the result, not sit and type `·` and `⊗`.
+Faber Romanus is a language for coding agents to write and for humans to read. The syntax is deliberately mechanical: type-first bindings, one locale pack per file, a small glyph set for tensor work, no mixed-language spellings. A model is supposed to emit that surface without guessing. A person is supposed to read the result, not sit and type `·` and `⊗`.
 
 Latin is the canonical lexical identity — the compiler's interchange, not a costume and not the required writing language. English is the default public surface, and those keywords were not picked by taste. A council of different models chose each English keyword for the most stable, highest-probability hit on that semantic concept, so the locale agents meet first is the one they already want to emit.
 
