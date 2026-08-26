@@ -2,7 +2,7 @@
 name: Faber
 camp: syntactic
 spans_camps: []
-one_liner: "Typed compute language designed for coding agents to author and for humans to read. Mechanical, predictable syntax; reader locales so a speaker of Chinese or Thai can talk to a model and write the program in that language. Same HIR, same compile."
+one_liner: "Typed compute language designed for coding agents to author and for humans to read. Mechanical syntax; English keywords chosen by a multi-model council for the most stable, highest-probability hit on each concept; other locales render the same HIR."
 url: https://faberlang.dev
 repo: faberlang/faber
 paper: null
@@ -23,9 +23,13 @@ key_idea: |
   humans read it. The surface is mechanical and predictable — type-first
   declarations, sealed keywords, math glyphs for tensor work — so a model
   can emit it without inventing syntax. Humans are not expected to type
-  · ⊗ ⊙. HIR is the program: a reader locale is a rendering, which is why
-  someone can speak Chinese or Thai to their model, read and write the
-  .fab file in that language, and still compile the same meaning.
+  · ⊗ ⊙. Latin is the canonical lexical identity. The English locale was
+  chosen keyword-by-keyword by a council of different models for the most
+  stable, highest-probability hit on each concept, so the default public
+  surface is the one models already want to emit. HIR is the program: a
+  reader locale is a rendering, which is why someone can speak Chinese or
+  Thai to their model, read and write the .fab file in that language, and
+  still compile the same meaning.
 crossrefs:
   - slug: tacit
     name: Tacit
@@ -54,9 +58,11 @@ history:
 
 Faber is a language for coding agents to write and for humans to read. The syntax is deliberately mechanical: type-first bindings, one locale pack per file, a small glyph set for tensor work, no mixed-language spellings. A model is supposed to emit that surface without guessing. A person is supposed to read the result, not sit and type `·` and `⊗`.
 
-HIR is what makes the second half work across languages. The compiler holds one analysed program. A `.fab` file is a rendering into a reader locale — English by default, also Latin (interchange, not costume), Thai, Simplified and Traditional Chinese, Arabic, Vietnamese, Hindi. Someone who thinks in Thai can talk to their model in Thai, read the program in Thai, write the program in Thai, and it still compiles. Keywords and primitive type names change; identifiers and structural glyphs do not. Meaning does not fork.
+Latin is the canonical lexical identity — the compiler's interchange, not a costume and not the required writing language. English is the default public surface, and those keywords were not picked by taste. A council of different models chose each English keyword for the most stable, highest-probability hit on that semantic concept, so the locale agents meet first is the one they already want to emit.
 
-<p class="pullquote">Agents write it. Humans read it. The locale is theirs; the meaning is one program.</p>
+HIR is what makes the second half work across languages. The compiler holds one analysed program. A `.fab` file is a rendering into a reader locale — English by default, also Latin, Thai, Simplified and Traditional Chinese, Arabic, Vietnamese, Hindi. Someone who thinks in Thai can talk to their model in Thai, read the program in Thai, write the program in Thai, and it still compiles. Keywords and primitive type names change; identifiers and structural glyphs do not. Meaning does not fork.
+
+<p class="pullquote">Agents write it. Humans read it. English is the high-probability default; the locale is theirs; the meaning is one program.</p>
 
 The same HIR then projects onto measured compilation targets. Application lowers currently include Rust, TypeScript, Go and Swift; the MIR lane includes LLVM IR and WebAssembly; the GPU lane names Metal and CUDA. Support is stated target by target. Bounded dual-backend training on Metal and CUDA is the current proven device claim; end-to-end device GPU inference is not shipped.
 
@@ -71,7 +77,7 @@ The same HIR then projects onto measured compilation targets. Application lowers
     <span class="kw">print</span> product
 }</pre>
   </div>
-  <p class="caption">English reader surface. The same HIR renders into Thai or Chinese; a human reads their keywords, an agent emits the sealed pack, the matmul glyph and the names stay put.</p>
+  <p class="caption">English reader surface. Those keywords were chosen for model probability, not human fashion. The same HIR renders into Thai or Chinese; a human reads their keywords, an agent emits the sealed pack, the matmul glyph and the names stay put.</p>
 </div>
 
 Declarations are type-first (`const tensor&lt;f32, [2, 3]&gt; a`, not `a: Tensor`). Runtime binds use `←`. Tensor work that is a nested index walk in ordinary code is a glyph or a method: `·` matmul, `⊗` outer product, `⊙` Hadamard, `↦` convert, `.mean()` / `.sum()` for reductions. Locales are sealed: `fn` and `functio` do not mix in one file.
@@ -79,6 +85,7 @@ Declarations are type-first (`const tensor&lt;f32, [2, 3]&gt; a`, not `a: Tensor
 ## Distinctive moves.
 
 - **Agents author; humans read.** The surface is mechanical so a model can emit it. Glyphs are for the agent and the reader, not for a human to hunt on a keyboard.
+- **English keywords chosen for model probability.** Latin is canonical interchange. The English locale was set keyword-by-keyword by a council of different models for the most stable, highest-probability hit on each concept.
 - **Native-language loop through HIR.** Speak to the model in Chinese or Thai, write and read the `.fab` in that locale, compile the same program.
 - **Sealed reader packs.** One locale per file. English is the default writing surface; Latin is the interchange template, not a required writing language.
 - **Predictable tensor surface.** Rank-aware operators carry shape contracts into typechecking (inner-dimension unification on `·`, identical-shape on `⊙`).
@@ -93,4 +100,4 @@ The strain under real use is the usual early-language one, plus a specific hones
 
 ## Agent tooling.
 
-`https://faberlang.dev/llms.txt` is the machine index; `llms-full.txt` is the expanded map. The site content-negotiates an agent guide at `/en-US/` and publishes skills for install, language, packages, examples and corpus. `faber explain` answers glyphs, keywords, grammar terms and diagnostic codes. The inclusion claim is the design intent — agents as authors of a locale-rendered, mechanically predictable HIR — plus that shipped tooling, not a runtime chatbot wrapped around another language.
+`https://faberlang.dev/llms.txt` is the machine index; `llms-full.txt` is the expanded map. The site content-negotiates an agent guide at `/en-US/` and publishes skills for install, language, packages, examples and corpus. `faber explain` answers glyphs, keywords, grammar terms and diagnostic codes. The inclusion claim is the design intent — agents as authors of a locale-rendered, mechanically predictable HIR, with an English keyword surface chosen for model probability — plus that shipped tooling, not a runtime chatbot wrapped around another language.
