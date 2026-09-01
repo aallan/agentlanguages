@@ -62,15 +62,15 @@ The distinctive move is constrained decoding shipped as toolchain output. `axis 
   id <span class="ty">UUID</span> <span class="ct">PK</span> <span class="ct">AUTO</span>
   title <span class="ty">STRING</span> <span class="num">200</span> <span class="ct">REQUIRED</span>
   completed <span class="ty">BOOL</span> <span class="ct">DEFAULT</span> <span class="kw">false</span>
-
+<!-- -->
 <span class="kw">SOURCE</span> todos <span class="kw">POSTGRES</span>
   <span class="kw">SHAPE</span> <span class="ty">Todo</span>
   <span class="ct">INDEX</span> completed
-
+<!-- -->
 <span class="kw">REALM</span> api
   <span class="ct">CAPABILITY</span> read todos
   <span class="ct">CAPABILITY</span> write todos
-
+<!-- -->
 <span class="kw">FLOW</span> get_todo <span class="kw">get</span> /todos/:id
   <span class="kw">REALM</span> api
   <span class="kw">LET</span> todo

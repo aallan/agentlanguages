@@ -54,7 +54,7 @@ The distinctive move shows up in the comparison with Vera. The two share design 
     <span class="kw">match</span> b
         <span class="num">0</span> -&gt; <span class="ct">Result.Err</span>(<span class="str">"Division by zero"</span>)
         _ -&gt; <span class="ct">Result.Ok</span>(a / b)
-
+<!-- -->
 <span class="kw">verify</span> safeDivide
     safeDivide(<span class="num">10</span>, <span class="num">2</span>) =&gt; <span class="ct">Result.Ok</span>(<span class="num">5</span>)
     safeDivide(<span class="num">7</span>, <span class="num">0</span>)  =&gt; <span class="ct">Result.Err</span>(<span class="str">"Division by zero"</span>)</pre>

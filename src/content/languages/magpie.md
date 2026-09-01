@@ -48,7 +48,7 @@ The distinctive move shows up in the cross-camp comparison with Vera. Vera adds 
 <span class="kw">exports</span> { <span class="sl">@main</span> }
 <span class="kw">imports</span> { }
 <span class="kw">digest</span> <span class="str">"0000000000000000"</span>
-
+<!-- -->
 <span class="kw">fn</span> <span class="sl">@add_two</span>(a: <span class="ty">i64</span>, b: <span class="ty">i64</span>) -&gt; <span class="ty">i64</span> {
 <span class="sl">bb0</span>:
   <span class="sl">%sum</span>: <span class="ty">i64</span> = i.add { lhs=<span class="sl">%a</span>, rhs=<span class="sl">%b</span> }

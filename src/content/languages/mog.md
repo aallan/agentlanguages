@@ -56,11 +56,11 @@ The distinctive move is what Mog refuses to do. It is not standalone; it has no 
   <div class="code">
 <pre><span class="kw">import</span> agent;
 <span class="kw">optional</span> log;
-
+<!-- -->
 <span class="cm">// post-compaction hook: re-inject key context</span>
 <span class="kw">pub</span> <span class="kw">fn</span> on_post_compaction(session: agent.<span class="ty">Session</span>) {
   log.info(<span class="str">"post-compaction hook: injecting reminder"</span>);
-
+<!-- -->
   session.messages.push(agent.<span class="ty">Message</span> {
     role: agent.<span class="ty">Role</span>.SYSTEM,
     content: <span class="str">"IMPORTANT: Always run tests before committing."</span>,

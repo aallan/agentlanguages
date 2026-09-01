@@ -63,16 +63,16 @@ The distinctive move is the depth of what is actually proved &mdash; and the hon
 <pre><span class="kw">fn</span> <span class="ty">greet</span>(name: <span class="ty">string</span>) -&gt; <span class="ty">string</span> {
   <span class="kw">return</span> (+ <span class="str">"Hello, "</span> name)
 }
-
+<!-- -->
 <span class="kw">shadow</span> greet {
   <span class="ct">assert</span> (== (greet <span class="str">"World"</span>) <span class="str">"Hello, World"</span>)
 }
-
+<!-- -->
 <span class="kw">fn</span> <span class="ty">main</span>() -&gt; <span class="ty">int</span> {
   (<span class="ty">println</span> (greet <span class="str">"World"</span>))
   <span class="kw">return</span> <span class="num">0</span>
 }
-
+<!-- -->
 <span class="kw">shadow</span> main { <span class="ct">assert</span> <span class="kw">true</span> }</pre>
   </div>
   <p class="caption">Every function needs a shadow block. <code>shadow main { assert true }</code> exists only because the compiler refuses to compile without it — and the trivial case still has to satisfy the discipline.</p>

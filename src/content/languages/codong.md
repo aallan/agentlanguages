@@ -61,7 +61,7 @@ The distinctive move is which kind of choice gets eliminated. NERD strips operat
     port = config.get(<span class="str">"port"</span>, <span class="num">8080</span>)
     <span class="kw">return</span> {host: host, port: port}
 }
-
+<!-- -->
 <span class="kw">try</span> {
     config = load_config(<span class="str">"config.json"</span>)<span class="op">?</span>
     print(<span class="str">"Server: <span class="sl">{config.host}</span>:<span class="sl">{config.port}</span>"</span>)

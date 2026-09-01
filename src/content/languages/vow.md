@@ -64,7 +64,7 @@ The distinctive move is the choice of checker. Vera and Intent dispatch contract
 <div class="code-sample">
   <div class="code">
 <pre><span class="kw">module</span> <span class="ty">Bisect</span>
-
+<!-- -->
 <span class="kw">fn</span> bisect(lo: <span class="ty">i64</span>, hi: <span class="ty">i64</span>) -&gt; <span class="ty">i64</span> <span class="kw">vow</span> {
   <span class="ct">requires</span>: hi &gt;= lo
 } {
@@ -78,7 +78,7 @@ The distinctive move is the choice of checker. Vera and Intent dispatch contract
   }
   lo
 }
-
+<!-- -->
 <span class="kw">fn</span> main() -&gt; <span class="ty">i32</span> [<span class="ct">io</span>] {
   <span class="kw">let</span> r: <span class="ty">i64</span> = bisect(<span class="num">0</span>, <span class="num">64</span>);
   print_i64(r);

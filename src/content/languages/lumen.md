@@ -61,12 +61,12 @@ The distinctive move is making the source file the same artefact as the document
 <pre><span class="kw">effect</span> <span class="ty">Log</span>
   <span class="kw">cell</span> info(msg: <span class="ty">String</span>) -&gt; <span class="ty">Unit</span>
 <span class="kw">end</span>
-
+<!-- -->
 <span class="kw">cell</span> <span class="ty">main</span>() -&gt; <span class="ty">String</span> / {<span class="ct">Log</span>}
   <span class="kw">perform</span> <span class="ty">Log</span>.info(<span class="str">"Starting"</span>)
   <span class="kw">return</span> <span class="str">"Done"</span>
 <span class="kw">end</span>
-
+<!-- -->
 <span class="kw">handle</span> main() <span class="kw">with</span> <span class="ty">Log</span>.info(msg) -&gt; resume(unit)
   print(<span class="str">"LOG: {msg}"</span>)
 <span class="kw">end</span></pre>
