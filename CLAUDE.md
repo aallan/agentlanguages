@@ -51,7 +51,10 @@ CC BY 4.0 for content.
 - **Star counts:** Baked in at build time from `src/data/stars.json`,
   refreshed weekly by `.github/workflows/refresh-stars.yml`. **No** live
   GitHub API calls from the site.
-- **Deploy:** GitHub Pages, served from the `gh-pages` branch. The
+- **Deploy:** GitHub Pages, built and published by Actions rather than served
+  from a branch. Pages is set to `build_type: workflow`, so `dist/` is uploaded
+  as an artifact and deployed straight from the run; there is no `gh-pages`
+  branch, and `main` is the only branch the repository carries. The
   `.github/workflows/deploy.yml` workflow runs on every push to `main` and
   also via `workflow_run` after the stars refresh completes (so weekly
   refreshes propagate without a separate human-driven deploy).
