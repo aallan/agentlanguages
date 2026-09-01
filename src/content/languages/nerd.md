@@ -53,7 +53,7 @@ done
 fn main
 call fizzbuzz 15</pre>
   </div>
-  <p class="caption">Every operator is a word: <code>mod</code>, <code>eq</code>, <code>repeat</code>, <code>done</code>. No braces, no semicolons, no <code>+</code>/<code>==</code>.</p>
+  <p class="caption">Every operator is a word: <code>mod</code>, <code>eq</code>, <code>repeat</code>, <code>done</code>. No braces, no semicolons, no <code>+</code>/<code>==</code>. Statements are delimited by line rather than by punctuation, so a conditional chain has nowhere to break: the <code>if</code> above runs to 124 characters and scrolls sideways. This sample is <code>examples/fizzbuzz.nerd</code> from the repository, unaltered.</p>
 </div>
 
 ## Distinctive moves.
