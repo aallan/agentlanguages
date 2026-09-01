@@ -2,9 +2,13 @@
 import { getCollection, render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import { validateCrossrefs } from '../../lib/validate-crossrefs';
 
 export async function getStaticPaths() {
   const languages = await getCollection('languages');
+  // Fails the build on a crossref slug that names no entry. Runs here because
+  // this is where the whole collection is in hand, before the body filter.
+  validateCrossrefs(languages);
   // Only generate detail pages for entries with a non-empty body.
   return languages
     .filter((l) => (l.body ?? '').trim().length > 0)
