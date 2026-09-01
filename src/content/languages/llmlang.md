@@ -63,7 +63,7 @@ The distinctive move sits in two places at once. The first is the density lever:
   <div class="code">
 <pre><span class="cm">// Factorial. ^0 refers to the most-recent binding (the parameter n).</span>
 <span class="kw">:</span> fact n <span class="op">?</span> <span class="sl">^0</span> <span class="op">*</span> <span class="op">$</span> <span class="sl">^0</span> <span class="kw">@</span> fact <span class="op">-</span> <span class="op">></span> <span class="sl">^0</span> <span class="num">1</span> <span class="op">></span> <span class="sl">^0</span>
-
+<!-- -->
 <span class="cm">// Auto-instrumented function. The M marker triggers compiler-injected</span>
 <span class="cm">// span entry/exit and timing around handle_request.</span>
 <span class="kw">M</span> <span class="str">"otel"</span> <span class="str">"handle_request"</span> <span class="kw">:</span> handle_request req

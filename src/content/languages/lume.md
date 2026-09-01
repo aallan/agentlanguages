@@ -62,13 +62,13 @@ The distinctive move sits in the toolchain rather than the syntax. `lume kb pack
     id: <span class="ty">str</span>
     balance: <span class="ty">int</span>
 }
-
+<!-- -->
 <span class="kw">fn</span> debit(acc: <span class="ty">Account</span>, amount: <span class="ty">int</span>) -&gt; <span class="ty">Account</span>
 <span class="str">"Returns a new Account with balance reduced by amount."</span>
 {
     acc.with(balance<span class="op">=</span> acc.balance <span class="op">-</span> amount)
 }
-
+<!-- -->
 <span class="kw">fn</span> main()
 {
     acc <span class="op">=</span> <span class="ty">Account</span>(id<span class="op">=</span> <span class="str">"acc-1"</span>, balance<span class="op">=</span> <span class="num">1000</span>)

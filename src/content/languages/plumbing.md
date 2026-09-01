@@ -47,11 +47,11 @@ The distinctive move is to refuse the orchestration camp's normal framing. Where
   <div class="code">
 <pre><span class="kw">type</span> <span class="ty">Verdict</span> = { verdict: <span class="ty">bool</span>, commentary: <span class="ty">string</span>, draft: <span class="ty">string</span> }
 <span class="kw">type</span> <span class="ty">Review</span>  = { score: <span class="ty">int</span>, review: <span class="ty">string</span>, draft: <span class="ty">string</span> }
-
+<!-- -->
 <span class="kw">let</span> composer : !<span class="ty">string</span>  <span class="op">-&gt;</span> !<span class="ty">string</span>  = <span class="kw">agent</span> { ... }
 <span class="kw">let</span> checker  : !<span class="ty">string</span>  <span class="op">-&gt;</span> !<span class="ty">Verdict</span> = <span class="kw">agent</span> { ... }
 <span class="kw">let</span> critic   : !<span class="ty">Verdict</span> <span class="op">-&gt;</span> !<span class="ty">Review</span>  = <span class="kw">agent</span> { ... }
-
+<!-- -->
 <span class="kw">let</span> main : !<span class="ty">string</span> <span class="op">-&gt;</span> !<span class="ty">string</span> = <span class="kw">plumb</span>(input, output) {
   input   ; composer ; checker
   checker ; <span class="ty">filter</span>(verdict = <span class="kw">false</span>)

@@ -53,7 +53,7 @@ fn create_user(data: NewUser) -&gt; User or BadRequest
 {
   let existing: User = find_by_email(data.email)
   return BadRequest { message: "Email already taken" } if existing != nothing
-
+<!-- -->
   let user: User = {
     id: rng.uuid(),
     email: data.email,
@@ -61,7 +61,7 @@ fn create_user(data: NewUser) -&gt; User or BadRequest
     active: true,
     created_at: time.now(),
   }
-
+<!-- -->
   db.insert("users", user)
 }</pre>
   </div>

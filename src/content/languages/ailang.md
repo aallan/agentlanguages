@@ -67,9 +67,9 @@ The distinctive move is the no-loops decision. AILANG commits to lambda calculus
 <div class="code-sample">
   <div class="code">
 <pre><span class="kw">module</span> examples/hello
-
+<!-- -->
 <span class="kw">import</span> std/io (println)
-
+<!-- -->
 <span class="kw">export</span> <span class="kw">func</span> <span class="ty">main</span>() <span class="op">-&gt;</span> () ! {<span class="ct">IO</span>} {
   <span class="ty">println</span>(<span class="str">"Hello from AILANG!"</span>)
 }</pre>
