@@ -2,7 +2,7 @@
 name: Faber Romanus
 camp: syntactic
 spans_camps: []
-one_liner: "Typed compute language designed for coding agents to author and for humans to read. Mechanical syntax; English keywords chosen by a multi-model council for the most stable, highest-probability hit on each concept; other locales render the same HIR."
+one_liner: "Typed compute language designed for coding agents to author and for humans to read. Mechanical syntax; the project states its English keywords were chosen by a multi-model council for the most stable, highest-probability hit on each concept; other locales render the same HIR."
 url: https://faberlang.dev
 repo: faberlang/faber
 paper: null
@@ -11,11 +11,11 @@ implementation_language: Rust
 compilation_target: Rust, TypeScript, Go, Swift, LLVM IR, WebAssembly, Metal, CUDA
 license: MIT
 maturity: working_compiler
-date_appeared: 2025-01
+date_appeared: 2026-07
 agent_tooling:
   - llms.txt / llms-full.txt
   - SKILL.md (install, language, examples, corpus)
-  - well-known agent-skills catalog
+  - well-known agent-skills catalogue
   - Markdown agent guide under /en-US/
   - faber explain for glyphs, keywords, and diagnostic codes
 key_idea: |
@@ -23,10 +23,10 @@ key_idea: |
   humans read it. The surface is mechanical and predictable — type-first
   declarations, sealed keywords, math glyphs for tensor work — so a model
   can emit it without inventing syntax. Humans are not expected to type
-  · ⊗ ⊙. Latin is the canonical lexical identity. The English locale was
-  chosen keyword-by-keyword by a council of different models for the most
-  stable, highest-probability hit on each concept, so the default public
-  surface is the one models already want to emit. HIR is the program: a
+  · ⊗ ⊙. Latin is the canonical lexical identity. The project states the
+  English locale was chosen keyword-by-keyword by a council of different
+  models for the most stable, highest-probability hit on each concept, so
+  the default public surface is the one models already want to emit. HIR is the program: a
   reader locale is a rendering, which is why someone can speak Chinese or
   Thai to their model, read and write the .fab file in that language, and
   still compile the same meaning.
@@ -48,8 +48,8 @@ crossrefs:
     camp: verification
     relation: "Both publish llms.txt and skills. Vera removes parameter names so the model cannot lean on them; Faber keeps readable names and moves the language barrier into locale packs so the model can write in the human's language."
 history:
-  - when: "2025"
-    what: "Faber Romanus first appears as a typed compute language with reader-localised source and a closed compiler (Radix)."
+  - when: "Jul 2026"
+    what: "The public <code>faber</code> CLI is imported from the closed Radix compiler and the <code>faberlang</code> organisation appears; v1.0.0 is tagged six days later."
   - when: "Aug 2026"
     what: "Public CLI documents first correct end-to-end compiled inference against pinned goldens (not a shipped device-GPU inference product). Site first-contact path and experimental-through-v1 banner land."
 ---
@@ -58,7 +58,7 @@ history:
 
 Faber Romanus is a language for coding agents to write and for humans to read. The syntax is deliberately mechanical: type-first bindings, one locale pack per file, a small glyph set for tensor work, no mixed-language spellings. A model is supposed to emit that surface without guessing. A person is supposed to read the result, not sit and type `·` and `⊗`.
 
-Latin is the canonical lexical identity — the compiler's interchange, not a costume and not the required writing language. English is the default public surface, and those keywords were not picked by taste. A council of different models chose each English keyword for the most stable, highest-probability hit on that semantic concept, so the locale agents meet first is the one they already want to emit.
+Latin is the canonical lexical identity — the compiler's interchange, not a costume and not the required writing language. English is the default public surface, and the project reports those keywords were not picked by taste: it describes a council of different models choosing each English keyword for the most stable, highest-probability hit on that semantic concept, so the locale agents meet first is the one they already want to emit.
 
 HIR is what makes the second half work across languages. The compiler holds one analysed program. A `.fab` file is a rendering into a reader locale — English by default, also Latin, Thai, Simplified and Traditional Chinese, Arabic, Vietnamese, Hindi. Someone who thinks in Thai can talk to their model in Thai, read the program in Thai, write the program in Thai, and it still compiles. Keywords and primitive type names change; identifiers and structural glyphs do not. Meaning does not fork.
 
@@ -85,16 +85,16 @@ Declarations are type-first (`const tensor&lt;f32, [2, 3]&gt; a`, not `a: Tensor
 ## Distinctive moves.
 
 - **Agents author; humans read.** The surface is mechanical so a model can emit it. Glyphs are for the agent and the reader, not for a human to hunt on a keyboard.
-- **English keywords chosen for model probability.** Latin is canonical interchange. The English locale was set keyword-by-keyword by a council of different models for the most stable, highest-probability hit on each concept.
+- **English keywords chosen for model probability.** Latin is canonical interchange. The project states the English locale was set keyword-by-keyword by a council of different models for the most stable, highest-probability hit on each concept.
 - **Native-language loop through HIR.** Speak to the model in Chinese or Thai, write and read the `.fab` in that locale, compile the same program.
 - **Sealed reader packs.** One locale per file. English is the default writing surface; Latin is the interchange template, not a required writing language.
 - **Predictable tensor surface.** Rank-aware operators carry shape contracts into typechecking (inner-dimension unification on `·`, identical-shape on `⊙`).
-- **Agent-facing docs shipped with the product.** `faberlang.dev/llms.txt`, a skills catalog, and `faber explain` for glyphs, keywords and diagnostic codes.
+- **Agent-facing docs shipped with the product.** `faberlang.dev/llms.txt`, a skills catalogue, and `faber explain` for glyphs, keywords and diagnostic codes.
 - **Honest capability ladder.** Reader-localised source is shipped. Bounded Metal/CUDA training is proven. Device GPU inference and multi-device execution are not current product claims. Version 1 is experimental; stability is a version 2 claim.
 
 ## Maturity.
 
-A working `faber` CLI ships as tagged release archives for macOS arm64 and Linux x86_64. The language, public libraries (including Gradus, the MIT autograd and ML library), examples and the documentation site are MIT. Radix, the compiler, is closed while it is under active development; that is presented as temporary, not as a permanent fence. Public GitHub organisation `faberlang` holds the open surface; the Haskell project at `faber-lang/faber` is unrelated.
+A working `faber` CLI ships as a tagged release archive; v1.0.0 publishes a macOS arm64 build. The language, public libraries (including Gradus, the MIT autograd and ML library), examples and the documentation site are MIT. Radix, the compiler, is closed while it is under active development; that is presented as temporary, not as a permanent fence. Public GitHub organisation `faberlang` holds the open surface; the Haskell project at `faber-lang/faber` is unrelated.
 
 The strain under real use is the usual early-language one, plus a specific honesty gap: the tensor and inference *surface* is large (Gradus is a substantial Faber library) while device residency and GPU execution remain compiler and host concerns. A catalogue reader should not take the glyph surface as a shipped serving product.
 
