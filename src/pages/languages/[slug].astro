@@ -77,11 +77,46 @@ const next = detailIdx >= 0 && detailIdx < withDetail.length - 1 ? withDetail[de
 const siteHost = (() => {
   try { return new URL(data.url).hostname; } catch { return data.url; }
 })();
+
+// Schema.org JSON-LD. The page is an Article about a piece of software, so
+// the editorial framing is the Article and the language sits under `about`.
+//
+// No `datePublished`: we do not record when an entry was added, and
+// `date_appeared` is when the *language* appeared, which is a different fact.
+// It belongs on the software instead, as `dateCreated`.
+//
+// `about.author` is deliberately absent. Schema.org types `author` as
+// Person or Organization, and the frontmatter field is free text covering
+// both ("escapeboy", "Chris Tate and Matt Van Horn / Vercel Labs"), so there
+// is no way to classify it correctly at build time. It stays visible in the
+// page and the markdown companion rather than being emitted mistyped here.
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: `${data.name} — agentlanguages.dev`,
+  description: data.one_liner,
+  url: new URL(Astro.url.pathname, Astro.site).toString(),
+  inLanguage: 'en',
+  author: { '@type': 'Organization', name: 'agentlanguages.dev', url: 'https://agentlanguages.dev' },
+  publisher: { '@type': 'Organization', name: 'agentlanguages.dev', url: 'https://agentlanguages.dev' },
+  isPartOf: { '@type': 'CollectionPage', name: 'agentlanguages.dev', url: 'https://agentlanguages.dev' },
+  about: {
+    '@type': 'SoftwareSourceCode',
+    name: data.name,
+    description: data.one_liner,
+    url: data.url,
+    ...(data.repo ? { codeRepository: `https://github.com/${data.repo}` } : {}),
+    ...(data.implementation_language ? { programmingLanguage: data.implementation_language } : {}),
+    ...(data.license ? { license: data.license } : {}),
+    ...(data.date_appeared ? { dateCreated: data.date_appeared } : {}),
+  },
+};
 ---
 <Base
   title={`${data.name} — agentlanguages.dev`}
   description={data.one_liner}
   campAccent={data.camp}
+  jsonLd={jsonLd}
 >
   <div class="col col-full">
     <div class="breadcrumb">

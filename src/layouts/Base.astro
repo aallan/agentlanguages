@@ -7,12 +7,15 @@ interface Props {
   title: string;
   description?: string;
   campAccent?: 'syntactic' | 'verification' | 'orchestration' | 'adjacent' | 'unclassified';
+  /** Schema.org JSON-LD for this page. Emitted verbatim in <head>. */
+  jsonLd?: Record<string, unknown>;
 }
 
 const {
   title,
   description = 'A community-edited catalogue of programming languages designed for AI agents to author code.',
   campAccent,
+  jsonLd,
 } = Astro.props;
 
 const bodyStyle = campAccent ? `--camp: var(--camp-${campAccent});` : undefined;
@@ -67,6 +70,12 @@ if (pathname === '/' || pathname === '') {
     <link rel="alternate" type="text/markdown" href="/llms-full.txt" title="llms-full.txt — full catalogue text" />
     <link rel="llms-txt" href="/llms.txt" />
     <link rel="llms-full-txt" href="/llms-full.txt" />
+    {/* Schema.org structured data, for crawlers and agent SDKs that read
+        JSON-LD rather than the markdown companions above. Built per page and
+        passed in, so each route decides its own @type. */}
+    {jsonLd && (
+      <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
+    )}
     <meta name="generator" content={Astro.generator} />
 
     <meta property="og:title" content={title} />
