@@ -59,6 +59,28 @@ Boruna doesn't think the problem with LLM code is the code. It thinks the proble
 
 The unit of computation is a DAG workflow. Each step is an `.ax` source file. Every side effect — LLM call, HTTP request, database write, filesystem mutation — is declared in the source and policy-gated at the VM level. The VM refuses to execute a step that would perform an undeclared effect; the policy layer lets administrators forbid specific declared effects per workflow or per role. Every executed step writes to a hash-chained evidence bundle that's tamper-evident; the bundle is sufficient to replay the workflow deterministically (same inputs, same model responses recorded, same outputs).
 
+## What it looks like.
+
+<div class="code-sample">
+  <div class="code">
+<pre><span class="cm">// Capability demo — functions declare their side effects</span>
+<!-- -->
+<span class="kw">fn</span> get_time() -&gt; <span class="ty">Int</span> <span class="ct">!{time}</span> {
+    <span class="num">42</span>
+}
+<!-- -->
+<span class="kw">fn</span> pure_add(a: <span class="ty">Int</span>, b: <span class="ty">Int</span>) -&gt; <span class="ty">Int</span> {
+    a <span class="op">+</span> b
+}
+<!-- -->
+<span class="kw">fn</span> main() -&gt; <span class="ty">Int</span> {
+    <span class="kw">let</span> t: <span class="ty">Int</span> = get_time()
+    pure_add(t, <span class="num">10</span>)
+}</pre>
+  </div>
+  <p class="caption"><code>examples/capabilities.ax</code>, unaltered. The <code>!{time}</code> clause is the declaration the VM enforces: <code>get_time</code> may read the clock, <code>pure_add</code> may not, and a step that reaches for an effect missing from its own signature does not run. Effects reach the VM as values rather than as calls, which is what lets each one be recorded in the evidence bundle and replayed from it.</p>
+</div>
+
 ## Distinctive moves.
 
 - **Capability-safe by construction.** A step can't reach for an effect it didn't declare. The VM is the enforcement point, not a linter.
