@@ -53,27 +53,30 @@ The distinctive move is the **intent block** itself: a named natural-language go
 
 ## What it looks like.
 
-```intent
-entity BankAccount {
-    field balance: Int;
-
-    invariant self.balance >= 0;
-
-    method deposit(amount: Int) returns Void
-        requires amount > 0
-        ensures self.balance == old(self.balance) + amount
+<div class="code-sample">
+  <div class="code">
+<pre><span class="kw">entity</span> <span class="ty">BankAccount</span> {
+    <span class="kw">field</span> balance: <span class="ty">Int</span>;
+<!-- -->
+    <span class="ct">invariant</span> <span class="kw">self</span>.balance <span class="op">&gt;=</span> <span class="num">0</span>;
+<!-- -->
+    <span class="kw">method</span> deposit(amount: <span class="ty">Int</span>) <span class="kw">returns</span> <span class="ty">Void</span>
+        <span class="ct">requires</span> amount <span class="op">&gt;</span> <span class="num">0</span>
+        <span class="ct">ensures</span> <span class="kw">self</span>.balance <span class="op">==</span> <span class="kw">old</span>(<span class="kw">self</span>.balance) <span class="op">+</span> amount
     {
-        self.balance = self.balance + amount;
+        <span class="kw">self</span>.balance <span class="op">=</span> <span class="kw">self</span>.balance <span class="op">+</span> amount;
     }
 }
-
-intent "Safe withdrawal preserves non-negative balance" {
-    goal "BankAccount.withdraw never results in balance < 0";
-    guarantee "if withdraw returns false then balance is unchanged";
-    verified_by BankAccount.invariant;
-    verified_by BankAccount.withdraw.requires;
-}
-```
+<!-- -->
+<span class="kw">intent</span> <span class="str">"Safe withdrawal preserves non-negative balance"</span> {
+    <span class="ct">goal</span> <span class="str">"BankAccount.withdraw never results in balance &lt; 0"</span>;
+    <span class="ct">guarantee</span> <span class="str">"if withdraw returns false then balance is unchanged"</span>;
+    <span class="ct">verified_by</span> <span class="ty">BankAccount</span>.invariant;
+    <span class="ct">verified_by</span> <span class="ty">BankAccount</span>.withdraw.requires;
+}</pre>
+  </div>
+  <p class="caption">An entity whose invariant and method contracts are machine-checkable, then an intent block naming the clauses that discharge a natural-language goal.</p>
+</div>
 
 `old(...)` captures pre-mutation state for `ensures` clauses. `forall i in 0..n: p` and `exists i in 0..n: p` quantify over integer ranges in contracts. Loops carry `invariant` and `decreases` clauses for inductive reasoning at verification time.
 

@@ -48,16 +48,19 @@ Plasm treats the agent integration problem as a **language and plan** problem, n
 
 ## What it looks like.
 
-```text
-issues = e1{p46="open"}.page_size(50)
-labels = issues.r3
-report = labels[p50] <<RPT
-{% for r in rows %}{{ r.p50 }}
-{% endfor %}
-RPT
-sent = e1.m13(p91=report.content)
-issues, sent
-```
+<div class="code-sample">
+  <div class="code">
+<pre>issues <span class="op">=</span> <span class="sl">e1</span>{<span class="sl">p46</span><span class="op">=</span><span class="str">"open"</span>}.page_size(<span class="num">50</span>)
+labels <span class="op">=</span> issues.<span class="sl">r3</span>
+report <span class="op">=</span> labels[<span class="sl">p50</span>] <span class="kw">&lt;&lt;RPT</span>
+<span class="ct">{% for r in rows %}</span><span class="sl">{{ r.p50 }}</span>
+<span class="ct">{% endfor %}</span>
+<span class="kw">RPT</span>
+sent <span class="op">=</span> <span class="sl">e1</span>.<span class="sl">m13</span>(<span class="sl">p91</span><span class="op">=</span>report.content)
+issues, sent</pre>
+  </div>
+  <p class="caption">Filter issues, hop a relation, render a template into a heredoc, then post the result. Every <code>e#</code>, <code>p#</code>, <code>r#</code> and <code>m#</code> is a session-local symbol copied from the teaching table.</p>
+</div>
 
 Symbols are **session-local**: `e1` might mean GitHub `Issue` in one federated session and Linear `Issue` as `e2` when both catalogs are seeded. The grammar rules are stable; the vocabulary is **catalog-parameterised** (like SQL over a schema). Canonical surface spec: [Plasm language definition](https://plasmtools.github.io/plasm-core/reference/plasm-language-definition/).
 

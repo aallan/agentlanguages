@@ -51,18 +51,21 @@ Two views render the same tree: a dense **authoring view** sized for model token
 
 ## What it looks like.
 
-```tacit
-unit Math {
-  import inc : Int -> Int
-    from blake3:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef;
-
-  private double : Int -> Int =
-    lambda x. @add x x;
-
-  export public add_two : Int -> Int =
-    lambda x. inc (inc x);
-}
-```
+<div class="code-sample">
+  <div class="code">
+<pre><span class="kw">unit</span> Math {
+  <span class="kw">import</span> inc : <span class="ty">Int</span> -&gt; <span class="ty">Int</span>
+    <span class="kw">from</span> blake3:<span class="num">0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef</span>;
+<!-- -->
+  <span class="kw">private</span> double : <span class="ty">Int</span> -&gt; <span class="ty">Int</span> =
+    <span class="kw">lambda</span> x<span class="op">.</span> <span class="sl">@add</span> x x;
+<!-- -->
+  <span class="kw">export</span> <span class="kw">public</span> add_two : <span class="ty">Int</span> -&gt; <span class="ty">Int</span> =
+    <span class="kw">lambda</span> x<span class="op">.</span> inc (inc x);
+}</pre>
+  </div>
+  <p class="caption">One unit: an import pinned to a definition hash, a private binding, and an exported one. <code>@add</code> is a builtin; <code>lambda x.</code> binds by position.</p>
+</div>
 
 Imports name exact `blake3:<64-hex>` definition hashes, not paths or version ranges. Visibility (`public` / `package` / `private`) is part of the artefact. The display names `x`, `inc`, `double` are sidecar metadata; in canonical form references are DeBruijn indices.
 
