@@ -43,8 +43,41 @@ const buildDate = new Date();
 const asOfLabel = `${buildDate.getDate()} ${monthNames[buildDate.getMonth()]} ${buildDate.getFullYear()}`;
 
 const trackedCount = languages.length;
+
+// Schema.org JSON-LD. The homepage is a CollectionPage over the catalogue,
+// which is what lets a crawler read the site as a structured directory rather
+// than as one long article. Only entries that render a detail page are listed,
+// so every itemListElement has somewhere to point.
+const listed = languages.filter((l) => (l.body ?? '').trim().length > 0);
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'agentlanguages.dev',
+  description:
+    'A community-edited catalogue of programming languages designed for AI agents to author code, organised around three philosophical camps: syntactic, verification, and orchestration.',
+  url: 'https://agentlanguages.dev/',
+  inLanguage: 'en',
+  isPartOf: { '@type': 'WebSite', name: 'agentlanguages.dev', url: 'https://agentlanguages.dev' },
+  mainEntity: {
+    '@type': 'ItemList',
+    name: 'Programming languages designed for AI agents to write',
+    numberOfItems: listed.length,
+    itemListElement: listed.map((l, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      url: `https://agentlanguages.dev/languages/${l.id}/`,
+      item: {
+        '@type': 'SoftwareSourceCode',
+        name: l.data.name,
+        description: l.data.one_liner,
+        url: l.data.url,
+      },
+    })),
+  },
+};
 ---
 <Base
+  jsonLd={jsonLd}
   title="agentlanguages.dev — Programming languages designed for AI agents to write"
   description="A community-edited catalogue of programming languages designed for AI agents to author code, organised around three philosophical camps: syntactic, verification, and orchestration."
 >
