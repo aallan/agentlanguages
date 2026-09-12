@@ -104,10 +104,15 @@ if (pathname === '/' || pathname === '') {
       // localStorage — running synchronously in <head> so it lands before
       // first paint and avoids a flash.
       (function () {
-        var saved = localStorage.getItem('theme');
-        if (saved === 'dark' || saved === 'light') {
-          document.documentElement.setAttribute('data-theme', saved);
-        }
+        // localStorage throws rather than returning null in a locked-down
+        // context (Safari private browsing, site data blocked). Swallowing it
+        // leaves the page in auto, which is the right fallback.
+        try {
+          var saved = localStorage.getItem('theme');
+          if (saved === 'dark' || saved === 'light') {
+            document.documentElement.setAttribute('data-theme', saved);
+          }
+        } catch (e) {}
       })();
     </script>
   </head>
@@ -117,27 +122,54 @@ if (pathname === '/' || pathname === '') {
     <Footer />
 
     <script is:inline>
-      // Toggle sets data-theme to "light" or "dark" explicitly — never
-      // removes the attribute — so an explicit-light choice on a dark-pref
-      // OS still wins. Removing the attribute would re-expose the user to
-      // the @media (prefers-color-scheme: dark) rule and flip them back.
+      // Three states, cycling light -> dark -> auto -> light.
       //
-      // To pick "follow my OS again", users can clear localStorage (devtools
-      // or a future "Reset" button); we don't yet expose a UI for that.
+      // Auto is the absence of data-theme: the @media (prefers-color-scheme)
+      // rules in global.css take over, so the page follows the OS again. That
+      // is the state the old two-state toggle could reach only by clearing
+      // localStorage in devtools, which is what #1 was about.
       //
-      // The current state is read from the *computed* theme rather than the
-      // attribute alone, so the first click on a system-dark page where the
-      // attribute is unset still flips correctly to light.
-      function toggleTheme() {
-        var root = document.documentElement;
-        var explicit = root.getAttribute('data-theme');
-        var isDark = explicit
-          ? explicit === 'dark'
-          : window.matchMedia('(prefers-color-scheme: dark)').matches;
-        var next = isDark ? 'light' : 'dark';
-        root.setAttribute('data-theme', next);
-        localStorage.setItem('theme', next);
+      // An explicit light choice still has to beat a dark-preferring OS, which
+      // is why light sets the attribute rather than clearing it.
+      var THEME_ORDER = ['light', 'dark', 'auto'];
+
+      function currentTheme() {
+        return document.documentElement.getAttribute('data-theme') || 'auto';
       }
+
+      function applyTheme(mode) {
+        var root = document.documentElement;
+        if (mode === 'auto') {
+          root.removeAttribute('data-theme');
+        } else {
+          root.setAttribute('data-theme', mode);
+        }
+        try {
+          if (mode === 'auto') localStorage.removeItem('theme');
+          else localStorage.setItem('theme', mode);
+        } catch (e) {}
+        labelTheme(mode);
+      }
+
+      // The label names the state you are in, matching the glyph. Announcing
+      // the next state instead would disagree with the icon, and a screen
+      // reader user would have no way to tell which reading was meant.
+      function labelTheme(mode) {
+        var button = document.getElementById('theme-toggle');
+        if (!button) return;
+        var label = 'Theme: ' + mode;
+        button.setAttribute('aria-label', label);
+        button.setAttribute('title', label);
+      }
+
+      function toggleTheme() {
+        var next = THEME_ORDER[(THEME_ORDER.indexOf(currentTheme()) + 1) % THEME_ORDER.length];
+        applyTheme(next);
+      }
+
+      // The head script sets the attribute before first paint; this syncs the
+      // button's label to whatever it decided.
+      labelTheme(currentTheme());
     </script>
   </body>
 </html>

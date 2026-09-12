@@ -209,17 +209,20 @@ nav.primary a:hover { color: var(--ink-900); }
 }
 .theme-toggle:hover { color: var(--ink-900); border-color: var(--ink-500); }
 .theme-toggle svg { width: 16px; height: 16px; }
+/* Three states, and the icon reports which one you are in rather than which
+   one you would get by clicking. `data-theme` is absent in auto, so the
+   selectors key off the attribute alone and need no media query: the OS
+   preference decides the page's colours, not which glyph is showing.
+   A first-time visitor therefore sees the auto glyph, which is honest,
+   where the old two-state toggle showed a sun or a moon and implied a
+   choice the visitor had never made. */
+.theme-toggle .sun,
 .theme-toggle .moon { display: none; }
-.theme-toggle .sun  { display: block; }
-/* Same precedence ladder as the token block above: media query for OS
-   preference (excluding explicit-light), attribute selector for the
-   explicit-dark choice. Both swap moon for sun. */
-@media (prefers-color-scheme: dark) {
-  html:not([data-theme="light"]) .theme-toggle .moon { display: block; }
-  html:not([data-theme="light"]) .theme-toggle .sun  { display: none; }
-}
-html[data-theme="dark"] .theme-toggle .moon { display: block; }
-html[data-theme="dark"] .theme-toggle .sun  { display: none; }
+.theme-toggle .auto { display: block; }
+html[data-theme="light"] .theme-toggle .sun  { display: block; }
+html[data-theme="light"] .theme-toggle .auto { display: none; }
+html[data-theme="dark"]  .theme-toggle .moon { display: block; }
+html[data-theme="dark"]  .theme-toggle .auto { display: none; }
 
 /* ===== Hero ===== */
 .hero {
