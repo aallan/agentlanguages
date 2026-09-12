@@ -1,15 +1,16 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 
-import mdx from '@astrojs/mdx';
-
 // We dropped @astrojs/sitemap and emit our own sitemap.xml from
 // src/pages/sitemap.xml.ts — the integration ignores non-HTML routes,
 // which would have hidden the markdown companions, llms.txt, and
 // llms-full.txt from search and agent crawlers.
 export default defineConfig({
   site: 'https://agentlanguages.dev',
-  integrations: [mdx()],
+  // No integrations. @astrojs/mdx was dropped once it was measured: every
+  // entry is .md, so it processed nothing and its removal left all 101
+  // built files byte-identical. Re-add it if a .mdx entry is ever wanted.
+  integrations: [],
   // Renamed entries land here so existing links keep working. Astro
   // emits a static HTML redirect page (meta-refresh + canonical link)
   // for each entry. Add new mappings as they happen; remove old ones

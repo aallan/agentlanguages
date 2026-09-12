@@ -31,8 +31,9 @@ CC BY 4.0 for content.
 - **Framework:** Astro 7.x, static-output. No JS framework. Vanilla JS only
   for the theme toggle.
 - **Content:** A single content collection at `src/content/languages/*.md`,
-  schema-validated by Zod in `src/content.config.ts`. Each MDX file is one
-  language entry; frontmatter is required, body is optional.
+  schema-validated by Zod in `src/content.config.ts`. Each Markdown file is
+  one language entry; frontmatter is required, body is optional. There are no
+  `.mdx` files, and no MDX integration.
 - **Pages:**
   - `src/pages/index.astro` — homepage
   - `src/pages/languages/[slug].astro` — detail pages (only rendered for
@@ -192,7 +193,7 @@ same deploy. It only changes *how the change lands*: branch → PR → review
 
 ### Editorial reword
 
-Most editorial copy is dynamic. A change to a language MDX cascades to
+Most editorial copy is dynamic. A change to a language entry cascades to
 HTML detail page, markdown companion, llms.txt entry, llms-full.txt block,
 homepage card, and sitemap automatically on the next build.
 
@@ -355,7 +356,7 @@ npm run preview  # serves the built site
   triggers (GitHub's anti-recursion guard); without it, the weekly
   stars refresh would land but never deploy.
 - **`refresh-stars.yml`** runs Mondays 06:00 UTC, or on
-  `workflow_dispatch`. Reads `repo:` fields from MDX frontmatter, calls
+  `workflow_dispatch`. Reads `repo:` fields from entry frontmatter, calls
   the GitHub REST API, writes `src/data/stars.json`. Commits the file
   as `github-actions[bot]` only if it changed.
 - Both workflows opt into Node 24 via `FORCE_JAVASCRIPT_ACTIONS_TO_NODE24`

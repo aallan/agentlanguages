@@ -53,9 +53,9 @@ const languages = defineCollection({
       })
       .optional(),
 
-    // Presence of a non-empty MDX body is what causes a detail page to render.
+    // Presence of a non-empty Markdown body is what causes a detail page to render.
     //
-    // NOTE: pullquotes and code samples go INLINE in the MDX body, as
+    // NOTE: pullquotes and code samples go INLINE in the Markdown body, as
     // `<p class="pullquote">…</p>` and `<div class="code-sample">…</div>`
     // respectively (see vera.md, codong.md, fabro.md for the pattern). There
     // were once `pullquote` and `code_sample` frontmatter fields here, but the

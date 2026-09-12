@@ -5,7 +5,7 @@ import { getCollection } from 'astro:content';
 //
 // Was previously a static file in public/.well-known/. Moved here so the
 // project count in description_for_model stays in sync with the content
-// collection — adding a language MDX file now updates the manifest on the
+// collection — adding a language entry now updates the manifest on the
 // next build, no manual edit needed.
 
 export const GET: APIRoute = async () => {
