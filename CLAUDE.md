@@ -359,8 +359,11 @@ npm run preview  # serves the built site
   `workflow_dispatch`. Reads `repo:` fields from entry frontmatter, calls
   the GitHub REST API, writes `src/data/stars.json`. Commits the file
   as `github-actions[bot]` only if it changed.
-- Both workflows opt into Node 24 via `FORCE_JAVASCRIPT_ACTIONS_TO_NODE24`
-  ahead of GitHub's deprecation timeline for Node 20.
+- Both workflows run on Node 24 because every action they use declares
+  `node24` itself. They used to force it with
+  `FORCE_JAVASCRIPT_ACTIONS_TO_NODE24`, set ahead of GitHub's move off
+  Node 20; #37 removed it once the action majors made it a no-op. Do not
+  add it back.
 
 ---
 
@@ -374,8 +377,10 @@ cite: Verification and Syntactic are close to each other and much larger
 than the rest, Orchestration is roughly half their size but the most
 internally varied, Unclassified holds a handful of entries with limited
 public evidence, and Adjacent has just Plumbing. Verification carries the
-most mature implementations. Vera, Magpie, and Boruna anchor the three
-camps' detail-page treatments on the homepage.
+most mature implementations. NERD, Vera and Boruna anchor the syntactic,
+verification and orchestration camps on the homepage. The anchors are set by
+the `findById` calls in `src/pages/index.astro`, which is the place to check
+rather than this sentence.
 
 To get the current distribution rather than trusting this paragraph:
 
