@@ -42,7 +42,7 @@ crossrefs:
 
 With is a systems language whose safety model is Rust-like in outcome and different in mechanism. Ownership is persistent and single; borrowing is ephemeral and never stored; relationships that must outlive a scope are expressed as typed handles. That trade removes lifetime annotations from the language at the cost of forbidding references inside long-lived data structures. The compiler is written in With and rebuilds itself to a byte-identical fixpoint.
 
-It is not designed as a language for agents in the sense of the syntactic camp. It is designed for human ergonomics, and it treats agents as first-class authors of the projects written in it.
+It is designed for agents and humans to author alike. The rule that removes ceremony for a human, that no character the program already determines has to be written, applies equally to an agent generating the code, and the explicit spellings that remain sit where an author of either kind is most likely to be silently wrong. `with init` gives every new project an agent primer.
 
 <p class="pullquote">If the creators of the language can leak by accident, the design is wrong, not the programmer.</p>
 
