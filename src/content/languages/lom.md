@@ -111,7 +111,7 @@ A working toolchain: dual backends, formatter, LSP, local package manifests,
 CLI fix tooling, and a browser playground. CI runs the full self-hosting
 regression on Linux and the build/test matrix on three platforms. The
 dependency and claim surface is machine-checked — a zero-third-party-crate CI
-gate, 368 self-compilation cases, a 14-case three-layer bootstrap check, 618
+gate, 368 self-compilation cases, a 14-case three-layer bootstrap check, 621
 Rust tests — and the codebase contains no unsafe code.
 
 ## Agent tooling.
