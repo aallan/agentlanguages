@@ -1,11 +1,12 @@
 ---
 name: Lom
 camp: unclassified
+spans_camps: []
 one_liner: "An LLM-repair-native dynamic language: stable diagnostic codes, a confidence-graded fix engine with a written auto-apply safety axiom, and a repair-loop benchmark are the language's reason to exist."
 url: https://github.com/lom-lang/lom
 repo: lom-lang/lom
 paper: null
-author: wyty (developed in LLM co-authorship throughout — a model-readability test is the repository's second commit, on day one)
+author: wytyKen (developed in LLM co-authorship throughout — a model-readability test is the repository's second commit, on day one)
 implementation_language: Rust
 compilation_target: tree-walking interpreter and WASM (dual backends, byte-identical output); self-hosted subset compiler bootstraps to a byte-identical quine
 license: Apache-2.0
