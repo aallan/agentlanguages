@@ -103,8 +103,6 @@ Transition expressions lower into canonical IR rather than surviving as arbitrar
 
 **Multiple interpretations.** Canonical models support execution and artifact generation alongside validation, simulation, inspection, and other non-execution uses. Interpretation coverage varies by semantic domain and adapter.
 
-**Attributable defaults.** Conventions supply common authoring and compilation defaults. The architectural goal is deterministic, inspectable decisions with explicit configuration and local overrides where necessary.
-
 ## Maturity.
 
 Cohesive is an early R&D implementation with working semantic models, typed builders, validators, reference interpreters, source generators, code generators, and infrastructure integrations. Existing integrations include PostgreSQL, Cosmos DB, ASP.NET Core, Azure Durable Task, and TypeScript projections.
@@ -121,4 +119,4 @@ The repository includes AGENTS.md guidance covering semantic authority, determin
 
 These mechanisms support inspection of materialised semantics and attribution of diagnostics and derived artifacts to source declarations. Agents can author through typed C# surfaces while compiler and validation tooling operate on the resulting semantic models.
 
-Agent-facing support remains under development. This entry does not claim a complete MCP-based authoring interface or a published agent-performance benchmark.
+Agent-facing inspection and editing interfaces remain under development. Current authoring primarily uses typed C# declarations and repository documentation.
