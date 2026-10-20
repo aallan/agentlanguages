@@ -8,8 +8,8 @@ repo: faberlang/faber
 paper: null
 author: Ian Zepp
 implementation_language: Rust
-compilation_target: Rust, TypeScript, Go, Swift, LLVM IR, WebAssembly, Metal, CUDA
-license: MIT
+compilation_target: Rust, TypeScript, Go, Swift, Python, C, LLVM IR, WebAssembly, Cranelift, Metal, WGSL, CUDA
+license: Apache-2.0 OR MIT
 maturity: working_compiler
 date_appeared: 2026-07
 agent_tooling:
@@ -52,6 +52,8 @@ history:
     what: "The public <code>faber</code> CLI is imported from the closed Radix compiler and the <code>faberlang</code> organisation appears; v1.0.0 is tagged six days later."
   - when: "Aug 2026"
     what: "Public CLI documents first correct end-to-end compiled inference against pinned goldens (not a shipped device-GPU inference product). Site first-contact path and experimental-through-v1 banner land."
+  - when: "Oct 2026"
+    what: "The compiler front end, MIR runner, standard library and grammar are published as <code>faberlang/faber</code> (Apache-2.0 OR MIT), filtered out of the private Radix repository; the earlier public repo is archived as <code>faberlang/faber-1.x</code>. v1.14.0 ships macOS arm64 and Linux x64 builds."
 ---
 
 ## The thesis.
@@ -71,16 +73,19 @@ The same HIR then projects onto measured compilation targets. Application lowers
 <div class="code-sample">
   <div class="code">
 <pre><span class="kw">main</span> {
-    <span class="kw">const</span> <span class="ty">tensor</span>&lt;<span class="ty">f32</span>, [2, 3]&gt; a ← <span class="kw">empty</span>
-    <span class="kw">const</span> <span class="ty">tensor</span>&lt;<span class="ty">f32</span>, [3, 4]&gt; b ← <span class="kw">empty</span>
-    <span class="kw">const</span> <span class="ty">tensor</span>&lt;<span class="ty">f32</span>, [2, 4]&gt; product ← a <span class="op">·</span> b
+    <span class="kw">let</span> <span class="ty">vf32</span>[3] a ← [1.0, 2.0, 3.0] <span class="op">↦</span> <span class="ty">vf32</span>[3]
+    <span class="kw">let</span> <span class="ty">vf32</span>[2] p ← [1.0, 1.0] <span class="op">↦</span> <span class="ty">vf32</span>[2]
+    <span class="kw">let</span> <span class="ty">vf32</span>[4] s ← [1.0, 2.0, 3.0, 4.0] <span class="op">↦</span> <span class="ty">vf32</span>[4]
+    <span class="kw">let</span> <span class="ty">matrix</span>&lt;<span class="ty">f32</span>, [3, 2]&gt; left ← a <span class="op">⊗</span> p
+    <span class="kw">let</span> <span class="ty">matrix</span>&lt;<span class="ty">f32</span>, [2, 4]&gt; right ← p <span class="op">⊗</span> s
+    <span class="kw">let</span> <span class="ty">matrix</span>&lt;<span class="ty">f32</span>, [3, 4]&gt; product ← left <span class="op">·</span> right
     <span class="kw">print</span> product
 }</pre>
   </div>
   <p class="caption">English reader surface. Those keywords were chosen for model probability, not human fashion. The same HIR renders into Thai or Chinese; a human reads their keywords, an agent emits the sealed pack, the matmul glyph and the names stay put.</p>
 </div>
 
-Declarations are type-first (`const tensor&lt;f32, [2, 3]&gt; a`, not `a: Tensor`). Runtime binds use `←`. Tensor work that is a nested index walk in ordinary code is a glyph or a method: `·` matmul, `⊗` outer product, `⊙` Hadamard, `↦` convert, `.mean()` / `.sum()` for reductions. Locales are sealed: `fn` and `functio` do not mix in one file.
+Declarations are type-first (`let matrix&lt;f32, [3, 2]&gt; left`, not `left: Matrix`); shapes are part of the type, so a mismatch is a compile error. Runtime binds use `←`. Tensor work that is a nested index walk in ordinary code is a glyph or a method: `·` matmul, `⊗` outer product, `⊙` Hadamard, `↦` convert, `.mean()` / `.sum()` for reductions. Locales are sealed: `fn` and `functio` do not mix in one file.
 
 ## Distinctive moves.
 
@@ -94,7 +99,7 @@ Declarations are type-first (`const tensor&lt;f32, [2, 3]&gt; a`, not `a: Tensor
 
 ## Maturity.
 
-A working `faber` CLI ships as a tagged release archive; v1.0.0 publishes a macOS arm64 build. The language, public libraries (including Gradus, the MIT autograd and ML library), examples and the documentation site are MIT. Radix, the compiler, is closed while it is under active development; that is presented as temporary, not as a permanent fence. Public GitHub organisation `faberlang` holds the open surface; the Haskell project at `faber-lang/faber` is unrelated.
+A working `faber` CLI ships as tagged release archives on `faberlang/releases`; v1.14.0 (October 2026) publishes macOS arm64 and Linux x64 builds. Since October 2026 the compiler front end, the MIR reference runner, the standard library and the grammar are open source in `faberlang/faber` under Apache-2.0 OR MIT. Several code generators (Rust, Go, TypeScript, Swift, LLVM, WebAssembly, the GPU targets) still ship only in the official binary, and the repository README states each target's measured pass rate against the reference runner. The project is explicitly experimental through version 1, with breaking changes in minor releases. Public GitHub organisation `faberlang` holds the open surface; the Haskell project at `faber-lang/faber` is unrelated.
 
 The strain under real use is the usual early-language one, plus a specific honesty gap: the tensor and inference *surface* is large (Gradus is a substantial Faber library) while device residency and GPU execution remain compiler and host concerns. A catalogue reader should not take the glyph surface as a shipped serving product.
 
