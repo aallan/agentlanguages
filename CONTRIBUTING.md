@@ -28,7 +28,7 @@ Academic papers without a downloadable implementation are accepted if the paper 
 ```yaml
 ---
 name: Example
-camp: verification                 # syntactic | verification | orchestration | adjacent | unclassified
+camp: verification                 # syntactic | verification | orchestration — or adjacent | unclassified, see below
 spans_camps: []                    # optional secondary camp(s)
 one_liner: "One-sentence neutral description."
 url: https://example.org
@@ -60,7 +60,14 @@ benchmark:
 ---
 ```
 
-**Camp classification.** Pick the closest fit and explain in the PR if the project spans camps (use `spans_camps:` for secondary camps). Marginal cases are discussed in the PR thread, and the maintainer makes the final call — several entries have been merged with a different secondary camp from the one submitted, with the reasoning given in the thread.
+**Camp classification.** Pick the closest of the three camps — Syntactic, Verification, Orchestration — and explain the choice in the PR. The camp records a project's *distinctive move*, not a claim of purity: most entries touch all three concerns, so reach for `spans_camps:` to capture the secondary ones rather than for a different primary. Marginal cases are discussed in the PR thread, and the maintainer makes the final call — several entries have been merged with a different secondary camp from the one submitted, with the reasoning given in the thread.
+
+`adjacent` and `unclassified` are narrow categories, not a way to say "none of these fit":
+
+- **`adjacent`** is for projects that support the field without being a language an agent authors — tooling, runtimes, protocols. Plumbing is the catalogue's example.
+- **`unclassified`** is for projects whose public evidence is too thin to place at all. A project documented well enough to write an entry about is almost always placeable.
+
+A language with substantial public documentation belongs in one of the three camps even when its distinctive move sits awkwardly across them. That awkwardness is what `spans_camps:` and the `crossrefs` prose exist to carry.
 
 **Optional fields.**
 
