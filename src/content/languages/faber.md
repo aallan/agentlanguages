@@ -14,9 +14,9 @@ maturity: working_compiler
 date_appeared: 2026-07
 agent_tooling:
   - llms.txt / llms-full.txt
-  - SKILL.md (install, language, examples, corpus)
+  - SKILL.md (install, language, packages, corpus)
   - well-known agent-skills catalogue
-  - Markdown agent guide under /en-US/
+  - Markdown agent guide under /agents/
   - faber explain for glyphs, keywords, and diagnostic codes
 key_idea: |
   Faber Romanus is built for a split audience. Coding agents write the source;
@@ -99,7 +99,7 @@ Declarations are type-first (`let matrix&lt;f32, [3, 2]&gt; left`, not `left: Ma
 
 ## Maturity.
 
-A working `faber` CLI ships as tagged release archives on `faberlang/releases`; v1.14.0 (October 2026) publishes macOS arm64 and Linux x64 builds. Since October 2026 the compiler front end, the MIR reference runner, the standard library and the grammar are open source in `faberlang/faber` under Apache-2.0 OR MIT. Several code generators (Rust, Go, TypeScript, Swift, LLVM, WebAssembly, the GPU targets) still ship only in the official binary, and the repository README states each target's measured pass rate against the reference runner. The project is explicitly experimental through version 1, with breaking changes in minor releases. Public GitHub organisation `faberlang` holds the open surface; the Haskell project at `faber-lang/faber` is unrelated.
+A working `faber` CLI ships as tagged release archives on `faberlang/releases`, built for macOS arm64 and Linux x64. Since October 2026 the compiler front end, the MIR reference runner, the standard library and the grammar are open source in `faberlang/faber` under Apache-2.0 OR MIT. Several code generators (Rust, Go, TypeScript, Swift, LLVM, WebAssembly, the GPU targets) still ship only in the official binary, and the repository README states each target's measured pass rate against the reference runner. The project is explicitly experimental through version 1, with breaking changes in minor releases. Public GitHub organisation `faberlang` holds the open surface; the Haskell project at `faber-lang/faber` is unrelated.
 
 The strain under real use is the usual early-language one, plus a specific honesty gap: the tensor and inference *surface* is large (Gradus is a substantial Faber library) while device residency and GPU execution remain compiler and host concerns. A catalogue reader should not take the glyph surface as a shipped serving product.
 
