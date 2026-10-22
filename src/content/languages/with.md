@@ -1,6 +1,6 @@
 ---
 name: With
-camp: adjacent
+camp: syntactic
 spans_camps: [verification]
 one_liner: "A self-hosted, LLVM-native systems language with ownership-based memory safety, first-class C import and migration, and agent guidance generated into every new project."
 url: https://withlang.org
