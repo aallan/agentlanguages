@@ -1,12 +1,12 @@
 ---
 name: Lom
-camp: unclassified
+camp: verification
 spans_camps: []
 one_liner: "An LLM-repair-native dynamic language: stable diagnostic codes, a confidence-graded fix engine with a written auto-apply safety axiom, and a repair-loop benchmark are the language's reason to exist."
 url: https://github.com/lom-lang/lom
 repo: lom-lang/lom
 paper: null
-author: wytyKen (developed in LLM co-authorship throughout — a model-readability test is the repository's second commit, on day one)
+author: wytyKen (with LLM co-authorship throughout)
 implementation_language: Rust
 compilation_target: tree-walking interpreter and WASM (dual backends, byte-identical output); self-hosted subset compiler bootstraps to a byte-identical quine
 license: Apache-2.0
@@ -57,7 +57,7 @@ crossrefs:
 
 ## The thesis.
 
-Most agent languages optimize how agents write code. Lom optimizes what happens
+Most agent languages optimise how agents write code. Lom optimises what happens
 when the agent gets it wrong: the repair loop. The language ships with stable
 diagnostic codes across nine namespaces (plus an eight-family code space for its
 self-hosted subset compiler), a fix engine whose suggestions are graded
@@ -94,7 +94,7 @@ captured from the real compiler, machine-checked against it in CI.
   <div class="code">
 <pre>lom fix broken.lom --plan
 共 1 个诊断（1 个有可应用修复，0 个仅提示）
-
+<!-- -->
 --- 诊断 #1 [NAM003] (error) ---
   位置: broken.lom:3:13
   消息: 未定义变量 'y'
