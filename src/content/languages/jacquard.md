@@ -3,7 +3,7 @@ name: Jacquard
 camp: orchestration
 spans_camps: [verification]
 one_liner: "Effect rows on every arrow, enforced as a runtime authority manifest. Handlers swap the world a program runs in, from a fixed snapshot to an exact probability model. Definitions are content-addressed by canonical structure."
-url: https://research.friendmachine.co/jacquard/
+url: https://jacquardlang.org/
 repo: jbwinters/jacquard-lang
 paper: null
 author: Josh Winters (FriendMachine)
