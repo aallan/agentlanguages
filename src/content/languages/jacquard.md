@@ -1,8 +1,8 @@
 ---
 name: Jacquard
-camp: orchestration
-spans_camps: [verification]
-one_liner: "Effect rows on every arrow, enforced as a runtime authority manifest. Handlers swap the world a program runs in, from a fixed snapshot to an exact probability model. Definitions are content-addressed by canonical structure."
+camp: verification
+spans_camps: [orchestration]
+one_liner: "Effect rows on every arrow, checked and enforced as a runtime authority manifest. Content-addressed definitions, so a semantic diff and a reviewer's approval name exact canonical code. Handlers swap the world a program runs in, up to an exact probability model."
 url: https://jacquardlang.org/
 repo: jbwinters/jacquard-lang
 paper: null
@@ -15,6 +15,7 @@ date_appeared: 2026-07
 agent_tooling:
   - SKILL.md
   - AGENTS.md
+  - llms.txt
   - JSON diagnostics (--diagnostic-format json-v1)
   - stable error codes with cause and next step (docs/errors.md)
   - Warp test framework with exhaustive finite checking
@@ -26,6 +27,9 @@ key_idea: |
   Handlers are deep and may resume a continuation once, never, or many
   times, so the same program runs against a fixed snapshot, a recorded
   trace, or a finite probability model whose outcomes enumerate exactly.
+  Definitions are identified by the hash of their canonical structure,
+  which covers everything they call, so a review can approve one exact
+  version and tell when anything beneath it changes.
 crossrefs:
   - slug: boruna
     name: Boruna
@@ -97,14 +101,15 @@ with-risk-model(body) =
 
 - **Signatures as authority manifests.** Effect rows are inferred and checked; the runtime installs a world handler only for an explicit `--allow` grant and refuses the rest, dynamically evaluated code included. The project describes this as language-level enforcement in a research runtime, not a replacement for an operating-system sandbox.
 - **Handlers as worlds.** A handler may resume once, decline to resume, or resume many times. Resuming many times forks the rest of the program, which is how exact enumeration and likelihood weighting of `Dist` models, and Warp's exhaustive mode, run as ordinary library code over the same program.
-- **Canonical identity.** Definitions hash by canonical resolved structure, so comments, formatting, provenance and ordinary local or term names do not change identity, and pure tests rerun only when canonical code or a dependency changes. The project states that this identity says nothing about behavioural equivalence of different programs.
-- **Testing the review, not only the code.** Warp checks properties by sampling or, over finite generators, exhaustively. `jac relate` reruns a program under schedule, secret or grant variation and reports any difference under a declared observation policy, and `jac review run` (on main, after 0.3.0) compares two versions of an entry over declared cases with grouped differences and replayable witnesses.
+- **Canonical identity.** Definitions hash by canonical resolved structure, so comments, formatting, provenance and ordinary local or term names do not change identity. The hash covers every definition a function calls, so an edit to a callee changes the caller's hash too. The project states that this identity says nothing about behavioural equivalence of different programs.
+- **Review tooling.** `jac diff` compares two versions by canonical structure rather than text: it reports added and changed definitions, any change to their authority (for example `authority {}` becoming `{Net}`) and the dependents affected, and reports no semantic changes for a pure reformat. A signature that omits an effect its body performs is rejected (E0804), `jac run --dry-run` simulates the world effects and reports what the run would have done, and an approval can name the exact hash a reviewer read. `jac relate` reruns a program under schedule, secret or grant variation and reports any difference under a declared observation policy, and `jac review run` (on main, not yet in a release) compares two versions of an entry over declared cases with grouped differences and replayable witnesses.
+- **Warp.** The built-in test framework runs the same property by seeded sampling or, over finite generators, exhaustively. `fault.all` resumes at every fault site with both outcomes, so a test covers every combination of failures within a budget, and results are cached by hash, so a test reruns only when its canonical code or a dependency changes.
 - **Governance as effects.** Audit records and approvals are ordinary effects with canonical hash-chain carriers and approval handlers, so a governed workflow is checked and tested with the same machinery as any other program.
 
 ## Maturity.
 
-At 0.3.0 (7 October 2026), the project publishes Linux x86-64 and macOS binaries, an installer and a release evidence pack. Its README calls Jacquard a research prototype rather than a production language and points to `docs/release/0.3/LIMITS.md` for the boundary. A real network adapter does not ship; the networking examples run against deterministic stubs, scripted responses, recorded traces or probability models. Exhaustive checking and exact enumeration are bounded by explicit budgets: a uniform distribution enumerates at most 10,000 values, and larger models fall back to seeded sampling or likelihood weighting, with results labelled accordingly. The 0.3 release decision records 1,201 Alcotest/QCheck cases and 79 transcript tests on main. Commits carry a single human author, who describes development as largely model-assisted; recent pull requests record Codex and Claude reviews of each change.
+Tagged releases publish Linux x86-64 and macOS binaries, an installer and a release evidence pack. Its README calls Jacquard a research prototype rather than a production language and points to `docs/release/0.3/LIMITS.md` for the boundary. Core ships no real network adapter; its networking examples run against deterministic stubs, scripted responses, recorded traces or probability models, and a host integration can implement the same effects instead. Exhaustive checking and exact enumeration are bounded by explicit budgets: a uniform distribution enumerates at most 10,000 values, and larger models fall back to seeded sampling or likelihood weighting, with results labelled accordingly. The 0.3 release decision records 1,201 Alcotest/QCheck cases and 79 transcript tests on main. Commits carry a single human author, who describes development as largely model-assisted; recent pull requests record Codex and Claude reviews of each change.
 
 ## Agent tooling.
 
-`docs/SKILL.md` (about 43 KB) states that it covers installing Jacquard and writing, checking, running, testing and compiling `.jac` programs without a repository checkout. `AGENTS.md` orients agents working on the implementation. Every diagnostic carries a stable code, a cause and a next step, catalogued in `docs/errors.md`, and the CLI emits them as JSON with `--diagnostic-format json-v1`. There is no MCP server and no model-call effect; a separate host worker protocol carries the boundary to external systems.
+The project site, jacquardlang.org, serves an `llms.txt` index, a copy of `SKILL.md` and the error catalogue, along with a review tour that records each command's output from the released binary. `docs/SKILL.md` (about 43 KB) states that it covers installing Jacquard and writing, checking, running, testing and compiling `.jac` programs without a repository checkout. `AGENTS.md` orients agents working on the implementation. Every diagnostic carries a stable code, a cause and a next step, catalogued in `docs/errors.md`, and the CLI emits them as JSON with `--diagnostic-format json-v1`. There is no MCP server and no model-call effect. External systems sit behind an experimental, versioned host protocol: the companion `jbwinters/jacquard-host` repository publishes Python, TypeScript and Go SDKs, plus a protocol-level Rust adapter, that call checked Jacquard functions and implement their declared effects as ordinary services.
