@@ -43,10 +43,10 @@ crossrefs:
     name: Tacit
     camp: syntactic
     relation: "Same identity move, different source of truth. Both content-address definitions so that names and formatting stop mattering; Tacit makes the AST authoritative and hashes its canonical text with BLAKE3, while Jacquard keeps an ordinary surface syntax and hashes the canonical resolved kernel (SHA-256), erasing comments, spans and local names."
-  - slug: lumen
-    name: Lumen
-    camp: orchestration
-    relation: "Both put algebraic effects in signatures and gate them with grants. Lumen targets humans authoring agent workflows and makes model calls a first-class effect; Jacquard targets code that models write, and ships no model-call effect, leaving model access to a host on the other side of a versioned worker protocol."
+  - slug: semaprax
+    name: SEMAPRAX
+    camp: verification
+    relation: "Both make a change's identity and authority reviewable, from opposite ends. SEMAPRAX gives each public declaration a persistent ID that survives edits and binds semantic patches to exact source revisions, so stale ones fail closed; Jacquard identifies a definition by the hash of its canonical structure, so any real edit, including one to a callee, yields a new identity that an earlier approval no longer matches."
 history:
   - when: "Jul 2026"
     what: "First commit (3 July) and Jacquard Core 0.1 release candidates (11–12 July), with the public .jac surface syntax over the .jqd kernel notation."
