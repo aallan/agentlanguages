@@ -364,6 +364,16 @@ npm run preview  # serves the built site
   `FORCE_JAVASCRIPT_ACTIONS_TO_NODE24`, set ahead of GitHub's move off
   Node 20; #37 removed it once the action majors made it a no-op. Do not
   add it back.
+- **Astro's real Node floor is stricter than its `engines` field, and it
+  only tells you at build time.** 7.4.2 publishes `engines.node` of
+  `>=22.12.0` while refusing to run on anything below 22.23.4. So `npm ci`
+  succeeds without a warning and `astro build` exits 1 with "Node.js vX is
+  not supported by Astro!". That is what broke the deploy on #81: the
+  runner's `node-version: '22'` resolved to 22.23.3, one patch short.
+  `deploy.yml` now pins `node-version: '24'` to stay well clear, and
+  `package.json` records the real floor so the constraint surfaces at
+  install time. A local build will not reproduce this unless your Node
+  happens to be older than the floor.
 
 ---
 
