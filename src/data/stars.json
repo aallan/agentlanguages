@@ -1,217 +1,222 @@
 {
   "AvitalTamir/sever": {
-    "fetched_at": "2026-10-26T12:42:43Z",
+    "fetched_at": "2026-11-02T15:28:25Z",
     "forks": 8,
     "stars": 71
   },
   "KikotVit/pact-lang": {
-    "fetched_at": "2026-10-26T12:42:42Z",
+    "fetched_at": "2026-11-02T15:28:23Z",
     "forks": 0,
     "stars": 1
   },
   "Nerd-Lang/nerd-lang-core": {
-    "fetched_at": "2026-10-26T12:42:42Z",
+    "fetched_at": "2026-11-02T15:28:23Z",
     "forks": 9,
-    "stars": 172
+    "stars": 170
   },
   "PlasmTools/plasm-core": {
-    "fetched_at": "2026-10-26T12:42:42Z",
+    "fetched_at": "2026-11-02T15:28:24Z",
     "forks": 3,
     "stars": 9
   },
   "aallan/vera": {
-    "fetched_at": "2026-10-26T12:42:45Z",
-    "forks": 29,
-    "stars": 419
+    "fetched_at": "2026-11-02T15:28:26Z",
+    "forks": 30,
+    "stars": 420
   },
   "alantech/marsha": {
-    "fetched_at": "2026-10-26T12:42:41Z",
+    "fetched_at": "2026-11-02T15:28:22Z",
     "forks": 16,
     "stars": 466
   },
   "alliecatowo/lumen": {
-    "fetched_at": "2026-10-26T12:42:40Z",
+    "fetched_at": "2026-11-02T15:28:21Z",
     "forks": 0,
     "stars": 0
   },
   "arcanist-sh/hx": {
-    "fetched_at": "2026-10-26T12:42:35Z",
+    "fetched_at": "2026-11-02T15:28:14Z",
     "forks": 2,
     "stars": 36
   },
   "atverm/m9c": {
-    "fetched_at": "2026-10-26T12:42:40Z",
+    "fetched_at": "2026-11-02T15:28:21Z",
     "forks": 0,
     "stars": 0
   },
   "brettinhere/Codong": {
-    "fetched_at": "2026-10-26T12:42:36Z",
+    "fetched_at": "2026-11-02T15:28:16Z",
     "forks": 6,
     "stars": 73
   },
   "cohesivesystems/cohesive": {
-    "fetched_at": "2026-10-26T12:42:36Z",
+    "fetched_at": "2026-11-02T15:28:16Z",
     "forks": 1,
     "stars": 5
   },
   "damiant3/NewRepository": {
-    "fetched_at": "2026-10-26T12:42:36Z",
+    "fetched_at": "2026-11-02T15:28:15Z",
     "forks": 2,
     "stars": 18
   },
   "dollspace-gay/Thermite": {
-    "fetched_at": "2026-10-26T12:42:44Z",
+    "fetched_at": "2026-11-02T15:28:26Z",
     "forks": 2,
     "stars": 54
   },
   "escapeboy/boruna": {
-    "fetched_at": "2026-10-26T12:42:35Z",
+    "fetched_at": "2026-11-02T15:28:14Z",
     "forks": 0,
     "stars": 6
   },
   "faberlang/faber": {
-    "fetched_at": "2026-10-26T12:42:37Z",
-    "forks": 0,
-    "stars": 0
+    "fetched_at": "2026-11-02T15:28:16Z",
+    "forks": 1,
+    "stars": 1
   },
   "fabro-sh/fabro": {
-    "fetched_at": "2026-10-26T12:42:37Z",
-    "forks": 193,
-    "stars": 1749
+    "fetched_at": "2026-11-02T15:28:17Z",
+    "forks": 196,
+    "stars": 1783
   },
   "hale-lang/hale": {
-    "fetched_at": "2026-10-26T12:42:38Z",
+    "fetched_at": "2026-11-02T15:28:17Z",
     "forks": 2,
     "stars": 41
   },
   "hvoetsch/valea": {
-    "fetched_at": "2026-10-26T12:42:44Z",
+    "fetched_at": "2026-11-02T15:28:26Z",
     "forks": 0,
     "stars": 5
   },
   "ilo-lang/ilo": {
-    "fetched_at": "2026-10-26T12:42:38Z",
+    "fetched_at": "2026-11-02T15:28:18Z",
     "forks": 1,
     "stars": 11
   },
   "imjasonh/loom": {
-    "fetched_at": "2026-10-26T12:42:35Z",
+    "fetched_at": "2026-11-02T15:28:14Z",
     "forks": 0,
     "stars": 0
   },
   "jasisz/aver": {
-    "fetched_at": "2026-10-26T12:42:34Z",
+    "fetched_at": "2026-11-02T15:28:13Z",
     "forks": 2,
-    "stars": 64
+    "stars": 66
+  },
+  "jbwinters/jacquard-lang": {
+    "fetched_at": "2026-11-02T15:28:18Z",
+    "forks": 6,
+    "stars": 122
   },
   "jordanhubbard/nanolang": {
-    "fetched_at": "2026-10-26T12:42:42Z",
+    "fetched_at": "2026-11-02T15:28:23Z",
     "forks": 24,
     "stars": 630
   },
   "kerv/laze": {
-    "fetched_at": "2026-10-26T12:42:39Z",
+    "fetched_at": "2026-11-02T15:28:19Z",
     "forks": 2,
     "stars": 4
   },
   "kimjooyoon/meta-ontology-go": {
-    "fetched_at": "2026-10-26T12:42:37Z",
+    "fetched_at": "2026-11-02T15:28:17Z",
     "forks": 0,
-    "stars": 16
+    "stars": 18
   },
   "korulang/koru": {
-    "fetched_at": "2026-10-26T12:42:39Z",
+    "fetched_at": "2026-11-02T15:28:19Z",
     "forks": 2,
     "stars": 33
   },
   "lhaig/intent": {
-    "fetched_at": "2026-10-26T12:42:38Z",
+    "fetched_at": "2026-11-02T15:28:18Z",
     "forks": 0,
-    "stars": 7
+    "stars": 8
   },
   "littletuna4/reqlan": {
-    "fetched_at": "2026-10-26T12:42:43Z",
-    "forks": 0,
-    "stars": 7
+    "fetched_at": "2026-11-02T15:28:24Z",
+    "forks": 1,
+    "stars": 8
   },
   "lom-lang/lom": {
-    "fetched_at": "2026-10-26T12:42:39Z",
+    "fetched_at": "2026-11-02T15:28:20Z",
     "forks": 0,
     "stars": 3
   },
   "magpie-lang/magpie": {
-    "fetched_at": "2026-10-26T12:42:41Z",
-    "forks": 5,
-    "stars": 58
+    "fetched_at": "2026-11-02T15:28:21Z",
+    "forks": 6,
+    "stars": 60
   },
   "mavboas/lume": {
-    "fetched_at": "2026-10-26T12:42:40Z",
+    "fetched_at": "2026-11-02T15:28:20Z",
     "forks": 0,
     "stars": 1
   },
   "mronus/spec": {
-    "fetched_at": "2026-10-26T12:42:43Z",
+    "fetched_at": "2026-11-02T15:28:25Z",
     "forks": 1,
     "stars": 11
   },
   "murolang/muro": {
-    "fetched_at": "2026-10-26T12:42:41Z",
+    "fetched_at": "2026-11-02T15:28:22Z",
     "forks": 1,
-    "stars": 3
+    "stars": 4
   },
   "paulprogrammer/llmlang": {
-    "fetched_at": "2026-10-26T12:42:39Z",
+    "fetched_at": "2026-11-02T15:28:19Z",
     "forks": 0,
     "stars": 1
   },
   "sunholo-data/ailang": {
-    "fetched_at": "2026-10-26T12:42:33Z",
+    "fetched_at": "2026-11-02T15:28:13Z",
     "forks": 5,
-    "stars": 35
+    "stars": 38
   },
   "veighnsche/canlang": {
-    "fetched_at": "2026-10-26T12:42:35Z",
+    "fetched_at": "2026-11-02T15:28:15Z",
     "forks": 0,
     "stars": 0
   },
   "vercel-labs/zerolang": {
-    "fetched_at": "2026-10-26T12:42:46Z",
-    "forks": 342,
-    "stars": 5388
+    "fetched_at": "2026-11-02T15:28:28Z",
+    "forks": 345,
+    "stars": 5396
   },
   "vmelnic/axis": {
-    "fetched_at": "2026-10-26T12:42:34Z",
+    "fetched_at": "2026-11-02T15:28:13Z",
     "forks": 0,
     "stars": 3
   },
   "voltropy/mog": {
-    "fetched_at": "2026-10-26T12:42:41Z",
+    "fetched_at": "2026-11-02T15:28:22Z",
     "forks": 10,
     "stars": 145
   },
   "vow-lang/vow": {
-    "fetched_at": "2026-10-26T12:42:45Z",
+    "fetched_at": "2026-11-02T15:28:27Z",
     "forks": 0,
-    "stars": 8
+    "stars": 9
   },
   "wavect/semaprax": {
-    "fetched_at": "2026-10-26T12:42:43Z",
-    "forks": 3,
+    "fetched_at": "2026-11-02T15:28:24Z",
+    "forks": 4,
     "stars": 25
   },
   "weetster/tacit": {
-    "fetched_at": "2026-10-26T12:42:44Z",
+    "fetched_at": "2026-11-02T15:28:25Z",
     "forks": 2,
     "stars": 4
   },
   "withlang-dev/with": {
-    "fetched_at": "2026-10-26T12:42:45Z",
-    "forks": 10,
+    "fetched_at": "2026-11-02T15:28:27Z",
+    "forks": 11,
     "stars": 44
   },
   "x07lang/x07": {
-    "fetched_at": "2026-10-26T12:42:46Z",
+    "fetched_at": "2026-11-02T15:28:27Z",
     "forks": 0,
-    "stars": 9
+    "stars": 10
   }
 }
