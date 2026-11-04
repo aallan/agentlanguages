@@ -54,6 +54,8 @@ history:
     what: "Public CLI documents first correct end-to-end compiled inference against pinned goldens (not a shipped device-GPU inference product). Site first-contact path and experimental-through-v1 banner land."
   - when: "Oct 2026"
     what: "The compiler front end, MIR runner, standard library and grammar are published as <code>faberlang/faber</code> (Apache-2.0 OR MIT), filtered out of the private Radix repository; the earlier public repo is archived as <code>faberlang/faber-1.x</code>. v1.14.0 ships macOS arm64 and Linux x64 builds."
+  - when: "Oct 2026"
+    what: "v1.17.0 (29 Oct) adds kernel safety tiers and lets <code>faber run --target</code> build and run Go, TypeScript and LLVM programs or compile in memory with Cranelift. v1.18.0 (31 Oct) makes Cranelift the default engine for a plain <code>faber run</code>, falling back to the reference runner when Cranelift declines a program."
 ---
 
 ## The thesis.
