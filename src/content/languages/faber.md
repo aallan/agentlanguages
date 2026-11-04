@@ -54,6 +54,8 @@ history:
     what: "Public CLI documents first correct end-to-end compiled inference against pinned goldens (not a shipped device-GPU inference product). Site first-contact path and experimental-through-v1 banner land."
   - when: "Oct 2026"
     what: "The compiler front end, MIR runner, standard library and grammar are published as <code>faberlang/faber</code> (Apache-2.0 OR MIT), filtered out of the private Radix repository; the earlier public repo is archived as <code>faberlang/faber-1.x</code>. v1.14.0 ships macOS arm64 and Linux x64 builds."
+  - when: "Oct 2026"
+    what: "v1.17.0 (29 Oct) adds kernel safety tiers and lets <code>faber run --target</code> build and run Go, TypeScript and LLVM programs or compile in memory with Cranelift. v1.18.0 (31 Oct) makes Cranelift the default engine for a plain <code>faber run</code>, falling back to the reference runner when Cranelift declines a program."
 ---
 
 ## The thesis.
@@ -105,4 +107,4 @@ The strain under real use is the usual early-language one, plus a specific hones
 
 ## Agent tooling.
 
-`https://faberlang.dev/llms.txt` is the machine index; `llms-full.txt` is the expanded map. The site content-negotiates an agent guide at `/en-US/` and publishes skills for install, language, packages, examples and corpus. `faber explain` answers glyphs, keywords, grammar terms and diagnostic codes. The inclusion claim is the design intent — agents as authors of a locale-rendered, mechanically predictable HIR, with an English keyword surface chosen for model probability — plus that shipped tooling, not a runtime chatbot wrapped around another language.
+`https://faberlang.dev/llms.txt` is the machine index; `llms-full.txt` is the expanded map. The site publishes an agent guide at `/agents/` and skills for install, language, packages and corpus. `faber explain` answers glyphs, keywords, grammar terms and diagnostic codes. The inclusion claim is the design intent — agents as authors of a locale-rendered, mechanically predictable HIR, with an English keyword surface chosen for model probability — plus that shipped tooling, not a runtime chatbot wrapped around another language.
