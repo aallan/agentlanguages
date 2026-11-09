@@ -56,6 +56,8 @@ history:
     what: "The compiler front end, MIR runner, standard library and grammar are published as <code>faberlang/faber</code> (Apache-2.0 OR MIT), filtered out of the private Radix repository; the earlier public repo is archived as <code>faberlang/faber-1.x</code>. v1.14.0 ships macOS arm64 and Linux x64 builds."
   - when: "Oct 2026"
     what: "v1.17.0 (29 Oct) adds kernel safety tiers and lets <code>faber run --target</code> build and run Go, TypeScript and LLVM programs or compile in memory with Cranelift. v1.18.0 (31 Oct) makes Cranelift the default engine for a plain <code>faber run</code>, falling back to the reference runner when Cranelift declines a program."
+  - when: "Nov 2026"
+    what: "v1.19.0 (8 Nov) lets one <code>.fab</code> file hold its program, its tests and the input and output a test run expects as labelled sections, adds <code>and</code> loop heads that walk several lists in lockstep, and admits <code>f64</code> in kernels on the CPU and CUDA routes. A plain <code>faber run</code> now refuses a program Cranelift declines instead of silently falling back to the interpreter."
 ---
 
 ## The thesis.
