@@ -35,12 +35,12 @@ crossrefs:
   - slug: intent
     name: Intent
     camp: verification
-    relation: "Both expose machine-checkable structure to support agent-authored code, but check different properties. Intent verifies contracts and their references; Separan's structural review tooling checks edit boundaries and does not establish behavioral correctness."
+    relation: "Both expose machine-checkable structure to support agent-authored code, but check different properties. Intent verifies contracts and their references; Separan's structural review tooling checks edit boundaries and does not establish behavioural correctness."
 ---
 
 ## The thesis.
 
-Separan starts from a source-level problem: when a block's purpose and boundary are implicit, a reader or editing tool has to reconstruct them from indentation or surrounding syntax. Separan instead names the boundary. A logic unit opens with `SEP:name` and closes with `END_SEP:name`; labeled control-flow blocks use the same matching-label principle. The parser reports a structural mismatch rather than treating a differently named closer as an equivalent boundary.
+Separan starts from a source-level problem: when a block's purpose and boundary are implicit, a reader or editing tool has to reconstruct them from indentation or surrounding syntax. Separan instead names the boundary. A logic unit opens with `SEP:name` and closes with `END_SEP:name`; labelled control-flow blocks use the same matching-label principle. The parser reports a structural mismatch rather than treating a differently named closer as an equivalent boundary.
 
 <p class="pullquote">Name the boundary, then check that the edit stayed inside it.</p>
 
@@ -63,13 +63,13 @@ Separan's structural tooling extends the same idea to review. It assigns hierarc
 
 ## Distinctive moves.
 
-- **Named, checked boundaries.** `SEP`/`END_SEP` and labeled control-flow closers expose the structure in source and reject mismatched labels.
+- **Named, checked boundaries.** `SEP`/`END_SEP` and labelled control-flow closers expose the structure in source and reject mismatched labels.
 - **AST identities for review.** Hierarchical identities keep repeated labels addressable, while fingerprints distinguish structural changes from movement or formatting.
 - **Explicit edit scopes.** A reviewer or CI job can permit changes beneath a selected boundary and fail when changes occur outside it. Ambiguous short labels require a more specific path rather than fuzzy matching.
 
 ## Maturity.
 
-Separan has Python and native C implementations, a command-line runtime, and a published language specification. Structural diff and edit-scope verification are implemented as a preview tooling layer. These checks constrain where a change occurs; they do not prove that the changed code has the intended behavior. Tests, type checks, and other semantic checks remain necessary.
+Separan has Python and native C implementations, a command-line runtime, and a published language specification. Structural diff and edit-scope verification are implemented as a preview tooling layer. These checks constrain where a change occurs; they do not prove that the changed code has the intended behaviour. Tests, type checks, and other semantic checks remain necessary.
 
 ## Agent tooling.
 
