@@ -30,6 +30,9 @@ key_idea: |
   claims (forbid reaches(A, B)) answered with minimal countermodel
   witnesses, constitutions shared across entrypoints and environments,
   and signed composition of separately compiled binaries into a fleet.
+  The project's case for model authorship is subtractive: with no async
+  functions to colour, no lifetimes and no lock to pick, the shapes a
+  model tends to hallucinate are not in the language.
 benchmark:
   label: "hale bench (vs Go, Node, Python)"
   url: https://github.com/hale-lang/bench
@@ -67,7 +70,9 @@ history:
 
 ## The thesis.
 
-Hale's position is that the distance between how you describe a system out loud and what you type should be near zero. One primitive, the locus, stands in for class, actor and service, and a seed, a directory whose files share one scope, takes the place of a module or package. Loci own their state and never reach sideways into each other: siblings coordinate through their parent or over a typed topic bus. A `main` locus declares placement (threads, cores, NUMA nodes) and bindings (in-process queue, Unix socket, shared-memory ring), so deployment shape is an edit to the main locus, not a rewrite.
+Hale's position is that the distance between how you describe a system out loud and what you type should be near zero — and that the same property that helps a human helps a model. One primitive, the locus, stands in for class, actor and service, and a seed, a directory whose files share one scope, takes the place of a module or package. Loci own their state and never reach sideways into each other: siblings coordinate through their parent or over a typed topic bus. A `main` locus declares placement (threads, cores, NUMA nodes) and bindings (in-process queue, Unix socket, shared-memory ring), so deployment shape is an edit to the main locus, not a rewrite.
+
+The [README](https://github.com/hale-lang/hale#built-for-humans-and-models) argues the case for model authorship by subtraction: there are no async functions to colour, no lifetimes to get wrong and no lock to pick, so the shapes a model tends to hallucinate are not in the language.
 
 The project publishes the design model behind this as `%DESIGN v1`, a recursive hypergraph with numbered nodes, hyperedges and invariants, and its documentation maps each construct onto it; AGENTS.md asks for the IDs to be cited when a rule is justified. Two of the model's rules carry most of the weight. Ownership edges run only between parent and child (`H9`), which is what lets a locus's arena be freed wholesale, with no garbage collector and no borrow checker. And every graph the compiler derives closes at a named boundary (`I8`), past which anything unresolved is recorded as a hole.
 
