@@ -2,7 +2,7 @@
 name: Intent
 camp: verification
 spans_camps: []
-one_liner: "Mandatory preconditions, postconditions, and entity invariants. Z3 SMT verification via intentc verify. Natural-language intent blocks that resolve to specific contract references. One source file compiles to Rust, JavaScript, and WebAssembly."
+one_liner: "Mandatory preconditions, postconditions, and entity invariants. Z3 SMT verification via intentc verify. Natural-language intent blocks that resolve to specific contract references. One source file compiles to Rust, JavaScript, and WebAssembly, from a toolchain that self-hosts."
 url: https://github.com/lhaig/intent
 repo: lhaig/intent
 paper: null
@@ -24,6 +24,15 @@ key_idea: |
   matching contract. `intentc verify` discharges what it can to Z3; what
   remains runs as enforced runtime checks in Rust (panic), JavaScript
   (throw), or WebAssembly (trap), all from the same source file.
+history:
+  - when: "February 2026"
+    what: "v0.1.0 and v0.2.0 released: contracts, Z3 verification, and Rust, JavaScript and WebAssembly backends from one IR."
+  - when: "May 2026"
+    what: "Language server shipped (diagnostics, hover, completion, go-to-definition, references), along with --strip-contracts for release builds."
+  - when: "July 2026"
+    what: "v0.3.0: the formatter, linter, checker and compiler are rewritten in Intent and reproduce the Go implementation byte for byte, proven by a stage1, stage2, stage3 bootstrap fixpoint."
+  - when: "July 2026"
+    what: "v0.4.0: module-qualified generic and variant construction across packages, carried through the self-hosted compiler."
 crossrefs:
   - slug: vera
     name: Vera
@@ -87,11 +96,14 @@ The distinctive move is the **intent block** itself: a named natural-language go
 - **Z3 as an optional static layer, runtime checks as the floor.** `intentc verify` translates IR contracts to SMT-LIB and invokes Z3; results are reported per contract as `verified` / `unverified` / `error` / `timeout`. When Z3 is absent, the compiler degrades gracefully and the runtime asserts still run.
 - **Rust as IR, not as the only backend.** An explicit IR layer (~30 node types, contracts as first-class IR nodes, `OldCapture`/`OldRef` as explicit pre-state) feeds three sibling backends: a Rust generator that hands off to `cargo`, a direct JavaScript emitter, and a direct WebAssembly binary emitter that does not require the Rust toolchain. Each enforces the same contracts at runtime.
 - **Property-based test generation from contracts.** `intentc test-gen` derives property-based tests from `requires`/`ensures`, complementing &mdash; not replacing &mdash; the SMT discharge.
+- **A self-hosting toolchain as the correctness check.** The formatter, linter, checker and compiler are each also written in Intent, and CI checks that the Intent versions produce output byte-identical to the Go originals. `make bootstrap-stage3` closes the loop: the Go compiler builds the Intent compiler, that builds itself again, and the third stage re-emits the whole toolchain unchanged.
 
 ## Maturity.
 
-A Go workspace at v0.2.0 (released 16 February 2026) with 45 commits and 5 stars at time of cataloguing. The roadmap (`docs/ROADMAP.md`) records milestones 1&ndash;6 as complete: usable language surface (loops, arrays, enums, pattern matching, `Result`/`Option`, try operator, multi-file imports), the Z3 verifier (`internal/verify/`), and three working backends (Rust via `internal/rustbe/`, JavaScript via `internal/jsbe/`, direct WASM via `internal/wasmbe/`). The `docs/DESIGN.md` specification runs to 1,764 lines and notes that traits, generics, async/await, and a package manager with semver constraints have all landed since the POC. The CLI surface &mdash; `intentc build / check / verify / fmt / lint / test-gen`, plus `intentc pkg init / add / remove / install` &mdash; is shippable; a four-target showcase (CLI binary, browser dashboard, Node server, browser WASM at 155 bytes) runs against unmodified compiler output. Last commit was 25 March 2026; an LSP, REPL, and release-mode contract stripping sit on the milestone-8 roadmap and are not yet built.
+A Go workspace at v0.4.0 (released 16 July 2026). Milestones 1&ndash;9 in `docs/ROADMAP.md` are recorded as complete: the language surface (loops, arrays, enums, pattern matching, `Result`/`Option`, the try operator, multi-file imports), the Z3 verifier (`internal/verify/`), three backends (Rust via `internal/rustbe/`, JavaScript via `internal/jsbe/`, direct WASM via `internal/wasmbe/`), generics, traits, async/await, closures, `Map<K,V>`, and a package manager that resolves git and path dependencies with minimal version selection and an `intent.lock`. The CLI covers `intentc build / check / verify / test / test-gen / fmt / lint / lsp`, plus `intentc pkg init / add / remove / install / upgrade / vendor / list`, and `--strip-contracts` removes runtime assertions for release builds.
+
+The largest change since v0.2.0 is self-hosting (v0.3.0, July 2026). Each tool has an Intent implementation selectable with `--self-hosted`, and differential gates compare it with the Go implementation across the examples and invalid fixtures; the self-hosted emitter matches on every Intent program in the repository. Design decisions are recorded as 60-plus ADRs in `docs/decisions/`. Open items the project lists itself: the self-hosted compiler emits the Rust target only (JS and WASM backends remain Go-only), dependencies are git or path rather than a versioned registry, the self-hosted checker has a documented tail of missed diagnostics that never fire on valid code, and verification-aware contract stripping (keep only the unverified checks) is planned but not built. There is no REPL.
 
 ## Agent tooling.
 
-Three documents target agent authors directly. `AGENTS.md` (~18 KB) is the Codex/general-agent orientation. `CLAUDE.md` is the Claude-specific working guide. `INTENT.md` (~26 KB) is the language reference written as agent instructions &mdash; it opens &ldquo;You are generating code in Intent&rdquo; and ends with ten explicit guidelines for AI code generation, including &ldquo;Write contracts first&rdquo; and &ldquo;Every function should have contracts.&rdquo; `docs/REPRODUCE.md` documents reproducing the compiler with the agent of the reader's choice. Diagnostics are textual rather than structured JSON; the LSP that would expose them programmatically is on the roadmap rather than shipped.
+Three documents target agent authors directly. `AGENTS.md` (~25 KB) is the general agent orientation, and `CLAUDE.md` points to the same guide. `INTENT.md` (~39 KB) is the language reference written as agent instructions &mdash; it opens &ldquo;You are generating code in Intent&rdquo; and ends with explicit guidelines for AI code generation, including &ldquo;Write contracts first&rdquo; and &ldquo;Every function should have contracts.&rdquo; `docs/REPRODUCE.md` documents reproducing the compiler with the agent of the reader's choice. `intentc lsp` serves diagnostics (including per-contract Z3 results anchored at the clause), hover, completion, signature help, go-to-definition, references, document symbols and formatting, which gives agents in LSP-aware editors programmatic access to checker and verifier output. CLI diagnostics remain textual rather than structured JSON.
