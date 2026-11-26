@@ -58,6 +58,8 @@ history:
     what: "v1.17.0 (29 Oct) adds kernel safety tiers and lets <code>faber run --target</code> build and run Go, TypeScript and LLVM programs or compile in memory with Cranelift. v1.18.0 (31 Oct) makes Cranelift the default engine for a plain <code>faber run</code>, falling back to the reference runner when Cranelift declines a program."
   - when: "Nov 2026"
     what: "v1.19.0 (8 Nov) lets one <code>.fab</code> file hold its program, its tests and the input and output a test run expects as labelled sections, adds <code>and</code> loop heads that walk several lists in lockstep, and admits <code>f64</code> in kernels on the CPU and CUDA routes. A plain <code>faber run</code> now refuses a program Cranelift declines instead of silently falling back to the interpreter."
+  - when: "Nov 2026"
+    what: "v1.24.0 (24 Nov) is the first binary release since v1.19.1; v1.20 to v1.23 were tagged without binaries. <code>faber build</code> now produces a native Cranelift executable by default, and the released binary no longer contains the MIR interpreter. Device kernels for the CPU, Metal, CUDA and the new AMD GPU route all compile through one kernel IR, and kernels gain reductions inside lane loops. The language gains math notation: <code>π</code>, <code>ℯ</code>, the trigonometric family and prefix words such as <code>sin x</code>, <code>exp x</code> and <code>sigmoid x</code>. The English range words become <code>exclusive</code> and <code>inclusive</code>, as in <code>for exclusive n</code>."
 ---
 
 ## The thesis.
